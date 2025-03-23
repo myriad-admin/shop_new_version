@@ -355,6 +355,13 @@
                                         svg {
                                             width: auto;
                                             height: 43px;
+                                            &#wishlistButton {
+                                                &.selected {
+                                                    #heart {
+                                                        fill: #EBC343;
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }

@@ -317,6 +317,8 @@
                 .product #MainContent .shopify-section .pds-slider .product-boxes .swiper-wrapper .swiper-slide.swiper-product-info .product-image .action-buttons svg {
                   width: auto;
                   height: 43px; }
+                  .product #MainContent .shopify-section .pds-slider .product-boxes .swiper-wrapper .swiper-slide.swiper-product-info .product-image .action-buttons svg#wishlistButton.selected #heart {
+                    fill: #EBC343; }
             .product #MainContent .shopify-section .pds-slider .product-boxes .swiper-wrapper .swiper-slide.swiper-product-info .arrows {
               position: absolute;
               top: -21px;
