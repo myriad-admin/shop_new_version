@@ -1,0 +1,22 @@
+.myd-topbar {
+    display: none;
+    font-family: "Julius Sans One", serif !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    align-items: center;
+    justify-content: center;
+    column-gap: 0.35rem;
+    color: white;
+    background-color: #d4af3566 !important;
+    border-block-end: 1px solid #d4af37;
+}
+
+.myd-topbar .text {
+    font-size: 15px;
+    line-height: 1.3;
+    transform: translateY(1px);
+}
+
+.index .myd-topbar {
+    display: flex !important;
+}
