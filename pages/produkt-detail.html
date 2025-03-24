@@ -193,18 +193,37 @@
                                         <script>
                                             document.addEventListener('DOMContentLoaded', () => {
                                                 let selectSizeWrapper = document.querySelector('.size-select-wrapper');
+                                                let isSwiping = null;
+                                                let event2 = null;
                                                 // Schließt das Element, wenn außerhalb geklickt wird
-                                                document.addEventListener('click', (event) => {
-                                                    console.log(selectSizeWrapper.classList.contains('active'));
-                                                    console.log(event.target.type != 'radio');
-                                                    if (selectSizeWrapper.classList.contains('active') && event.target.type != 'radio') {
+                                                document.addEventListener('pointerdown', (event) => {
+                                                    isSwiping = false;
+                                                    event2 = event;
+                                                });
+
+                                                sizeSelectSwiper.on('touchMove', function() {
+                                                    isSwiping = true;
+                                                });
+
+                                                document.addEventListener('pointerup', () => {
+                                                    console.log(event2.target.classList.contains('size-select-wrapper'));
+                                                    console.log(event2.target);
+
+                                                    console.log(selectSizeWrapper.classList.contains('active'), !event2.target.classList.contains('size-select-wrapper'), event2.target.type != 'radio', (
+                                                        event2.target.classList.contains('swiper-slide') &&
+                                                        event2.target.classList.contains('swiper-slide-active')
+                                                    ), !event2.target.closest('#ring-size-swiper'));
+                                                    if (selectSizeWrapper.classList.contains('active') && !event2.target.classList.contains('size-select-wrapper') && event2.target.type != 'radio' && (
+                                                            event2.target.classList.contains('swiper-slide') &&
+                                                            event2.target.classList.contains('swiper-slide-active')
+                                                        ) || !event2.target.closest('#ring-size-swiper')) {
                                                         selectSizeWrapper.classList.remove('active');
                                                     } else {
-                                                        if (event.target.classList.contains('swiper-slide')) {
+                                                        if (!selectSizeWrapper.classList.contains('active') && event2.target.classList.contains('swiper-slide') && !isSwiping) {
                                                             selectSizeWrapper.classList.add('active');
                                                         }
                                                     }
-                                                });
+                                                })
                                             });
                                         </script>
 
@@ -415,6 +434,7 @@
                         spaceBetween: 2,
                         watchSlidesProgress: true,
                         centeredSlides: true,
+                        slideToClickedSlide: true, // Diese Option sorgt dafür, dass beim Klicken auf eine Sektion der Swiper darauf springt
                     });
 
                     sizeSelectSwiper.on('touchStart', function() {

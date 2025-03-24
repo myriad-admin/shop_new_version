@@ -211,6 +211,7 @@
                             .product #MainContent .shopify-section .pds-slider .product-boxes .swiper-wrapper .swiper-slide.swiper-product-info .product-image .select-size .size-circle .size-select-wrapper .size-select-swiper .swiper-wrapper .swiper-slide.swiper-slide-active::after {
                               top: -4px !important; }
                     .product #MainContent .shopify-section .pds-slider .product-boxes .swiper-wrapper .swiper-slide.swiper-product-info .product-image .select-size .size-circle .size-select-wrapper.active {
+                      position: relative;
                       height: 76px;
                       translate: 0 26px; }
                       .product #MainContent .shopify-section .pds-slider .product-boxes .swiper-wrapper .swiper-slide.swiper-product-info .product-image .select-size .size-circle .size-select-wrapper.active .size-select-swiper {
