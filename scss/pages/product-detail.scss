@@ -385,7 +385,7 @@
 
                                             &.loading {
                                                 svg {
-                                                    #tasche {
+                                                    .hide-item {
                                                         opacity: 0;
                                                     }
                                                 }
@@ -441,6 +441,20 @@
                                                 100% {
                                                     transform: scaleY(-1) rotate(-135deg);
                                                 }
+                                            }
+
+                                            &.alreadyInCart {
+                                                #addToCartSvg {
+                                                    display: none;
+                                                }
+
+                                                #alreadyInCartSvg {
+                                                    display: block;
+                                                }
+                                            }
+
+                                            #alreadyInCartSvg {
+                                                display: none;
                                             }
                                         }
 

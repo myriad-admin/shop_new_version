@@ -358,7 +358,7 @@
   translate: -50% -50%;
   opacity: 0;
 }
-.product #MainContent .shopify-section .pds-slider .product-boxes .swiper-wrapper .swiper-slide.swiper-product-info .product-image .action-buttons .add-to-cart-wrapper.loading svg #tasche {
+.product #MainContent .shopify-section .pds-slider .product-boxes .swiper-wrapper .swiper-slide.swiper-product-info .product-image .action-buttons .add-to-cart-wrapper.loading svg .hide-item {
   opacity: 0;
 }
 .product #MainContent .shopify-section .pds-slider .product-boxes .swiper-wrapper .swiper-slide.swiper-product-info .product-image .action-buttons .add-to-cart-wrapper.loading::after {
@@ -400,6 +400,15 @@
   100% {
     transform: scaleY(-1) rotate(-135deg);
   }
+}
+.product #MainContent .shopify-section .pds-slider .product-boxes .swiper-wrapper .swiper-slide.swiper-product-info .product-image .action-buttons .add-to-cart-wrapper.alreadyInCart #addToCartSvg {
+  display: none;
+}
+.product #MainContent .shopify-section .pds-slider .product-boxes .swiper-wrapper .swiper-slide.swiper-product-info .product-image .action-buttons .add-to-cart-wrapper.alreadyInCart #alreadyInCartSvg {
+  display: block;
+}
+.product #MainContent .shopify-section .pds-slider .product-boxes .swiper-wrapper .swiper-slide.swiper-product-info .product-image .action-buttons .add-to-cart-wrapper #alreadyInCartSvg {
+  display: none;
 }
 .product #MainContent .shopify-section .pds-slider .product-boxes .swiper-wrapper .swiper-slide.swiper-product-info .product-image .action-buttons svg {
   width: auto;

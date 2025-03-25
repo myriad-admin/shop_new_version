@@ -272,23 +272,11 @@
                                                         }
                                                     }
                                                     else {
-                                                        if ((event2.target.classList.contains('swiper-slide') || event2.target.closest('#arrow-backround-svg') || event2.target.closest('#arrow-down-svg')) && !isSwiping) {
+                                                        if (event2.target.closest('.size-select-wrapper') && (event2.target.classList.contains('swiper-slide') || event2.target.closest('#arrow-backround-svg') || event2.target.closest('#arrow-down-svg')) && !isSwiping) {
                                                             console.log("ACTIVE!")
                                                             selectSizeWrapper.classList.add('active');
                                                         }
                                                     }
-
-                                                    // if (selectSizeWrapper.classList.contains('active') && event2.target.type != 'radio' && (
-                                                    //     event2.target.classList.contains('swiper-slide') &&
-                                                    //     event2.target.classList.contains('swiper-slide-active')
-                                                    // ) || !event2.target.closest('#ring-size-swiper') && !event2.target.classList.contains('size-select-wrapper')) {
-                                                    //     selectSizeWrapper.classList.remove('active');
-                                                    // }
-                                                    // if (!selectSizeWrapper.classList.contains('active') && (event2.target.id == "select-size-svg" || event2.target.classList.contains('swiper-slide') || event2.target.id == "arrow-backround-svg") && !isSwiping) {
-                                                    //     console.log("ACTIVE!")
-                                                    //     selectSizeWrapper.classList.add('active');
-                                                    // }
-
                                                 })
                                             });
                                         </script>
@@ -398,17 +386,59 @@
                                                 stroke-width="39" />
                                         </svg> -->
 
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="563" height="562"
-                                            viewBox="0 0 563 562" fill="none">
+                                        <svg id="addToCartSvg" xmlns="http://www.w3.org/2000/svg" width="563"
+                                            height="562" viewBox="0 0 563 562" fill="none">
                                             <g style="mix-blend-mode:plus-darker" opacity="0.75">
                                                 <circle cx="281.66" cy="280.934" r="280.934" fill="black" />
                                             </g>
                                             <path fill-rule="evenodd" clip-rule="evenodd"
                                                 d="M546.497 280.934C546.497 427.199 427.926 545.771 281.661 545.771C135.395 545.771 16.8242 427.199 16.8242 280.934C16.8242 134.669 135.395 16.0977 281.661 16.0977C427.926 16.0977 546.497 134.669 546.497 280.934ZM281.661 506.771C406.387 506.771 507.497 405.66 507.497 280.934C507.497 156.208 406.387 55.0977 281.661 55.0977C156.935 55.0977 55.8242 156.208 55.8242 280.934C55.8242 405.66 156.935 506.771 281.661 506.771Z"
                                                 fill="#D4AF37" />
-                                            <path id="tasche" fill-rule="evenodd" clip-rule="evenodd"
+                                            <path class="hide-item" fill-rule="evenodd" clip-rule="evenodd"
                                                 d="M206.881 172.875C207.42 133.054 241.483 102.305 281.662 102.305C321.841 102.305 355.905 133.054 356.443 172.875H372.47C390.125 172.875 404.871 186.518 406.12 204.228L406.124 204.282L418.949 383.758C419.619 393.116 416.364 402.312 409.984 409.163L409.933 409.217L409.883 409.271C403.591 415.96 394.735 419.906 385.292 419.906H178.032C168.59 419.906 159.734 415.961 153.442 409.271L153.391 409.217L153.341 409.163C146.96 402.312 143.706 393.116 144.375 383.758L157.201 204.282L157.204 204.228C158.454 186.518 173.199 172.875 190.855 172.875H206.881ZM236.887 172.875C237.432 151.123 256.492 132.305 281.662 132.305C306.832 132.305 325.892 151.123 326.437 172.875H236.887ZM206.875 202.875V259.124C206.875 267.408 213.591 274.124 221.875 274.124C230.159 274.124 236.875 267.408 236.875 259.124V202.875H326.449V259.124C326.449 267.408 333.165 274.124 341.449 274.124C349.733 274.124 356.449 267.408 356.449 259.124V202.875H372.47C374.43 202.875 376.061 204.394 376.195 206.346L389.026 385.896C389.1 386.936 388.741 387.954 388.03 388.717C387.32 389.472 386.332 389.906 385.292 389.906H178.032C176.992 389.906 176.005 389.472 175.294 388.717C174.583 387.954 174.224 386.936 174.299 385.896L187.129 206.346C187.264 204.394 188.895 202.875 190.855 202.875H206.875Z"
                                                 fill="#D4AF37" />
+                                        </svg>
+                                        <!-- 
+                                        <svg id="alreadyInCartSvg" xmlns="http://www.w3.org/2000/svg" width="562"
+                                            height="562" viewBox="0 0 562 562" fill="none">
+                                            <g style="mix-blend-mode:plus-darker" opacity="0.75">
+                                                <circle cx="280.934" cy="280.934" r="280.934" fill="black" />
+                                            </g>
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M545.771 280.934C545.771 427.199 427.199 545.771 280.934 545.771C134.669 545.771 16.0977 427.199 16.0977 280.934C16.0977 134.669 134.669 16.0977 280.934 16.0977C427.199 16.0977 545.771 134.669 545.771 280.934ZM280.934 506.771C405.66 506.771 506.771 405.66 506.771 280.934C506.771 156.208 405.66 55.0977 280.934 55.0977C156.208 55.0977 55.0977 156.208 55.0977 280.934C55.0977 405.66 156.208 506.771 280.934 506.771Z"
+                                                fill="#D4AF37" />
+                                            <path class="hide-item" d="M340.723 242.075V263.11M221.148 242.074V263.11"
+                                                stroke="#D4AF37" stroke-width="30" stroke-linecap="round" />
+                                            <path class="hide-item"
+                                                d="M340.719 181.676C340.719 150.457 313.951 125.148 280.932 125.148C247.912 125.148 221.145 150.457 221.145 181.676"
+                                                stroke="#D4AF37" stroke-width="30" stroke-linecap="round" />
+                                            <path class="hide-item"
+                                                d="M163.587 406.784L163.612 406.811L163.637 406.837C167.139 410.56 172.06 412.75 177.302 412.75H384.562C389.803 412.75 394.725 410.56 398.226 406.838L398.251 406.811L398.276 406.784C401.822 402.977 403.629 397.87 403.257 392.671C403.257 392.668 403.257 392.666 403.256 392.663L390.429 213.158C390.428 213.15 390.428 213.141 390.427 213.133C389.736 203.301 381.548 195.719 371.739 195.719H210.511H190.124C180.316 195.719 172.127 203.3 171.436 213.133C171.436 213.141 171.435 213.149 171.434 213.158L158.607 392.663C158.607 392.666 158.607 392.668 158.606 392.671C158.234 397.87 160.041 402.976 163.587 406.784Z"
+                                                stroke="#D4AF37" stroke-width="30" />
+                                            <path class="hide-item"
+                                                d="M340.539 315.751C338.145 344.896 312.373 367.84 280.934 367.84C249.494 367.84 223.723 344.896 221.328 315.751"
+                                                stroke="#D4AF37" stroke-width="30" stroke-linecap="round" />
+                                        </svg> -->
+
+                                        <svg id="alreadyInCartSvg" xmlns="http://www.w3.org/2000/svg" width="562"
+                                            height="562" viewBox="0 0 562 562" fill="none">
+                                            <g style="mix-blend-mode:plus-darker" opacity="0.75">
+                                                <circle cx="281.027" cy="280.934" r="280.934" fill="black" />
+                                            </g>
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M545.864 280.934C545.864 427.199 427.293 545.771 281.028 545.771C134.763 545.771 16.1914 427.199 16.1914 280.934C16.1914 134.669 134.763 16.0977 281.028 16.0977C427.293 16.0977 545.864 134.669 545.864 280.934ZM281.028 506.771C405.754 506.771 506.864 405.66 506.864 280.934C506.864 156.208 405.754 55.0977 281.028 55.0977C156.302 55.0977 55.1914 156.208 55.1914 280.934C55.1914 405.66 156.302 506.771 281.028 506.771Z"
+                                                fill="#D4AF37" />
+                                            <path class="hide-item" d="M340.816 234.208V255.243M221.242 234.207V255.243"
+                                                stroke="#D4AF37" stroke-width="30" stroke-linecap="round" />
+                                            <path class="hide-item"
+                                                d="M340.812 173.809C340.812 142.59 314.045 117.281 281.025 117.281C248.006 117.281 221.238 142.59 221.238 173.809"
+                                                stroke="#D4AF37" stroke-width="30" stroke-linecap="round" />
+                                            <path class="hide-item"
+                                                d="M398.32 398.97L398.345 398.943L398.37 398.916C401.916 395.109 403.723 390.003 403.351 384.803C403.351 384.801 403.35 384.799 403.35 384.796L390.523 205.291C390.522 205.282 390.522 205.274 390.521 205.266C389.83 195.433 381.641 187.852 371.833 187.852H210.605H190.218C180.41 187.852 172.221 195.433 171.53 205.265C171.529 205.274 171.529 205.282 171.528 205.291L158.701 384.796C158.701 384.799 158.7 384.801 158.7 384.803C158.328 390.002 160.135 395.109 163.681 398.916L163.706 398.943L163.731 398.97C167.233 402.693 172.154 404.883 177.395 404.883H384.656C389.897 404.883 394.818 402.693 398.32 398.97Z"
+                                                stroke="#D4AF37" stroke-width="30" />
+                                            <path class="hide-item"
+                                                d="M340.633 307.884C338.238 337.029 312.467 359.973 281.027 359.973C249.588 359.973 223.816 337.029 221.422 307.884"
+                                                stroke="#D4AF37" stroke-width="30" stroke-linecap="round" />
                                         </svg>
                                     </div>
 
@@ -660,12 +690,7 @@
                     });
                 </script>
 
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        document.querySelector('.pds-slider').focus();
-                        console.log("FOKUS!");
-                    });
-                </script>
+
 
                 <!-- Open/Close ColorSection -->
                 <script>
@@ -940,6 +965,7 @@
                     document.addEventListener('DOMContentLoaded', () => {
                         const targetNode = document.querySelector(".product-form__submit .loading__spinner");
                         let svgWrapper = document.querySelector('.action-buttons .add-to-cart-wrapper');
+                        let addToCartButton = document.getElementById('addToCartButton');
 
                         // Observer-Callback-Funktion
                         const callback = function (mutationsList) {
@@ -1155,16 +1181,7 @@
                         const callback = (mutationsList) => {
                             for (let mutation of mutationsList) {
                                 if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-                                    const newOpacity = button.style.opacity;
-                                    console.log('Opacity geändert:', newOpacity);
-
-                                    if (newOpacity == 0.75) {
-                                        myriadWishlistButton.classList.add('selected');
-                                    }
-
-                                    if (newOpacity == 1) {
-                                        myriadWishlistButton.classList.remove('selected');
-                                    }
+                                    changeHeartIcon();
                                 }
                             }
                         };
@@ -1173,7 +1190,107 @@
 
                         observer.observe(button, config);
 
+                        function changeHeartIcon() {
+                            const newOpacity = button.style.opacity;
+                            console.log('Opacity geändert:', newOpacity);
 
+                            if (newOpacity == 0.75) {
+                                myriadWishlistButton.classList.add('selected');
+                            }
+
+                            if (newOpacity == 1) {
+                                myriadWishlistButton.classList.remove('selected');
+                            }
+                        }
+
+                        changeHeartIcon();
+                    });
+                </script>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        async function getCart() {
+                            try {
+                                let response = await fetch('/cart.js');
+                                let cart = await response.json();
+                                return cart.items;
+                            } catch (error) {
+                                console.error('Fehler beim Abrufen des Warenkorbs:', error);
+                                return [];
+                            }
+                        }
+
+                        function checkProductInCart() {
+                            let productVariantsInCart = new Set();
+                            let shopifyProductInfos = document.querySelector('[id^="product-form-installment-template"]');
+                            let activeProductInput = shopifyProductInfos.querySelector('input[name="id"]');
+
+                            let activeVariant = Number(activeProductInput.value);
+
+
+
+
+
+
+
+                            let addToCartButton = document.getElementById('addToCartButton');
+
+
+                            getCart().then(items => {
+
+                                items.forEach(product => {
+                                    productVariantsInCart.add(product.variant_id);
+                                });
+
+                                if (productVariantsInCart.has(activeVariant)) {
+                                    addToCartButton.classList.add('alreadyInCart')
+                                } else {
+                                    addToCartButton.classList.remove('alreadyInCart')
+                                }
+
+                                console.log(activeVariant, productVariantsInCart);
+                                console.log(productVariantsInCart.has(activeVariant));
+                            });
+
+                        }
+
+                        checkProductInCart();
+
+                        const cartNotification = document.getElementById("cart-notification");
+
+                        const observer = new MutationObserver((mutationsList) => {
+                            mutationsList.forEach((mutation) => {
+                                if (mutation.attributeName === "class") {
+                                    const hasActiveClass = cartNotification.classList.contains("active");
+
+                                    if (hasActiveClass) {
+                                        checkProductInCart();
+                                    }
+                                }
+                            });
+                        });
+
+                        observer.observe(cartNotification, { attributes: true });
+
+
+                        let shopifyProductInfos = document.querySelector('[id^="product-form-installment-template"]');
+                        let activeProductInput = shopifyProductInfos.querySelector('input[name="id"]');
+
+                        const observer2 = new MutationObserver(() => {
+                            console.log("Variant ID hat sich geändert:", activeProductInput.value);
+                            checkProductInCart(); // Deine Funktion aufrufen
+                        });
+
+                        // Observer starten, um Änderungen am `value`-Attribut zu beobachten
+                        observer2.observe(activeProductInput, { attributes: true, attributeFilter: ["value"] });
+
+                    })
+                </script>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        document.querySelector('.pds-slider').focus();
+                        console.log("FOKUS!");
                     });
                 </script>
             </article>
