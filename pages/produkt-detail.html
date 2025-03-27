@@ -23,7 +23,7 @@
                 <div class="product-image-slider-wrapper">
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
+                            <!-- <div class="swiper-slide">
                                 <img src="https://cdn.shopify.com/s/files/1/0907/1231/0144/files/Produktbild_zugeschnitten.png?v=1742681633"
                                     alt="">
                             </div>
@@ -34,7 +34,7 @@
                             <div class="swiper-slide">
                                 <img src="https://cdn.shopify.com/s/files/1/0907/1231/0144/files/Produktbild_zugeschnitten.png?v=1742681633"
                                     alt="">
-                            </div>
+                            </div> -->
                         </div>
                         <div class="swiper-button-next">
                             <svg width="284" height="568" viewBox="0 0 284 568" fill="none"
@@ -272,7 +272,7 @@
                                                         }
                                                     }
                                                     else {
-                                                        if (event2.target.closest('.size-select-wrapper') && (event2.target.classList.contains('swiper-slide') || event2.target.closest('#arrow-backround-svg') || event2.target.closest('#arrow-down-svg')) && !isSwiping) {
+                                                        if ((event2.target.classList.contains('swiper-slide') && event2.target.closest('.size-select-wrapper') || event2.target.closest('#arrow-backround-svg') || event2.target.closest('#arrow-down-svg')) && !isSwiping) {
                                                             console.log("ACTIVE!")
                                                             selectSizeWrapper.classList.add('active');
                                                         }
@@ -706,7 +706,34 @@
                 <script>
                     let farbeFieldset = null;
                     document.addEventListener('DOMContentLoaded', () => {
-                        // 1️⃣ Farb-Fieldset finden
+                        let imagesData = productData.media;
+                        let productImageSwiperWrapper = document.querySelector('.product-image-slider-wrapper .swiper-wrapper');
+
+                        function changeProductImages(Ringcolor, Stonecolor, Stoneshape) {
+
+                            productImageSwiperWrapper.innerHTML = "";
+
+                            imagesData.forEach(imageData => {
+                                console.log(imageData.alt.toLowerCase(), Ringcolor.toLowerCase());
+                                if (imageData.alt.toLowerCase() == Ringcolor.toLowerCase()) {
+                                    let swiperSlideDiv = document.createElement('div');
+                                    swiperSlideDiv.classList.add('swiper-slide');
+
+                                    let imgElement = document.createElement('img');
+                                    imgElement.setAttribute('src', imageData.src);
+                                    imgElement.setAttribute('alt', `Myriad ${productData.title} ${imageData.alt}`);
+                                    swiperSlideDiv.appendChild(imgElement);
+
+                                    productImageSwiperWrapper.appendChild(swiperSlideDiv);
+                                }
+                            });
+
+                            productImageSwiperWrapper.classList.add('animation');
+
+                            setTimeout(() => {
+                                productImageSwiperWrapper.classList.remove('animation');
+                            }, 500);
+                        }
 
 
                         try {
@@ -748,38 +775,49 @@
                                 newColorLabel.setAttribute('for', label.id);
                                 newColorLabel.classList.add('color-field', 'animation-button');
 
-                                if (label.hasAttribute('checked')) {
-                                    newColorLabel.classList.add('color-field-active');
-                                }
+
 
                                 let labelColor = label.value;
 
-
-
-                                // const clonedLabel = label.cloneNode(true); // Label mit Inhalt klonen
-                                // console.log("AKC " + clonedLabel);
-                                // let labelColor;
-
-                                // try {
-                                //     labelColor = clonedLabel.firstChild.textContent.trim();
-                                //     if (!labelColor) throw new Error("Leerer Text"); // Falls der Text leer ist, nutze den Fallback
-                                // } catch (error) {
-                                //     labelColor = clonedLabel.getAttribute('value');
-                                // }
 
                                 console.log(labelColor);
 
                                 if (labelColor == "Gold") {
                                     newColorLabel.classList.add('gold');
-                                    addColor();
+                                    newColorLabel.setAttribute('value', 'gold');
+
+                                    if (label.hasAttribute('checked')) {
+                                        newColorLabel.classList.add('color-field-active');
+                                        addColor();
+                                        changeProductImages('gold', null, null);
+                                    }
+                                    else {
+                                        addColor();
+                                    }
                                 }
                                 if (labelColor == "Grau") {
                                     newColorLabel.classList.add('grau');
-                                    addColor();
+                                    newColorLabel.setAttribute('value', 'grau');
+                                    if (label.hasAttribute('checked')) {
+                                        newColorLabel.classList.add('color-field-active');
+                                        addColor();
+                                        changeProductImages('grau', null, null);
+                                    }
+                                    else {
+                                        addColor();
+                                    }
                                 }
                                 if (labelColor == "Bronze") {
                                     newColorLabel.classList.add('bronze');
-                                    addColor();
+                                    newColorLabel.setAttribute('value', 'bronze');
+                                    if (label.hasAttribute('checked')) {
+                                        newColorLabel.classList.add('color-field-active');
+                                        addColor();
+                                        changeProductImages('bronze', null, null);
+                                    }
+                                    else {
+                                        addColor();
+                                    }
                                 }
 
                                 function addColor() {
@@ -797,6 +835,12 @@
                             colorField.addEventListener("click", function () {
                                 colorFields.forEach(field => field.classList.remove("color-field-active"));
                                 this.classList.add("color-field-active");
+
+                                let activeColor = this.getAttribute('value');
+
+                                console.log(activeColor);
+
+                                changeProductImages(activeColor, null, null);
                             });
                         });
 
@@ -1209,7 +1253,10 @@
 
                 <script>
                     document.addEventListener('DOMContentLoaded', () => {
-                        async function getCart() {
+                        let cartItems = null;
+                        console.log(cartItems);
+
+                        async function getCartItems() {
                             try {
                                 let response = await fetch('/cart.js');
                                 let cart = await response.json();
@@ -1220,6 +1267,11 @@
                             }
                         }
 
+                        async function safeCartItems() {
+                            cartItems = await getCartItems();
+                            checkProductInCart();
+                        }
+
                         function checkProductInCart() {
                             let productVariantsInCart = new Set();
                             let shopifyProductInfos = document.querySelector('[id^="product-form-installment-template"]');
@@ -1227,34 +1279,22 @@
 
                             let activeVariant = Number(activeProductInput.value);
 
-
-
-
-
-
-
                             let addToCartButton = document.getElementById('addToCartButton');
 
 
-                            getCart().then(items => {
-
-                                items.forEach(product => {
-                                    productVariantsInCart.add(product.variant_id);
-                                });
-
-                                if (productVariantsInCart.has(activeVariant)) {
-                                    addToCartButton.classList.add('alreadyInCart')
-                                } else {
-                                    addToCartButton.classList.remove('alreadyInCart')
-                                }
-
-                                console.log(activeVariant, productVariantsInCart);
-                                console.log(productVariantsInCart.has(activeVariant));
+                            cartItems.forEach(product => {
+                                productVariantsInCart.add(product.variant_id);
                             });
 
-                        }
+                            if (productVariantsInCart.has(activeVariant)) {
+                                addToCartButton.classList.add('alreadyInCart')
+                            } else {
+                                addToCartButton.classList.remove('alreadyInCart')
+                            }
 
-                        checkProductInCart();
+                            console.log(activeVariant, productVariantsInCart);
+                            console.log(productVariantsInCart.has(activeVariant));
+                        }
 
                         const cartNotification = document.getElementById("cart-notification");
 
@@ -1264,7 +1304,7 @@
                                     const hasActiveClass = cartNotification.classList.contains("active");
 
                                     if (hasActiveClass) {
-                                        checkProductInCart();
+                                        safeCartItems();
                                     }
                                 }
                             });
@@ -1284,6 +1324,7 @@
                         // Observer starten, um Änderungen am `value`-Attribut zu beobachten
                         observer2.observe(activeProductInput, { attributes: true, attributeFilter: ["value"] });
 
+                        safeCartItems();
                     })
                 </script>
 
@@ -1292,6 +1333,13 @@
                         document.querySelector('.pds-slider').focus();
                         console.log("FOKUS!");
                     });
+                </script>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+
+
+                    })
                 </script>
             </article>
         </section>
