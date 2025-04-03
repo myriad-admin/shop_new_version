@@ -1,0 +1,27 @@
+{
+  "name": "myriad",
+  "version": "1.0.0",
+  "description": "Webshop Projekt",
+  "main": "index.js",
+  "scripts": {
+    "watch": "sass --watch scss/base.scss:dist/base.css",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myriad-admin/Myriad.git"
+  },
+  "author": "Jan Langguth",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/myriad-admin/Myriad/issues"
+  },
+  "homepage": "https://github.com/myriad-admin/Myriad#readme",
+  "dependencies": {
+    "swiper": "^11.2.6",
+    "webpack": "^5.98.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^6.0.1"
+  }
+}

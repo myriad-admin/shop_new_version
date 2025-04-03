@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script defer src="../js/webpack/bundle.js"></script>
 </head>
 
 <body class="gradient product">
@@ -21,12 +22,8 @@
                     alt="">
 
                 <div class="product-image-slider-wrapper">
-                    <div class="swiper mySwiper">
+                    <div class="swiper product-image-swiper">
                         <div class="swiper-wrapper">
-                            <!-- <div class="swiper-slide">
-                                <img src="https://cdn.shopify.com/s/files/1/0907/1231/0144/files/Produktbild_zugeschnitten.png?v=1742681633"
-                                    alt="">
-                            </div>
                             <div class="swiper-slide">
                                 <img src="https://cdn.shopify.com/s/files/1/0907/1231/0144/files/Produktbild_zugeschnitten.png?v=1742681633"
                                     alt="">
@@ -34,7 +31,11 @@
                             <div class="swiper-slide">
                                 <img src="https://cdn.shopify.com/s/files/1/0907/1231/0144/files/Produktbild_zugeschnitten.png?v=1742681633"
                                     alt="">
-                            </div> -->
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://cdn.shopify.com/s/files/1/0907/1231/0144/files/Produktbild_zugeschnitten.png?v=1742681633"
+                                    alt="">
+                            </div>
                         </div>
                         <div class="swiper-button-next">
                             <svg width="284" height="568" viewBox="0 0 284 568" fill="none"
@@ -233,7 +234,7 @@
                                         <article class="size-select-wrapper">
                                             <div class="swiper size-select-swiper">
                                                 <div class="swiper-wrapper" id="ring-size-swiper">
-                                                    <div class="swiper-slide">48</div>
+                                                    <!-- <div class="swiper-slide">48</div>
                                                     <div class="swiper-slide">50</div>
                                                     <div class="swiper-slide">51</div>
                                                     <div class="swiper-slide">52</div>
@@ -241,47 +242,10 @@
                                                     <div class="swiper-slide">56</div>
                                                     <div class="swiper-slide">57</div>
                                                     <div class="swiper-slide">58</div>
-                                                    <div class="swiper-slide">60</div>
+                                                    <div class="swiper-slide">60</div> -->
                                                 </div>
                                             </div>
                                         </article>
-
-                                        <script>
-                                            document.addEventListener('DOMContentLoaded', () => {
-                                                let selectSizeWrapper = document.querySelector('.size-select-wrapper');
-                                                let isSwiping = null;
-                                                let event2 = null;
-                                                // Schließt das Element, wenn außerhalb geklickt wird
-                                                document.addEventListener('pointerdown', (event) => {
-                                                    isSwiping = false;
-                                                    event2 = event;
-                                                });
-
-                                                sizeSelectSwiper.on('touchMove', function () {
-                                                    isSwiping = true;
-                                                });
-
-                                                document.addEventListener('pointerup', () => {
-                                                    console.log(event2.target);
-
-                                                    if (selectSizeWrapper.classList.contains('active')) {
-                                                        if (event2.target.type != 'radio' && (event2.target.classList.contains('swiper-slide') && event2.target.classList.contains('swiper-slide-active')
-                                                        ) || !event2.target.closest('#ring-size-swiper') && !event2.target.classList.contains('size-select-wrapper')) {
-                                                            selectSizeWrapper.classList.remove('active');
-                                                            console.log("gexchlossen");
-                                                        }
-                                                    }
-                                                    else {
-                                                        if ((event2.target.classList.contains('swiper-slide') && event2.target.closest('.size-select-wrapper') || event2.target.closest('#arrow-backround-svg') || event2.target.closest('#arrow-down-svg')) && !isSwiping) {
-                                                            console.log("ACTIVE!")
-                                                            selectSizeWrapper.classList.add('active');
-                                                        }
-                                                    }
-                                                })
-                                            });
-                                        </script>
-
-
 
                                         <svg id="diamond-svg" xmlns="http://www.w3.org/2000/svg" width="336"
                                             height="306" viewBox="0 0 336 306" fill="none">
@@ -360,32 +324,10 @@
                                                 d="M1588.03 101.154C1588.03 103.794 1587.31 105.834 1585.87 107.274C1584.31 108.594 1582.21 109.254 1579.57 109.254L1504.69 109.254C1499.05 109.254 1496.23 106.554 1496.23 101.154C1496.23 98.6337 1497.01 96.6537 1498.57 95.2137C1500.01 93.7737 1502.05 93.0537 1504.69 93.0537H1513.51C1501.99 84.1737 1496.23 72.1137 1496.23 56.8737C1496.23 45.3537 1499.59 36.4737 1506.31 30.2337C1512.91 23.8737 1522.27 20.6937 1534.39 20.6937H1579.57C1582.21 20.6937 1584.31 21.4737 1585.87 23.0337C1587.31 24.4737 1588.03 26.4537 1588.03 28.9737C1588.03 31.6137 1587.31 33.6537 1585.87 35.0937C1584.31 36.5337 1582.21 37.2537 1579.57 37.2537H1534.39C1526.35 37.2537 1520.29 39.1737 1516.21 43.0137C1512.13 46.7337 1510.09 52.3137 1510.09 59.7537C1510.09 69.8337 1513.09 77.8737 1519.09 83.8737C1524.97 89.7537 1532.95 92.6937 1543.03 92.6937L1579.57 92.6937C1582.21 92.6937 1584.31 93.4737 1585.87 95.0337C1587.31 96.4737 1588.03 98.5137 1588.03 101.154Z"
                                                 fill="#D4AF37" />
                                         </svg>
-
-                                        <svg class="animation-button" id="info-svg" width="263" height="264"
-                                            viewBox="0 0 263 264" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <circle cx="131.5" cy="131.984" r="122.5" stroke="#D4AF37"
-                                                stroke-width="18" />
-                                            <path
-                                                d="M131.305 84.287C126.825 84.287 123.115 83.027 120.175 80.507C117.375 77.847 115.975 74.487 115.975 70.427C115.975 66.367 117.375 63.077 120.175 60.557C123.115 57.897 126.825 56.567 131.305 56.567C135.785 56.567 139.495 57.897 142.435 60.557C145.375 63.077 146.845 66.367 146.845 70.427C146.845 74.487 145.375 77.847 142.435 80.507C139.495 83.027 135.785 84.287 131.305 84.287ZM131.305 207.557C127.665 207.557 124.795 206.577 122.695 204.617C120.735 202.657 119.755 199.927 119.755 196.427V111.587C119.755 108.087 120.735 105.357 122.695 103.397C124.795 101.437 127.665 100.457 131.305 100.457C134.945 100.457 137.815 101.437 139.915 103.397C142.155 105.357 143.275 108.087 143.275 111.587V196.427C143.275 199.927 142.155 202.657 139.915 204.617C137.815 206.577 134.945 207.557 131.305 207.557Z"
-                                                fill="#D4AF37" />
-                                        </svg>
-
                                     </div>
                                 </div>
                                 <div class="action-buttons">
                                     <div id="addToCartButton" class="add-to-cart-wrapper animation-button">
-                                        <!-- <svg width="508" height="507" viewBox="0 0 508 507" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <g style="mix-blend-mode:plus-darker" opacity="0.8">
-                                                <circle cx="254.272" cy="253.454" r="253.415" fill="black" />
-                                            </g>
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M191.408 183.834H173.79C161.616 183.834 151.511 193.243 150.642 205.391L139.278 364.528C138.82 370.953 141.048 377.278 145.437 381.993C149.834 386.707 155.98 389.386 162.425 389.386H346.122C352.567 389.386 358.714 386.707 363.11 381.993C367.5 377.278 369.727 370.953 369.27 364.528L357.905 205.391C357.036 193.243 346.931 183.834 334.757 183.834H317.265V180.519C317.265 145.728 289.065 117.527 254.274 117.527C220.756 117.527 189.777 144.223 191.282 180.519C191.328 181.62 191.368 182.727 191.408 183.834ZM317.265 203.726V253.457C317.265 258.947 312.81 263.403 307.319 263.403C301.829 263.403 297.373 258.947 297.373 253.457V203.726H211.174V253.457C211.174 258.947 206.718 263.403 201.228 263.403C195.738 263.403 191.282 258.947 191.282 253.457C191.282 253.457 192.144 230.216 191.859 203.726H173.79C172.053 203.726 170.608 205.072 170.488 206.803L159.116 365.94C159.05 366.861 159.369 367.763 159.998 368.44C160.628 369.109 161.504 369.494 162.425 369.494H346.122C347.044 369.494 347.919 369.109 348.549 368.44C349.179 367.763 349.497 366.861 349.431 365.94L338.059 206.803C337.94 205.072 336.494 203.726 334.757 203.726H317.265ZM297.373 183.834V180.519C297.373 156.715 278.078 137.419 254.274 137.419C230.469 137.419 211.174 156.715 211.174 180.519V183.834H297.373Z"
-                                                fill="#EBC343" />
-                                            <circle cx="254.272" cy="253.454" r="219.661" stroke="#EBC343"
-                                                stroke-width="39" />
-                                        </svg> -->
-
                                         <svg id="addToCartSvg" xmlns="http://www.w3.org/2000/svg" width="563"
                                             height="562" viewBox="0 0 563 562" fill="none">
                                             <g style="mix-blend-mode:plus-darker" opacity="0.75">
@@ -398,27 +340,6 @@
                                                 d="M206.881 172.875C207.42 133.054 241.483 102.305 281.662 102.305C321.841 102.305 355.905 133.054 356.443 172.875H372.47C390.125 172.875 404.871 186.518 406.12 204.228L406.124 204.282L418.949 383.758C419.619 393.116 416.364 402.312 409.984 409.163L409.933 409.217L409.883 409.271C403.591 415.96 394.735 419.906 385.292 419.906H178.032C168.59 419.906 159.734 415.961 153.442 409.271L153.391 409.217L153.341 409.163C146.96 402.312 143.706 393.116 144.375 383.758L157.201 204.282L157.204 204.228C158.454 186.518 173.199 172.875 190.855 172.875H206.881ZM236.887 172.875C237.432 151.123 256.492 132.305 281.662 132.305C306.832 132.305 325.892 151.123 326.437 172.875H236.887ZM206.875 202.875V259.124C206.875 267.408 213.591 274.124 221.875 274.124C230.159 274.124 236.875 267.408 236.875 259.124V202.875H326.449V259.124C326.449 267.408 333.165 274.124 341.449 274.124C349.733 274.124 356.449 267.408 356.449 259.124V202.875H372.47C374.43 202.875 376.061 204.394 376.195 206.346L389.026 385.896C389.1 386.936 388.741 387.954 388.03 388.717C387.32 389.472 386.332 389.906 385.292 389.906H178.032C176.992 389.906 176.005 389.472 175.294 388.717C174.583 387.954 174.224 386.936 174.299 385.896L187.129 206.346C187.264 204.394 188.895 202.875 190.855 202.875H206.875Z"
                                                 fill="#D4AF37" />
                                         </svg>
-                                        <!-- 
-                                        <svg id="alreadyInCartSvg" xmlns="http://www.w3.org/2000/svg" width="562"
-                                            height="562" viewBox="0 0 562 562" fill="none">
-                                            <g style="mix-blend-mode:plus-darker" opacity="0.75">
-                                                <circle cx="280.934" cy="280.934" r="280.934" fill="black" />
-                                            </g>
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M545.771 280.934C545.771 427.199 427.199 545.771 280.934 545.771C134.669 545.771 16.0977 427.199 16.0977 280.934C16.0977 134.669 134.669 16.0977 280.934 16.0977C427.199 16.0977 545.771 134.669 545.771 280.934ZM280.934 506.771C405.66 506.771 506.771 405.66 506.771 280.934C506.771 156.208 405.66 55.0977 280.934 55.0977C156.208 55.0977 55.0977 156.208 55.0977 280.934C55.0977 405.66 156.208 506.771 280.934 506.771Z"
-                                                fill="#D4AF37" />
-                                            <path class="hide-item" d="M340.723 242.075V263.11M221.148 242.074V263.11"
-                                                stroke="#D4AF37" stroke-width="30" stroke-linecap="round" />
-                                            <path class="hide-item"
-                                                d="M340.719 181.676C340.719 150.457 313.951 125.148 280.932 125.148C247.912 125.148 221.145 150.457 221.145 181.676"
-                                                stroke="#D4AF37" stroke-width="30" stroke-linecap="round" />
-                                            <path class="hide-item"
-                                                d="M163.587 406.784L163.612 406.811L163.637 406.837C167.139 410.56 172.06 412.75 177.302 412.75H384.562C389.803 412.75 394.725 410.56 398.226 406.838L398.251 406.811L398.276 406.784C401.822 402.977 403.629 397.87 403.257 392.671C403.257 392.668 403.257 392.666 403.256 392.663L390.429 213.158C390.428 213.15 390.428 213.141 390.427 213.133C389.736 203.301 381.548 195.719 371.739 195.719H210.511H190.124C180.316 195.719 172.127 203.3 171.436 213.133C171.436 213.141 171.435 213.149 171.434 213.158L158.607 392.663C158.607 392.666 158.607 392.668 158.606 392.671C158.234 397.87 160.041 402.976 163.587 406.784Z"
-                                                stroke="#D4AF37" stroke-width="30" />
-                                            <path class="hide-item"
-                                                d="M340.539 315.751C338.145 344.896 312.373 367.84 280.934 367.84C249.494 367.84 223.723 344.896 221.328 315.751"
-                                                stroke="#D4AF37" stroke-width="30" stroke-linecap="round" />
-                                        </svg> -->
 
                                         <svg id="alreadyInCartSvg" xmlns="http://www.w3.org/2000/svg" width="562"
                                             height="562" viewBox="0 0 562 562" fill="none">
@@ -442,16 +363,6 @@
                                         </svg>
                                     </div>
 
-                                    <!-- <svg id="addToCartButton" width="508" height="507" viewBox="0 0 508 507" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g style="mix-blend-mode:plus-darker" opacity="0.5">
-                                        <circle cx="254.272" cy="253.454" r="253.415" fill="black"/>
-                                        </g>
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M191.408 183.834H173.79C161.616 183.834 151.511 193.243 150.642 205.391L139.278 364.528C138.82 370.953 141.048 377.278 145.437 381.993C149.834 386.707 155.98 389.386 162.425 389.386H346.122C352.567 389.386 358.714 386.707 363.11 381.993C367.5 377.278 369.727 370.953 369.27 364.528L357.905 205.391C357.036 193.243 346.931 183.834 334.757 183.834H317.265V180.519C317.265 145.728 289.065 117.527 254.274 117.527C220.756 117.527 189.777 144.223 191.282 180.519C191.328 181.62 191.368 182.727 191.408 183.834ZM317.265 203.726V253.457C317.265 258.947 312.81 263.403 307.319 263.403C301.829 263.403 297.373 258.947 297.373 253.457V203.726H211.174V253.457C211.174 258.947 206.718 263.403 201.228 263.403C195.738 263.403 191.282 258.947 191.282 253.457C191.282 253.457 192.144 230.216 191.859 203.726H173.79C172.053 203.726 170.608 205.072 170.488 206.803L159.116 365.94C159.05 366.861 159.369 367.763 159.998 368.44C160.628 369.109 161.504 369.494 162.425 369.494H346.122C347.044 369.494 347.919 369.109 348.549 368.44C349.179 367.763 349.497 366.861 349.431 365.94L338.059 206.803C337.94 205.072 336.494 203.726 334.757 203.726H317.265ZM297.373 183.834V180.519C297.373 156.715 278.078 137.419 254.274 137.419C230.469 137.419 211.174 156.715 211.174 180.519V183.834H297.373Z" fill="#EBC343"/>
-                                        <circle cx="254.272" cy="253.454" r="219.661" stroke="#EBC343" stroke-width="39"/>
-                                    </svg> -->
-
-
-
                                     <svg id="wishlistButton" class="animation-button" xmlns="http://www.w3.org/2000/svg"
                                         width="562" height="563" viewBox="0 0 562 563" fill="none">
                                         <g style="mix-blend-mode:plus-darker" opacity="0.75">
@@ -469,22 +380,6 @@
                                             fill="#D4AF37" />
                                     </svg>
 
-                                    <!-- <svg id="wishlistButton" class="animation-button" width="508" height="508"
-                                        viewBox="0 0 508 508" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g style="mix-blend-mode:plus-darker" opacity="0.8">
-                                            <path
-                                                d="M507.678 254.09C507.678 394.047 394.22 507.504 254.264 507.504C114.307 507.504 0.849609 394.047 0.849609 254.09C0.849609 114.133 114.307 0.675781 254.264 0.675781C394.22 0.675781 507.678 114.133 507.678 254.09Z"
-                                                fill="black"></path>
-                                        </g>
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M493.424 254.09C493.424 386.175 386.349 493.25 254.264 493.25C122.179 493.25 15.1035 386.175 15.1035 254.09C15.1035 122.005 122.179 14.9297 254.264 14.9297C386.349 14.9297 493.424 122.005 493.424 254.09ZM254.264 454.25C364.809 454.25 454.424 364.636 454.424 254.09C454.424 143.545 364.809 53.9297 254.264 53.9297C143.718 53.9297 54.1035 143.545 54.1035 254.09C54.1035 364.636 143.718 454.25 254.264 454.25Z"
-                                            fill="#EBC343"></path>
-                                        <path id="heart"
-                                            d="M147.98 296.596L146.825 297.554C162.962 317.025 186.119 336.759 212.77 359.47L212.83 359.521L212.841 359.531L212.877 359.561L212.882 359.566L212.888 359.571C222 367.336 232.321 376.132 243.024 385.492C246.135 388.216 250.126 389.715 254.264 389.715C258.399 389.715 262.392 388.216 265.5 385.496L147.98 296.596ZM147.98 296.596L146.825 297.553C128.717 275.704 120.18 254.848 120.18 231.992C120.18 209.863 127.769 189.388 141.613 174.371L141.613 174.371C155.627 159.172 174.863 150.801 195.756 150.801C211.402 150.801 225.741 155.754 238.337 165.496L238.337 165.496C244.183 170.018 249.514 175.463 254.264 181.749C259.015 175.464 264.345 170.018 270.192 165.496C282.788 155.754 297.127 150.801 312.773 150.801C333.664 150.801 352.902 159.172 366.917 174.371L365.814 175.388L366.917 174.371C380.76 189.388 388.348 209.863 388.348 231.992C388.348 254.848 379.812 275.704 361.705 297.551C345.571 317.02 322.425 336.746 295.787 359.447L295.694 359.527L295.694 359.527C286.565 367.304 276.228 376.114 265.5 385.496L147.98 296.596ZM161.093 285.728L159.938 286.685L161.093 285.728C145.53 266.95 138.711 250.408 138.711 231.992C138.711 214.448 144.608 198.461 155.237 186.933C165.701 175.585 180.079 169.334 195.756 169.334C207.2 169.334 217.7 172.965 227 180.155C235.313 186.585 241.131 194.74 244.553 200.478L244.554 200.478C246.612 203.927 250.249 205.994 254.264 205.994C258.278 205.994 261.915 203.927 263.974 200.478L262.686 199.709L263.974 200.478C267.399 194.74 273.216 186.585 281.528 180.156C290.827 172.965 301.327 169.334 312.773 169.334C328.448 169.334 342.829 175.585 353.291 186.933C363.919 198.461 369.817 214.448 369.817 231.992C369.817 250.408 362.998 266.95 347.436 285.728C332.347 303.937 309.87 323.095 283.673 345.423C274.787 352.993 264.748 361.549 254.243 370.686C243.799 361.566 233.776 353.024 224.909 345.467L224.902 345.462L224.896 345.456L224.86 345.427C224.858 345.425 224.856 345.423 224.853 345.421C198.658 323.096 176.181 303.935 161.093 285.728Z"
-                                            fill="" stroke="#EBC343" stroke-width="20" style="
-                          "></path>
-                                    </svg> -->
-
                                     <svg class="animation-button" id="shareButton" xmlns="http://www.w3.org/2000/svg"
                                         width="563" height="563" viewBox="0 0 563 563" fill="none">
                                         <g style="mix-blend-mode:plus-darker" opacity="0.75">
@@ -497,25 +392,16 @@
                                             d="M336.898 140.707C332.416 141.703 329.727 143.396 327.137 146.982C323.253 152.161 323.054 153.356 322.456 170.587L321.958 187.021L318.472 187.719C316.58 188.017 309.508 189.113 302.735 189.91C235.405 198.675 176.043 242.001 145.565 304.551C132.816 330.646 125.246 361.821 125.246 388.216C125.246 398.076 126.441 400.964 131.023 402.757C136.103 404.65 138.692 403.056 147.557 392.399C188.792 342.299 244.17 312.419 307.815 306.045C317.078 305.049 319.767 305.049 320.962 306.045C322.157 307.041 322.456 310.128 322.456 321.483C322.456 329.451 322.954 337.12 323.552 339.013C325.145 343.694 328.93 348.574 332.416 350.367C336.201 352.359 343.671 352.26 348.153 350.168C350.444 349.172 367.376 333.136 391.978 308.634C435.544 259.859 440.951 262.155 441.597 245.839C441.104 237.159 438.963 234.853 436.564 230.732C434.285 226.816 424.547 216.703 393.77 185.727C371.759 163.615 352.436 144.691 350.842 143.695C346.858 141.205 340.683 139.91 336.898 140.707ZM409.109 246.284C409.109 249.372 406.818 251.961 381.022 277.858C365.583 293.296 352.834 305.845 352.635 305.646C352.436 305.447 351.639 302.758 350.842 299.67C347.954 288.814 339.488 280.049 328.532 276.563C324.249 275.268 321.062 274.969 312.894 275.467C263.99 278.455 210.604 298.276 171.361 327.957C168.672 329.849 167.079 330.646 167.079 329.75C167.079 326.961 178.134 306.045 184.808 296.085C213.293 253.854 259.508 224.87 307.317 219.392C331.42 216.603 335.105 215.408 342.376 208.137C347.356 203.256 349.946 198.376 351.44 191.404L352.536 186.225L380.822 214.511C406.818 240.607 409.109 243.097 409.109 246.284Z"
                                             fill="#D4AF37" />
                                     </svg>
-
-                                    <!-- <svg class="animation-button" id="shareButton" width="508" height="508"
-                                        viewBox="0 0 508 508" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g style="mix-blend-mode:plus-darker" opacity="0.8">
-                                            <path
-                                                d="M507.689 253.727C507.689 393.685 394.232 507.142 254.274 507.142C114.317 507.142 0.859375 393.685 0.859375 253.727C0.859375 113.77 114.317 0.3125 254.274 0.3125C394.232 0.3125 507.689 113.77 507.689 253.727Z"
-                                                fill="black" />
-                                        </g>
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M493.436 253.728C493.436 385.813 386.359 492.889 254.274 492.889C122.189 492.889 15.1133 385.813 15.1133 253.728C15.1133 121.642 122.189 14.5664 254.274 14.5664C386.359 14.5664 493.436 121.642 493.436 253.728ZM254.274 453.889C364.82 453.889 454.436 364.273 454.436 253.728C454.436 143.182 364.82 53.5664 254.274 53.5664C143.728 53.5664 54.1133 143.182 54.1133 253.728C54.1133 364.273 143.728 453.889 254.274 453.889Z"
-                                            fill="#EBC343" />
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M153.675 330.831C152.398 332.143 151.136 333.474 149.89 334.824C146.584 338.41 143.391 342.133 140.318 345.99C140.317 345.99 140.317 345.991 140.317 345.991C139.106 347.511 137.913 349.052 136.74 350.614C135.258 352.587 132.959 353.689 130.584 353.689C129.771 353.689 128.95 353.56 128.147 353.293C125.005 352.244 122.887 349.302 122.887 345.99C122.887 344.08 122.918 342.176 122.979 340.276C122.979 340.276 122.979 340.276 122.979 340.276C123.15 335.015 123.554 329.794 124.189 324.627C124.488 322.189 124.838 319.764 125.239 317.351C131.087 282.134 147.701 249.685 173.449 223.938C203.549 193.84 242.805 176.227 284.936 173.7C286.539 173.604 287.806 172.285 287.806 170.679V153.3C287.806 138.85 295.677 133.723 302.418 133.723C307.328 133.723 312.306 136.211 317.214 141.119L376.698 200.603C382.479 206.383 385.662 214.094 385.662 222.312C385.662 230.532 382.479 238.242 376.697 244.021L317.214 303.505C312.307 308.413 307.329 310.902 302.419 310.902H302.418C295.677 310.902 287.806 305.773 287.806 291.324V274.5C287.806 272.799 286.389 271.436 284.691 271.526C276.09 271.981 267.603 272.979 259.268 274.5C258.781 274.589 258.294 274.679 257.807 274.772C257.807 274.772 257.806 274.772 257.806 274.772C218.168 282.311 182.052 301.7 153.675 330.831ZM355.485 221.817L355.484 221.816L315.78 182.111C311.316 194.219 299.969 202.852 286.732 203.646C251.936 205.733 219.584 220.231 194.662 245.152C184.531 255.283 176.118 266.646 169.561 278.908C202.988 256.755 241.932 243.749 283.104 241.568C297.969 240.78 310.684 249.853 315.616 262.677L355.488 222.804C355.546 222.746 355.576 222.705 355.591 222.683C355.605 222.661 355.613 222.645 355.619 222.631C355.625 222.616 355.662 222.527 355.662 222.312C355.662 222.098 355.625 222.009 355.619 221.993C355.615 221.984 355.611 221.974 355.604 221.963C355.6 221.956 355.595 221.948 355.59 221.939C355.575 221.917 355.544 221.875 355.485 221.817Z"
-                                            fill="#EBC343" />
-                                    </svg> -->
-
-
                                 </div>
                             </article>
+
+                            <svg class="animation-button" id="info-svg" width="263" height="264" viewBox="0 0 263 264"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="131.5" cy="131.984" r="122.5" stroke="#D4AF37" stroke-width="18" />
+                                <path
+                                    d="M131.305 84.287C126.825 84.287 123.115 83.027 120.175 80.507C117.375 77.847 115.975 74.487 115.975 70.427C115.975 66.367 117.375 63.077 120.175 60.557C123.115 57.897 126.825 56.567 131.305 56.567C135.785 56.567 139.495 57.897 142.435 60.557C145.375 63.077 146.845 66.367 146.845 70.427C146.845 74.487 145.375 77.847 142.435 80.507C139.495 83.027 135.785 84.287 131.305 84.287ZM131.305 207.557C127.665 207.557 124.795 206.577 122.695 204.617C120.735 202.657 119.755 199.927 119.755 196.427V111.587C119.755 108.087 120.735 105.357 122.695 103.397C124.795 101.437 127.665 100.457 131.305 100.457C134.945 100.457 137.815 101.437 139.915 103.397C142.155 105.357 143.275 108.087 143.275 111.587V196.427C143.275 199.927 142.155 202.657 139.915 204.617C137.815 206.577 134.945 207.557 131.305 207.557Z"
+                                    fill="#D4AF37" />
+                            </svg>
 
                             <div class="arrows">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="823" height="582" viewBox="0 0 823 582"
@@ -612,6 +498,12 @@
                                     </defs>
                                 </svg>
                             </div>
+
+                            <div class="size-calculator-overlay-wrapper">
+                                <div class="size-calculator-overlay">
+
+                                </div>
+                            </div>
                         </div>
                         <div class="swiper-slide swiper-product-actions">Slide2</div>
                         <div class="swiper-slide empty-slide">Slide 3</div>
@@ -621,9 +513,9 @@
                 <article class="color-picker d-none" id="colorPicker">
                     <div class="colors">
                         <div class="colors-overflow-wrapper" id="colorSection">
-                            <!-- <div class="color-field gold" title="Gold"></div>
-                            <div class="color-field silber" title="Silber"></div>
-                            <div class="color-field bronze" title="Bronze"></div> -->
+                            <!-- <div class="color-field gold" value="Gold" title="Gold"></div>
+                            <div class="color-field silber" value="Silber" title="Silber"></div>
+                            <div class="color-field bronze" value="Bronze" title="Bronze"></div> -->
                         </div>
                     </div>
 
@@ -642,705 +534,6 @@
                         </svg>
                     </div>
                 </article>
-
-
-                <!-- Swiper JS -->
-                <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-                <!-- Initialize Swiper -->
-                <script>
-                    var swiper = new Swiper(".mySwiper", {
-                        navigation: {
-                            nextEl: ".swiper-button-next",
-                            prevEl: ".swiper-button-prev",
-                        },
-                    });
-
-                    var productBoxSwiper = new Swiper(".product-boxes", {
-                        observer: true,
-                        observeParents: true,
-                        direction: "vertical",
-                        initialSlide: 1, // Setzt den zweiten Slide als aktiv
-                        slidesPerView: "auto",
-                        resistanceRatio: 0,
-                        pagination: {
-                            el: ".swiper-pagination",
-                            clickable: true,
-                        },
-                    });
-
-
-                    var sizeSelectSwiper = new Swiper(".size-select-swiper", {
-                        direction: "vertical",
-                        nested: true,
-                        mousewheel: true, // Ermöglicht Scrollen mit dem Mausrad,
-                        touchMoveStopPropagation: true,
-                        spaceBetween: 2,
-                        watchSlidesProgress: true,
-                        centeredSlides: true,
-                        slideToClickedSlide: true, // Diese Option sorgt dafür, dass beim Klicken auf eine Sektion der Swiper darauf springt
-                    });
-
-                    sizeSelectSwiper.on('touchStart', function () {
-                        productBoxSwiper.allowTouchMove = false;
-                    });
-
-                    sizeSelectSwiper.on('touchEnd', function () {
-                        productBoxSwiper.allowTouchMove = true;
-                    });
-                </script>
-
-
-
-                <!-- Open/Close ColorSection -->
-                <script>
-                    let colorPickerIcon = document.getElementById('colorPickerIcon');
-                    let colorSection = document.getElementById('colorSection');
-
-                    colorPickerIcon.addEventListener('click', () => {
-                        colorSection.classList.toggle('closed');
-                    })
-                </script>
-
-                <!-- Dynamisches Laden der Labels in die colorSection -->
-                <script>
-                    let farbeFieldset = null;
-                    document.addEventListener('DOMContentLoaded', () => {
-                        let imagesData = productData.media;
-                        let productImageSwiperWrapper = document.querySelector('.product-image-slider-wrapper .swiper-wrapper');
-
-                        function changeProductImages(Ringcolor, Stonecolor, Stoneshape) {
-
-                            productImageSwiperWrapper.innerHTML = "";
-
-                            imagesData.forEach(imageData => {
-                                console.log(imageData.alt.toLowerCase(), Ringcolor.toLowerCase());
-                                if (imageData.alt.toLowerCase() == Ringcolor.toLowerCase()) {
-                                    let swiperSlideDiv = document.createElement('div');
-                                    swiperSlideDiv.classList.add('swiper-slide');
-
-                                    let imgElement = document.createElement('img');
-                                    imgElement.setAttribute('src', imageData.src);
-                                    imgElement.setAttribute('alt', `Myriad ${productData.title} ${imageData.alt}`);
-                                    swiperSlideDiv.appendChild(imgElement);
-
-                                    productImageSwiperWrapper.appendChild(swiperSlideDiv);
-                                }
-                            });
-
-                            productImageSwiperWrapper.classList.add('animation');
-
-                            setTimeout(() => {
-                                productImageSwiperWrapper.classList.remove('animation');
-                            }, 500);
-                        }
-
-
-                        try {
-                            console.log("Erste");
-                            // Erster Versuch: Exakte Übereinstimmung mit "Farbe"
-                            farbeFieldset = [...document.querySelectorAll("fieldset")].find(fieldset =>
-                                fieldset.querySelector("legend") && fieldset.querySelector("legend").textContent.trim() === "Farbe"
-                            );
-                        } catch (error) {
-                            console.error("Fehler in der ersten Methode:", error);
-                        }
-
-                        // Falls der erste Versuch fehlschlägt oder kein Element gefunden wurde, zweite Methode probieren
-                        if (!farbeFieldset) {
-                            console.log("Zweite");
-                            try {
-                                farbeFieldset = [...document.querySelectorAll("fieldset")].find(fieldset =>
-                                    fieldset.querySelector("legend") && fieldset.querySelector("legend").textContent.includes("Farbe:")
-                                );
-                            } catch (error) {
-                                console.error("Fehler in der zweiten Methode:", error);
-                            }
-                        }
-
-                        console.log(farbeFieldset ? "Feldset gefunden!" : "Kein passendes Feldset gefunden.");
-
-
-                        // 2️⃣ Labels aus dem Farb-Fieldset holen
-                        const farbeLabels = farbeFieldset ? farbeFieldset.querySelectorAll("input") : [];
-
-                        // 3️⃣ Zielbereich für die kopierten Labels
-                        const colorsSection = document.querySelector("#colorSection");
-
-                        // 4️⃣ Labels klonen und in #colorSection einfügen
-                        if (colorsSection && farbeLabels.length > 0) {
-                            document.getElementById('colorPicker').classList.remove('d-none');
-                            farbeLabels.forEach(label => {
-                                let newColorLabel = document.createElement('label');
-                                newColorLabel.setAttribute('for', label.id);
-                                newColorLabel.classList.add('color-field', 'animation-button');
-
-
-
-                                let labelColor = label.value;
-
-
-                                console.log(labelColor);
-
-                                if (labelColor == "Gold") {
-                                    newColorLabel.classList.add('gold');
-                                    newColorLabel.setAttribute('value', 'gold');
-
-                                    if (label.hasAttribute('checked')) {
-                                        newColorLabel.classList.add('color-field-active');
-                                        addColor();
-                                        changeProductImages('gold', null, null);
-                                    }
-                                    else {
-                                        addColor();
-                                    }
-                                }
-                                if (labelColor == "Grau") {
-                                    newColorLabel.classList.add('grau');
-                                    newColorLabel.setAttribute('value', 'grau');
-                                    if (label.hasAttribute('checked')) {
-                                        newColorLabel.classList.add('color-field-active');
-                                        addColor();
-                                        changeProductImages('grau', null, null);
-                                    }
-                                    else {
-                                        addColor();
-                                    }
-                                }
-                                if (labelColor == "Bronze") {
-                                    newColorLabel.classList.add('bronze');
-                                    newColorLabel.setAttribute('value', 'bronze');
-                                    if (label.hasAttribute('checked')) {
-                                        newColorLabel.classList.add('color-field-active');
-                                        addColor();
-                                        changeProductImages('bronze', null, null);
-                                    }
-                                    else {
-                                        addColor();
-                                    }
-                                }
-
-                                function addColor() {
-                                    colorsSection.appendChild(newColorLabel); // In #colorSection einfügen
-                                }
-
-                            });
-                        } else {
-                            console.error('Farbe Fieldset oder #colorSection nicht gefunden');
-                        }
-
-                        let colorFields = document.querySelectorAll('.color-field');
-
-                        colorFields.forEach((colorField) => {
-                            colorField.addEventListener("click", function () {
-                                colorFields.forEach(field => field.classList.remove("color-field-active"));
-                                this.classList.add("color-field-active");
-
-                                let activeColor = this.getAttribute('value');
-
-                                console.log(activeColor);
-
-                                changeProductImages(activeColor, null, null);
-                            });
-                        });
-
-                    })
-                </script>
-
-                <!-- Dynamisches laden der Ringgrößen -->
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        // Finde das 'fieldset' mit der 'Ringgröße'-Legende
-                        let ringSizeField = [...document.querySelectorAll("fieldset")].find(fieldset =>
-                            fieldset.querySelector("legend") && fieldset.querySelector("legend").innerHTML.trim() === "Ringgröße");
-
-                        let inputFields = ringSizeField.querySelectorAll('input');
-                        let ringSizeSwiper = document.getElementById('ring-size-swiper');
-                        console.log(ringSizeSwiper);
-                        ringSizeSwiper.innerHTML = ""; // Clear existing content
-
-                        let activeSlideIndex = null;
-
-                        // Füge für jedes input-Feld ein Swiper-Slide hinzu
-                        inputFields.forEach((inputField, index) => {
-                            let id = inputField.id;
-                            let value = inputField.value;
-
-                            let newSwiperSlide = document.createElement('div');
-                            newSwiperSlide.innerHTML = value; // Set the value inside the new slide
-                            newSwiperSlide.setAttribute('target', id); // Set the target attribute
-                            newSwiperSlide.classList.add('swiper-slide'); // Add swiper-slide class
-
-                            // Überprüfen, ob das Eingabefeld ausgewählt ist (für Radio/Checkbox)
-                            if (inputField.checked) {
-                                activeSlideIndex = index; // Merke den Index des aktiven Slides
-                            }
-
-                            ringSizeSwiper.appendChild(newSwiperSlide); // Füge das neue Slide hinzu
-                        });
-
-                        // Aktualisiere den Swiper nach dem Hinzufügen der neuen Slides
-                        sizeSelectSwiper.update();
-
-                        // Gehe zu dem aktiven Slide, falls einer ausgewählt ist
-                        if (activeSlideIndex !== null) {
-                            sizeSelectSwiper.slideTo(activeSlideIndex);
-                        }
-
-                        // Event Listener für slideChange
-                        sizeSelectSwiper.on('slideChange', function () {
-                            let myriadPriceField = document.getElementById('priceField');
-
-                            let activeIndex = sizeSelectSwiper.activeIndex; // Richtiger Name: activeIndex
-                            let activeSlide = ringSizeSwiper.children[activeIndex];
-
-                            let newTarget = activeSlide.getAttribute('target'); // Hole das Target des aktiven Slides
-
-                            // Klicke auf das Input-Element, das dem Target entspricht
-                            document.getElementById(newTarget).click();
-                        });
-                    });
-                </script>
-
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        let myriadShareButton = document.getElementById('shareButton');
-                        let shopifyShareButton = document.querySelector('.share-button__button');
-
-                        myriadShareButton.addEventListener('click', () => {
-                            shopifyShareButton.click();
-                        })
-
-                        let shopifyAddToCartButton = document.querySelector('.product-form__submit');
-                        let myriadAddToCartButton = document.getElementById('addToCartButton');
-
-                        myriadAddToCartButton.addEventListener('click', () => {
-                            shopifyAddToCartButton.click();
-                        })
-
-
-                    });
-                </script>
-
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        const priceTemplateDiv = document.querySelector('div[id^="price-template"][role="status"]');
-
-                        let myriadPriceField = document.getElementById('priceField');
-                        let latestStatusPriceField = null;
-
-                        if (priceTemplateDiv) {
-                            const observer = new MutationObserver(mutations => {
-
-                                updateContext();
-
-                                console.log("Änderung erkannt Preis!", mutations);
-                            });
-
-                            observer.observe(priceTemplateDiv, {
-                                childList: true, // Beobachtet das Hinzufügen/Entfernen von Elementen
-                                subtree: true, // Beobachtet auch Änderungen in untergeordneten Elementen
-                                characterData: true, // Beobachtet Änderungen im Text (z. B. geänderter Preis)
-                                attributes: true // Optional: Falls sich Attribute ändern (z. B. class, style)
-                            });
-
-                            console.log("MutationObserver läuft Preis...");
-                        } else {
-                            console.warn("Element .product__info-container nicht gefunden!");
-                        }
-
-                        updateContext(true)
-
-                        function updateContext(firstTime = false) {
-                            let shopifyPrice = document.querySelector('.price__regular .price-item.price-item--regular').textContent.replace(/[^\d,]/g, '');
-
-                            if (shopifyPrice.endsWith(",00")) {
-                                shopifyPrice = shopifyPrice.slice(0, -3); // Letzte 3 Zeichen entfernen (",00")
-                            }
-
-                            let updatedPrice = `${shopifyPrice} Euro`;
-                            if (updatedPrice != latestStatusPriceField) {
-                                if (firstTime) {
-                                    myriadPriceField.textContent = updatedPrice;
-                                } else {
-                                    myriadPriceField.classList.add('opacity');
-                                    setTimeout(() => {
-                                        myriadPriceField.textContent = updatedPrice;
-                                        myriadPriceField.classList.remove('opacity');
-                                    }, 100);
-
-                                }
-                                latestStatusPriceField = updatedPrice;
-                            }
-                        }
-                    })
-                </script>
-
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        let shopifyName = document.querySelector('.product__info-container .product__title h1').textContent;
-                        let myriadNameField = document.getElementById('nameField');
-
-                        myriadNameField.innerHTML = shopifyName;
-                    })
-                </script>
-
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        let animationButtons = document.querySelectorAll('.animation-button');
-
-                        animationButtons.forEach(actionButton => {
-                            actionButton.addEventListener('pointerdown', function (event) {
-                                if (event.button == 0) {
-                                    actionButton.classList.add('active');
-                                }
-                            });
-
-                            actionButton.addEventListener('pointerup', function (event) {
-                                if (event.button == 0) {
-                                    actionButton.classList.remove('active');
-                                }
-                            });
-                        });
-                    });
-                </script>
-
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        const targetNode = document.querySelector(".product-form__submit .loading__spinner");
-                        let svgWrapper = document.querySelector('.action-buttons .add-to-cart-wrapper');
-                        let addToCartButton = document.getElementById('addToCartButton');
-
-                        // Observer-Callback-Funktion
-                        const callback = function (mutationsList) {
-                            for (let mutation of mutationsList) {
-                                if (mutation.attributeName === "class") {
-                                    const hasHidden = targetNode.classList.contains("hidden");
-                                    console.log(hasHidden);
-
-                                    if (hasHidden) {
-                                        svgWrapper.classList.remove('loading');
-                                    }
-
-
-
-                                    // Falls du etwas tun willst, wenn "hidden" entfernt wurde:
-                                    if (!hasHidden) {
-                                        svgWrapper.classList.add('loading');
-                                    }
-                                }
-                            }
-                        };
-
-                        // MutationObserver-Instanz erstellen
-                        const observer = new MutationObserver(callback);
-
-                        // Konfiguration des Observers
-                        const config = {
-                            attributes: true,
-                            attributeFilter: ["class"]
-                        };
-
-                        // Observer starten
-                        observer.observe(targetNode, config);
-                    });
-                </script>
-
-                <script>
-                    // document.addEventListener('DOMContentLoaded', () => {
-                    //     // Überwacht, wenn das PayPal-Button-Element im DOM erscheint
-                    //     const observer = new MutationObserver(() => {
-                    //         let payPalButton = document.querySelector('.paypal-buttons-context-iframe');
-                    //         let payPalSvg = document.getElementById('payPalSvg');
-
-                    //         // Wenn beide Elemente existieren, berechne die Position und stoppe den Observer
-                    //         if (payPalButton && payPalSvg) {
-                    //             console.log(payPalButton);
-                    //             console.log(payPalSvg);
-
-                    //             // Berechne die Position des Elements relativ zum Dokument
-                    //             function getElementPosition(element) {
-                    //                 let offsetX = 0;
-                    //                 let offsetY = 0;
-
-                    //                 while (element) {
-                    //                     offsetX += element.offsetLeft;
-                    //                     offsetY += element.offsetTop;
-                    //                     element = element.offsetParent;
-                    //                 }
-
-                    //                 console.log(offsetX, offsetY);
-
-                    //                 return {
-                    //                     x: offsetX,
-                    //                     y: offsetY
-                    //                 };
-                    //             }
-
-                    //             // Berechne die Position relativ zum Dokument
-                    //             function getOffset(el) {
-                    //                 const rect = el.getBoundingClientRect();
-                    //                 console.log(rect.left + window.scrollX, rect.top + window.scrollY);
-                    //                 return {
-                    //                     x: rect.left + window.scrollX,
-                    //                     y: rect.top + window.scrollY
-                    //                 };
-                    //             }
-
-                    //             // Berechne den Unterschied in der Position
-                    //             let xTranslate = getOffset(payPalButton).x - getOffset(payPalSvg).x;
-                    //             let yTranslate = getOffset(payPalButton).y - getOffset(payPalSvg).y;
-
-                    //             console.log(xTranslate, yTranslate);
-
-                    //             // Setze die Translation
-                    //             payPalButton.style.transform = `translate(${xTranslate*-1}px, ${yTranslate*-1}px)`;
-
-                    //             // Stoppe den Observer, wenn das Element gefunden wurde
-                    //             observer.disconnect();
-                    //         }
-                    //     });
-
-                    //     // Startet den Observer für das gesamte DOM
-                    //     observer.observe(document.body, {
-                    //         childList: true,
-                    //         subtree: true
-                    //     });
-
-                    // });
-
-
-                    document.addEventListener('DOMContentLoaded', () => {
-                        startPayPalObserver();
-
-                        productBoxSwiper.on('slideChangeTransitionEnd', function () {
-                            setPayPalButton();
-                            console.log("moved");
-                        });
-                    });
-
-                    function startPayPalObserver() {
-                        const observer = new MutationObserver(() => {
-                            if (setPayPalButton()) {
-                                observer.disconnect();
-                                console.log('Observer gestoppt.');
-                            }
-                        });
-
-                        observer.observe(document.body, {
-                            childList: true,
-                            subtree: true
-                        });
-                    }
-
-                    let payPalButtonX = null;
-                    let payPalButtonY = null;
-
-                    function setPayPalButton() {
-                        let payPalButton = document.querySelector('.paypal-buttons');
-                        let payPalSvg = document.getElementById('payPalSvg');
-
-                        if (payPalButton && payPalSvg) {
-                            console.log(payPalButton, payPalSvg);
-
-                            if (payPalButtonX == null && payPalButtonY == null) {
-                                payPalButtonX = getOffset(payPalButton).x;
-                                payPalButtonY = getOffset(payPalButton).y;
-                            }
-
-                            let xTranslate = payPalButtonX - getOffset(payPalSvg).x;
-                            let yTranslate = payPalButtonY - getOffset(payPalSvg).y;
-
-                            console.log("PP X: " + payPalButtonX, "SVG X: " + getOffset(payPalSvg).x);
-                            console.log("PP Y: " + payPalButtonY, "SVG Y: " + getOffset(payPalSvg).y);
-                            console.log(xTranslate, yTranslate);
-
-                            payPalButton.style.transform = `translate(${-xTranslate}px, ${-yTranslate}px)`;
-                            return true;
-                        }
-                        return false;
-                    }
-
-                    function getOffset(el) {
-                        const rect = el.getBoundingClientRect();
-                        return {
-                            x: rect.left + window.scrollX,
-                            y: rect.top + window.scrollY
-                        };
-                    }
-                </script>
-
-                <script>
-                    document.addEventListener("DOMContentLoaded", function () {
-                        window.addEventListener('resize', () => {
-                            setPodestPosition();
-                        })
-
-                        setPodestPosition();
-
-                        function setPodestPosition() {
-                            let backgroundImage = document.getElementById('pdsBackgroundImage');
-                            let windowWidth = window.innerWidth;
-                            let windowHeight = window.innerHeight;
-
-                            let pictureHeight = (windowWidth * 787 / 360);
-
-                            backgroundImage.style.height = `${pictureHeight}px`;
-
-
-                            let productSwiperWrapper = document.querySelector('.product-image-slider-wrapper');
-
-                            productSwiperWrapper.style.top = `${windowWidth * 360 / 360}px`;
-
-
-                            let podestAndRingHeight = (windowWidth * 86 / 360) + productSwiperWrapper.querySelector('img').height;
-
-                            let spaceLeft = windowHeight - 258 - 115 - podestAndRingHeight;
-
-                            let translateNumber = spaceLeft / 2 - (windowWidth * 360 / 360 - productSwiperWrapper.querySelector('img').height - 115);
-
-                            backgroundImage.style.transform = `translateY(${translateNumber}px)`;
-                            productSwiperWrapper.style.transform = `translateY(${translateNumber}px)`;
-                            console.log(translateNumber);
-                        }
-                    });
-                </script>
-
-                <script>
-                    document.addEventListener("DOMContentLoaded", function () {
-                        let shopifyWishlistButton = document.querySelector('.quantum-lbw-wishlist-btn');
-                        let myriadWishlistButton = document.getElementById('wishlistButton');
-
-                        myriadWishlistButton.addEventListener('click', () => {
-                            shopifyWishlistButton.click();
-                        })
-
-                        const button = document.querySelector('.quantum-lbw-wishlist-btn');
-
-                        const config = {
-                            attributes: true,
-                            attributeFilter: ['style'],
-                        };
-
-                        const callback = (mutationsList) => {
-                            for (let mutation of mutationsList) {
-                                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-                                    changeHeartIcon();
-                                }
-                            }
-                        };
-
-                        const observer = new MutationObserver(callback);
-
-                        observer.observe(button, config);
-
-                        function changeHeartIcon() {
-                            const newOpacity = button.style.opacity;
-                            console.log('Opacity geändert:', newOpacity);
-
-                            if (newOpacity == 0.75) {
-                                myriadWishlistButton.classList.add('selected');
-                            }
-
-                            if (newOpacity == 1) {
-                                myriadWishlistButton.classList.remove('selected');
-                            }
-                        }
-
-                        changeHeartIcon();
-                    });
-                </script>
-
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        let cartItems = null;
-                        console.log(cartItems);
-
-                        async function getCartItems() {
-                            try {
-                                let response = await fetch('/cart.js');
-                                let cart = await response.json();
-                                return cart.items;
-                            } catch (error) {
-                                console.error('Fehler beim Abrufen des Warenkorbs:', error);
-                                return [];
-                            }
-                        }
-
-                        async function safeCartItems() {
-                            cartItems = await getCartItems();
-                            checkProductInCart();
-                        }
-
-                        function checkProductInCart() {
-                            let productVariantsInCart = new Set();
-                            let shopifyProductInfos = document.querySelector('[id^="product-form-installment-template"]');
-                            let activeProductInput = shopifyProductInfos.querySelector('input[name="id"]');
-
-                            let activeVariant = Number(activeProductInput.value);
-
-                            let addToCartButton = document.getElementById('addToCartButton');
-
-
-                            cartItems.forEach(product => {
-                                productVariantsInCart.add(product.variant_id);
-                            });
-
-                            if (productVariantsInCart.has(activeVariant)) {
-                                addToCartButton.classList.add('alreadyInCart')
-                            } else {
-                                addToCartButton.classList.remove('alreadyInCart')
-                            }
-
-                            console.log(activeVariant, productVariantsInCart);
-                            console.log(productVariantsInCart.has(activeVariant));
-                        }
-
-                        const cartNotification = document.getElementById("cart-notification");
-
-                        const observer = new MutationObserver((mutationsList) => {
-                            mutationsList.forEach((mutation) => {
-                                if (mutation.attributeName === "class") {
-                                    const hasActiveClass = cartNotification.classList.contains("active");
-
-                                    if (hasActiveClass) {
-                                        safeCartItems();
-                                    }
-                                }
-                            });
-                        });
-
-                        observer.observe(cartNotification, { attributes: true });
-
-
-                        let shopifyProductInfos = document.querySelector('[id^="product-form-installment-template"]');
-                        let activeProductInput = shopifyProductInfos.querySelector('input[name="id"]');
-
-                        const observer2 = new MutationObserver(() => {
-                            console.log("Variant ID hat sich geändert:", activeProductInput.value);
-                            checkProductInCart(); // Deine Funktion aufrufen
-                        });
-
-                        // Observer starten, um Änderungen am `value`-Attribut zu beobachten
-                        observer2.observe(activeProductInput, { attributes: true, attributeFilter: ["value"] });
-
-                        safeCartItems();
-                    })
-                </script>
-
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        document.querySelector('.pds-slider').focus();
-                        console.log("FOKUS!");
-                    });
-                </script>
-
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-
-
-                    })
-                </script>
             </article>
         </section>
     </main>
