@@ -1,8 +1,7 @@
 import Plugin from '../../plugin-system/plugin-class.js';
 
 import Swiper from 'swiper';
-import { Navigation } from "swiper/modules";
-import { Mousewheel } from "swiper/modules";
+import { Navigation, Mousewheel, Pagination } from "swiper/modules";
 
 
 export default class ProduktDetail extends Plugin {
@@ -30,6 +29,7 @@ export default class ProduktDetail extends Plugin {
         this._setMainSiteInFocus();
         this._setButtonAnimation();
         this._manageSizeCalculatorOverlay();
+        this._manageSizeCalculating();
     }
 
     _initSwipers() {
@@ -55,7 +55,6 @@ export default class ProduktDetail extends Plugin {
                 },
             });
 
-
             this.sizeSelectSwiper = new Swiper(".size-select-swiper", {
                 modules: [Mousewheel],
                 direction: "vertical",
@@ -67,8 +66,35 @@ export default class ProduktDetail extends Plugin {
                 centeredSlides: true,
                 slideToClickedSlide: true,
             });
+
+            this.ringSizeCalculatorSwiper = new Swiper(".size-calculator-swiper", {
+                modules: [Mousewheel, Pagination],
+                direction: "vertical",
+                slidesPerView: "auto",
+                nested: true,
+                // allowTouchMove: true,
+                mousewheel: true,
+
+                touchStartPreventDefault: false,
+                simulateTouch: true,
+                touchReleaseOnEdges: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                touchEventsTarget: "container"
+            });
+
+            // document.querySelectorAll('.size-calculator-swiper .input-wrapper input').forEach(input => {
+            //     input.addEventListener('touchstart', e => {
+            //         input.focus(); // Fokus trotzdem zulassen
+            //         e.stopPropagation(); // Swipe darf durch
+            //     }, { passive: true });
+            // });
+
+
         } catch (error) {
-            console.log('Fehler in _initSwipers()')
+            console.log('Fehler in _initSwipers()', error)
         }
     }
 
@@ -80,6 +106,14 @@ export default class ProduktDetail extends Plugin {
             });
 
             this.sizeSelectSwiper.on('touchEnd', () => {
+                this.productBoxSwiper.allowTouchMove = true;
+            });
+
+            this.ringSizeCalculatorSwiper.on('touchStart', () => {
+                this.productBoxSwiper.allowTouchMove = false;
+            });
+
+            this.ringSizeCalculatorSwiper.on('touchEnd', () => {
                 this.productBoxSwiper.allowTouchMove = true;
             });
 
@@ -344,19 +378,29 @@ export default class ProduktDetail extends Plugin {
 
     _syncShareButton() {
         try {
-            let myriadShareButton = document.getElementById('shareButton');
+            let myriadShareButtons = document.querySelectorAll('#shareButton');
+            // let myriadShareButton = document.getElementById('shareButton');
             let shopifyShareButton = document.querySelector('.share-button__button');
 
-            myriadShareButton.addEventListener('click', () => {
-                shopifyShareButton.click();
+            myriadShareButtons.forEach((shareButton) => {
+                shareButton.addEventListener('click', () => {
+                    shopifyShareButton.click();
+                })
             })
+
 
             let shopifyAddToCartButton = document.querySelector('.product-form__submit');
-            let myriadAddToCartButton = document.getElementById('addToCartButton');
+            // let myriadAddToCartButton = document.getElementById('addToCartButton');
 
-            myriadAddToCartButton.addEventListener('click', () => {
-                shopifyAddToCartButton.click();
+            let myriadAddToCartButtons = document.querySelectorAll('#addToCartButton');
+
+            myriadAddToCartButtons.forEach((myriadAddToCartButton) => {
+                myriadAddToCartButton.addEventListener('click', () => {
+                    shopifyAddToCartButton.click();
+                })
             })
+
+
         } catch (error) {
             console.log('Fehler in _syncShareButton()')
         }
@@ -427,19 +471,23 @@ export default class ProduktDetail extends Plugin {
     _manageCartLoadingSpinner() {
         try {
             const shopifyCartLoadingSpinner = document.querySelector(".product-form__submit .loading__spinner");
-            let myriadAddToCartWrapper = document.querySelector('.action-buttons .add-to-cart-wrapper');
+            // let myriadAddToCartWrapper = document.querySelector('.action-buttons .add-to-cart-wrapper');
+
+            let myriadAddToCartWrappers = document.querySelectorAll('.action-buttons .add-to-cart-wrapper');
 
             const callback = function (mutationsList) {
                 for (let mutation of mutationsList) {
                     if (mutation.attributeName === "class") {
                         const hasHidden = shopifyCartLoadingSpinner.classList.contains("hidden");
 
-                        if (hasHidden) {
-                            myriadAddToCartWrapper.classList.remove('loading');
-                        }
-                        else {
-                            myriadAddToCartWrapper.classList.add('loading');
-                        }
+                        myriadAddToCartWrappers.forEach((myriadAddToCartWrapper) => {
+                            if (hasHidden) {
+                                myriadAddToCartWrapper.classList.remove('loading');
+                            }
+                            else {
+                                myriadAddToCartWrapper.classList.add('loading');
+                            }
+                        })
                     }
                 }
             };
@@ -552,11 +600,17 @@ export default class ProduktDetail extends Plugin {
     _manageWishlistSync() {
         try {
             let shopifyWishlistButton = document.querySelector('.quantum-lbw-wishlist-btn');
-            let myriadWishlistButton = document.getElementById('wishlistButton');
+            // let myriadWishlistButton = document.getElementById('wishlistButton');
 
-            myriadWishlistButton.addEventListener('click', () => {
-                shopifyWishlistButton.click();
+            let myriadWishlistButtons = document.querySelectorAll('#wishlistButton');
+
+            myriadWishlistButtons.forEach((myriadWishlistButton) => {
+                myriadWishlistButton.addEventListener('click', () => {
+                    shopifyWishlistButton.click();
+                })
             })
+
+
 
             const button = document.querySelector('.quantum-lbw-wishlist-btn');
 
@@ -580,13 +634,15 @@ export default class ProduktDetail extends Plugin {
             function changeHeartIcon() {
                 const newOpacity = button.style.opacity;
 
-                if (newOpacity == 0.75) {
-                    myriadWishlistButton.classList.add('selected');
-                }
+                myriadWishlistButtons.forEach((myriadWishlistButton) => {
+                    if (newOpacity == 0.75) {
+                        myriadWishlistButton.classList.add('selected');
+                    }
 
-                if (newOpacity == 1) {
-                    myriadWishlistButton.classList.remove('selected');
-                }
+                    if (newOpacity == 1) {
+                        myriadWishlistButton.classList.remove('selected');
+                    }
+                });
             }
 
             changeHeartIcon();
@@ -622,18 +678,24 @@ export default class ProduktDetail extends Plugin {
 
                 let activeVariant = Number(activeProductInput.value);
 
-                let addToCartButton = document.getElementById('addToCartButton');
+                // let addToCartButton = document.getElementById('addToCartButton');
+
+                let addToCartButtons = document.querySelectorAll('#addToCartButton');
 
 
                 cartItems.forEach(product => {
                     productVariantsInCart.add(product.variant_id);
                 });
 
-                if (productVariantsInCart.has(activeVariant)) {
-                    addToCartButton.classList.add('alreadyInCart')
-                } else {
-                    addToCartButton.classList.remove('alreadyInCart')
-                }
+                addToCartButtons.forEach((addToCartButton) => {
+                    console.log(addToCartButton);
+                    if (productVariantsInCart.has(activeVariant)) {
+                        addToCartButton.classList.add('alreadyInCart')
+                    } else {
+                        addToCartButton.classList.remove('alreadyInCart')
+                    }
+                })
+
             }
 
             const cartNotification = document.getElementById("cart-notification");
@@ -702,15 +764,209 @@ export default class ProduktDetail extends Plugin {
     _manageSizeCalculatorOverlay() {
         try {
             let infoButton = document.getElementById('info-svg');
-            console.log(infoButton);
+            let sizeCalculatorOverlayWrapper = document.querySelector('.size-calculator-overlay-wrapper');
 
             infoButton.addEventListener('click', () => {
-                document.querySelector('.size-calculator-overlay').classList.toggle('active');
-                console.log('Wie heißt du?');
+                infoButton.classList.toggle('size-calculator-active');
+                document.querySelector('.size-calculator-swiper').classList.toggle('active');
+
+                if (sizeCalculatorOverlayWrapper.classList.contains('active')) {
+                    setTimeout(() => {
+                        sizeCalculatorOverlayWrapper.classList.remove('active');
+                    }, 800);
+                }
+                else {
+                    sizeCalculatorOverlayWrapper.classList.add('active');
+                }
             })
         }
         catch (error) {
             console.log('Fehler in _manageSizeCalculatorOverlay()')
         }
+    }
+
+    _manageSizeCalculating() {
+        const fingerumfangInput = document.getElementById('fingerumfangInput');
+        const ringdurchmesserInput = document.getElementById('ringdurchmesserInput');
+        // const inputs = [fingerumfangInput, ringdurchmesserInput];
+        const ringSizeField = document.getElementById('ringSize');
+
+        // inputs.forEach(input => {
+        //     input.addEventListener('input', function () {
+        //         // Nur Ziffern erlauben
+        //         let value = input.value.replace(/[^0-9]/g, '');
+
+        //         // Kürzen auf max. 2 Zeichen
+        //         if (value.length > 2) {
+        //             value = value.slice(0, 2);
+        //         }
+
+        //         input.value = value;
+
+        //         if (value.length === 2) {
+        //             const nummerInMm = parseInt(value);
+
+        //             if (input.id === 'fingerumfangInput') {
+        //                 console.log('Ringgröße (aus Umfang):', berechneRinggroesseVonUmfang(nummerInMm));
+        //             }
+
+        //             if (input.id === 'ringdurchmesserInput') {
+        //                 console.log('Ringgröße (aus Durchmesser):', berechneRinggroesseVonDurchmesser(nummerInMm));
+        //             }
+        //         }
+
+        //         if (value.length != 2) {
+        //             ringSizeField.classList.add('opacity');
+        //             setTimeout(() => {
+        //                 ringSizeField.innerHTML = null;
+        //             }, 100);
+
+        //         }
+        //     });
+        // });
+
+        fingerumfangInput.addEventListener('input', function () {
+            // Nur Ziffern erlauben
+            let value = fingerumfangInput.value.replace(/[^0-9]/g, '');
+
+            // Kürzen auf max. 2 Zeichen
+            if (value.length > 2) {
+                value = value.slice(0, 2);
+            }
+
+            fingerumfangInput.value = value;
+
+            if (value.length === 2) {
+                const nummerInMm = parseInt(value);
+
+                console.log('Ringgröße (aus Umfang):', berechneRinggroesseVonUmfang(nummerInMm));
+            }
+
+            if (value.length != 2) {
+                ringSizeField.classList.add('opacity');
+                setTimeout(() => {
+                    ringSizeField.innerHTML = null;
+                }, 100);
+
+            }
+        })
+
+        let previousRaw = '';
+        let lastLength = 0;
+
+        ringdurchmesserInput.addEventListener('input', function () {
+            const input = ringdurchmesserInput;
+
+            const rawCursor = input.selectionStart;
+            const oldFormatted = previousRaw;
+            const newUnformatted = input.value.replace(/[^0-9]/g, '');
+
+            const oldRaw = oldFormatted.replace(/[^0-9]/g, '');
+            let limitedRaw = newUnformatted.slice(0, 3);
+
+            let formatted = '';
+            if (limitedRaw.length >= 2) {
+                formatted = limitedRaw.slice(0, 2) + ',' + limitedRaw.slice(2);
+            } else {
+                formatted = limitedRaw;
+            }
+
+            // Neue Cursorposition vorbereiten
+            let newCursor = rawCursor;
+
+            // Wenn Komma gelöscht wurde
+            const removedComma = oldFormatted.includes(',') && !formatted.includes(',');
+            if (
+                oldRaw.length === 3 &&
+                limitedRaw.length === 2 &&
+                rawCursor === 3
+            ) {
+                newCursor--; // Komma gelöscht → Cursor eins zurück
+            }
+
+            // Wenn Komma hinzugefügt wurde durch neue Ziffer
+            if (
+                oldRaw.length === 2 &&
+                limitedRaw.length === 3 &&
+                rawCursor > 2
+            ) {
+                newCursor++; // Komma kam neu dazu
+            }
+
+            // ✅ Nur wenn der Benutzer 2 Ziffern NEU eingegeben hat (von 1 → 2 Zeichen), Cursor automatisch nach dem Komma
+            if (limitedRaw.length === 2 && oldRaw.length === 1 && !removedComma) {
+                newCursor = 3;
+            }
+
+            input.value = formatted;
+
+            // Cursor setzen nach Update
+            setTimeout(() => {
+                input.setSelectionRange(
+                    Math.min(newCursor, input.value.length),
+                    Math.min(newCursor, input.value.length)
+                );
+            }, 0);
+
+            // Ausgabe bei 3 Ziffern
+            if (limitedRaw.length === 3) {
+                const nummerInMm = parseFloat(formatted.replace(',', '.'));
+                console.log('Ringgröße (aus Durchmesser):', berechneRinggroesseVonDurchmesser(nummerInMm));
+            }
+
+            if (limitedRaw.length < 3) {
+                ringSizeField.classList.add('opacity');
+                setTimeout(() => {
+                    ringSizeField.innerHTML = null;
+                }, 100);
+            }
+
+            previousRaw = formatted;
+        });
+
+
+
+
+        function berechneRinggroesseVonUmfang(umfangInMm) {
+            ringSizeField.classList.add('opacity');
+
+            setTimeout(() => {
+                ringSizeField.innerHTML = Math.round(umfangInMm);
+                ringSizeField.classList.remove('opacity');
+            }, 100);
+
+            return Math.round(umfangInMm);
+
+        }
+
+        function berechneRinggroesseVonDurchmesser(durchmesserInMm) {
+            const umfangInMm = durchmesserInMm * Math.PI;
+
+
+            ringSizeField.classList.add('opacity');
+
+            setTimeout(() => {
+                ringSizeField.innerHTML = Math.round(umfangInMm);
+                ringSizeField.classList.remove('opacity');
+            }, 100);
+
+
+            return Math.round(umfangInMm);
+
+        }
+
+        this.ringSizeCalculatorSwiper.on('transitionStart', function () {
+            ringSizeField.classList.add('opacity');
+
+            let activeInputField = document.querySelector('.swiper-slide-active input');
+
+            const event = new Event('input', {
+                bubbles: true,
+                cancelable: true
+            });
+
+            activeInputField.dispatchEvent(event);
+        });
+
     }
 }
