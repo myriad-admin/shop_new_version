@@ -30,6 +30,7 @@ export default class ProduktDetail extends Plugin {
         this._setButtonAnimation();
         this._manageSizeCalculatorOverlay();
         this._manageSizeCalculating();
+        this._manageProductInformation();
     }
 
     _initSwipers() {
@@ -85,12 +86,39 @@ export default class ProduktDetail extends Plugin {
                 touchEventsTarget: "container"
             });
 
-            // document.querySelectorAll('.size-calculator-swiper .input-wrapper input').forEach(input => {
-            //     input.addEventListener('touchstart', e => {
-            //         input.focus(); // Fokus trotzdem zulassen
-            //         e.stopPropagation(); // Swipe darf durch
-            //     }, { passive: true });
-            // });
+            this.descriptionSlider = new Swiper(".description-slider", {
+                modules: [Mousewheel, Pagination],
+                direction: "vertical",
+                speed: 900, // Langsames Sliden
+                mousewheel: {
+                    sensitivity: 0.5,
+                    forceToAxis: true,
+                    releaseOnEdges: true,
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+            });
+
+            this.customerSlider = new Swiper(".customer-pictures", {
+                modules: [Mousewheel, Pagination],
+                slidesPerView: 2.6,
+                spaceBetween: 30,
+                nested: true,
+                mousewheel: true,
+                touchMoveStopPropagation: true,
+                breakpoints: {
+                    1200: {
+                        slidesPerView: 3.6
+                    }
+                }
+            });
+
+            // Customer-Slider verhindern dass am Ende der descriptionSlider slidet
+            document.querySelector('.customer-pictures').addEventListener('wheel', function (e) {
+                e.stopPropagation();
+            }, { passive: false });
 
 
         } catch (error) {
@@ -154,6 +182,35 @@ export default class ProduktDetail extends Plugin {
                 }
 
             })
+
+            // Desktop Produktinfos Slider ersten Slide erkennen
+            window.addEventListener("wheel", (event) => {
+                if (
+                    event.deltaY > 0 &&
+                    document.querySelector('.description-slider .swiper-wrapper .swiper-slide.one')?.classList.contains('swiper-slide-active')
+                ) {
+                    console.log("Scroll nach unten");
+                    this.descriptionSlider.slideNext();
+                }
+            });
+
+            this.descriptionSlider.on('slideChange', () => {
+                if (this.descriptionSlider.activeIndex == 0) {
+                    document.querySelector('.pds-slider.desktop').classList.remove('blur');
+
+                    setTimeout(() => {
+                        document.querySelector('.pds-slider.desktop').classList.remove('shadow');
+                    }, 750);
+                }
+                else {
+                    document.querySelector('.pds-slider.desktop').classList.add('blur', 'shadow');
+                }
+
+                console.log(this.descriptionSlider.activeIndex);
+            })
+
+
+
         } catch (error) {
             console.log('Fehler in _swiperBehavior()')
         }
@@ -243,7 +300,8 @@ export default class ProduktDetail extends Plugin {
 
             function loadProductImages(color) {
                 let imagesData = productData.media;
-                let productImageSwiperWrapper = document.querySelector('.product-image-slider-wrapper .swiper-wrapper');
+                // let productImageSwiperWrapper = document.querySelector('.product-image-slider-wrapper .swiper-wrapper');
+                let productImageSwiperWrappers = document.querySelectorAll('.product-image-slider-wrapper .swiper-wrapper');
 
                 const productImagesData = imagesData.reduce((acc, item) => {
                     const key = item.alt;
@@ -282,7 +340,10 @@ export default class ProduktDetail extends Plugin {
 
 
 
-                    productImageSwiperWrapper.appendChild(swiperSlideDiv);
+                    productImageSwiperWrappers.forEach((productImageSwiperWrapper) => {
+                        productImageSwiperWrapper.appendChild(swiperSlideDiv.cloneNode(true));
+                    })
+
 
                     console.log(index);
 
@@ -290,16 +351,19 @@ export default class ProduktDetail extends Plugin {
             }
 
             function changeImagebyColorchange(color) {
-                let productImageSwiperWrapper = document.querySelector('.product-image-slider-wrapper .swiper-wrapper');
+                // let productImageSwiperWrapper = document.querySelector('.product-image-slider-wrapper .swiper-wrapper');
+                let productImageSwiperWrappers = document.querySelectorAll('.product-image-slider-wrapper .swiper-wrapper');
 
-                let allImages = productImageSwiperWrapper.querySelectorAll('img');
-                allImages.forEach(image => {
-                    image.classList.remove('active');
+                productImageSwiperWrappers.forEach((productImageSwiperWrapper) => {
+                    let allImages = productImageSwiperWrapper.querySelectorAll('img');
+                    allImages.forEach(image => {
+                        image.classList.remove('active');
 
-                    if (image.classList.contains(color)) {
-                        image.classList.add('active');
-                    }
-                });
+                        if (image.classList.contains(color)) {
+                            image.classList.add('active');
+                        }
+                    });
+                })
             }
 
             function changeProductImages(Ringcolor, Stonecolor, Stoneshape) {
@@ -409,7 +473,10 @@ export default class ProduktDetail extends Plugin {
     _managePriceField() {
         try {
             const priceTemplateDiv = document.querySelector('div[id^="price-template"][role="status"]');
-            const myriadPriceField = document.getElementById('priceField');
+            // const myriadPriceField = document.getElementById('priceField');
+
+            let myriadPriceFields = document.querySelectorAll('.priceField');
+
             let latestStatusPriceField = null;
 
             if (priceTemplateDiv) {
@@ -439,16 +506,18 @@ export default class ProduktDetail extends Plugin {
                 let updatedPrice = `${shopifyPrice} Euro`;
 
                 if (updatedPrice != latestStatusPriceField) {
-                    if (firstTime) {
-                        myriadPriceField.textContent = updatedPrice;
-                    } else {
-                        myriadPriceField.classList.add('opacity');
-                        setTimeout(() => {
+                    myriadPriceFields.forEach((myriadPriceField) => {
+                        if (firstTime) {
                             myriadPriceField.textContent = updatedPrice;
-                            myriadPriceField.classList.remove('opacity');
-                        }, 100);
+                        } else {
+                            myriadPriceField.classList.add('opacity');
+                            setTimeout(() => {
+                                myriadPriceField.textContent = updatedPrice;
+                                myriadPriceField.classList.remove('opacity');
+                            }, 100);
 
-                    }
+                        }
+                    })
                     latestStatusPriceField = updatedPrice;
                 }
             }
@@ -460,9 +529,13 @@ export default class ProduktDetail extends Plugin {
     _manageArticleName() {
         try {
             let shopifyName = document.querySelector('.product__info-container .product__title h1').textContent;
-            let myriadNameField = document.getElementById('nameField');
+            let myriadNameFields = document.querySelectorAll('.nameField')
 
-            myriadNameField.innerHTML = shopifyName;
+            myriadNameFields.forEach((myriadNameField) => {
+                myriadNameField.innerHTML = shopifyName;
+            })
+
+
         } catch (error) {
             console.log('Fehler in _manageArticleName()')
         }
@@ -569,31 +642,100 @@ export default class ProduktDetail extends Plugin {
             setPodestPosition();
 
             function setPodestPosition() {
-                let backgroundImage = document.getElementById('pdsBackgroundImage');
-                let windowWidth = window.innerWidth;
-                let windowHeight = window.innerHeight;
+                if (window.innerWidth < 1024) {
+                    setMobilePosition();
+                }
+                else {
+                    setDesktopPosition();
+                }
 
-                let pictureHeight = (windowWidth * 787 / 360);
+                function setMobilePosition() {
+                    console.log('MOBILE');
+                    let backgroundImage = document.getElementById('pdsBackgroundImage');
+                    let windowWidth = window.innerWidth;
+                    let windowHeight = window.innerHeight;
 
-                backgroundImage.style.height = `${pictureHeight}px`;
+                    let pictureHeight = (windowWidth * 787 / 360);
+
+                    backgroundImage.style.height = `${pictureHeight}px`;
 
 
-                let productSwiperWrapper = document.querySelector('.product-image-slider-wrapper');
+                    let productSwiperWrapper = document.querySelector('.product-image-slider-wrapper');
 
-                productSwiperWrapper.style.top = `${windowWidth * 360 / 360}px`;
+                    productSwiperWrapper.style.top = `${windowWidth * 360 / 360}px`;
 
 
-                let podestAndRingHeight = (windowWidth * 86 / 360) + productSwiperWrapper.querySelector('img').height;
+                    let podestAndRingHeight = (windowWidth * 86 / 360) + productSwiperWrapper.querySelector('img').height;
 
-                let spaceLeft = windowHeight - 258 - 115 - podestAndRingHeight;
+                    let spaceLeft = windowHeight - 258 - 115 - podestAndRingHeight;
 
-                let translateNumber = spaceLeft / 2 - (windowWidth * 360 / 360 - productSwiperWrapper.querySelector('img').height - 115);
+                    let translateNumber = spaceLeft / 2 - (windowWidth * 360 / 360 - productSwiperWrapper.querySelector('img').height - 115);
 
-                backgroundImage.style.transform = `translateY(${translateNumber}px)`;
-                productSwiperWrapper.style.transform = `translateY(${translateNumber}px)`;
+                    backgroundImage.style.transform = `translateY(${translateNumber}px)`;
+                    productSwiperWrapper.style.transform = `translateY(${translateNumber}px)`;
+                }
+
+                function setDesktopPosition() {
+                    let imageElement = document.getElementById('pdsBackgroundImageDesktop');
+                    let anchorX = 950;
+                    let anchorY = 880;
+                    let imageNaturalWidth = 2944;
+                    let imageNaturalHeight = 1168;
+                    let getTargetViewportX = () => window.innerWidth * 0.25;
+                    let getTargetViewportY = () => window.innerHeight * 1;
+
+
+                    function updatePosition() {
+                        // console.log('POSITION');
+                        const viewportWidth = window.innerWidth;
+                        const viewportHeight = window.innerHeight;
+
+                        const imageAspectRatio = imageNaturalWidth / imageNaturalHeight;
+                        const viewportAspectRatio = viewportWidth / viewportHeight;
+
+                        let renderedWidth, renderedHeight;
+
+                        if (imageAspectRatio > viewportAspectRatio) {
+                            // Bild ist breiter → Höhe füllt Viewport
+                            renderedHeight = viewportHeight;
+                            renderedWidth = renderedHeight * imageAspectRatio;
+                        } else {
+                            // Bild ist höher → Breite füllt Viewport
+                            renderedWidth = viewportWidth;
+                            renderedHeight = renderedWidth / imageAspectRatio;
+                        }
+
+                        const scaleX = renderedWidth / imageNaturalWidth;
+                        const scaleY = renderedHeight / imageNaturalHeight;
+
+                        const anchorXOnScreen = anchorX * scaleX;
+                        const anchorYOnScreen = anchorY * scaleY;
+
+                        const targetX = getTargetViewportX();
+                        const targetY = getTargetViewportY();
+
+                        const offsetX = targetX - anchorXOnScreen;
+                        const offsetY = targetY - anchorYOnScreen;
+
+                        // Position und Größe anwenden
+                        imageElement.style.position = "absolute";
+                        imageElement.style.width = `${renderedWidth}px`;
+                        // imageElement.style.height = `${renderedHeight}px`;
+                        imageElement.style.left = `${offsetX}px`;
+                        // imageElement.style.top = `${offsetY}px`;
+                        imageElement.style.objectFit = "cover";
+                        imageElement.style.zIndex = "-1";
+                    }
+
+                    // Initial aufrufen
+                    updatePosition();
+
+                    // Bei Resize erneut aufrufen
+                    window.addEventListener("resize", updatePosition);
+                }
             }
         } catch (error) {
-            console.log('Fehler in _managePodestPosition()')
+            console.log('Fehler in _managePodestPosition()', error)
         }
     }
 
@@ -968,5 +1110,11 @@ export default class ProduktDetail extends Plugin {
             activeInputField.dispatchEvent(event);
         });
 
+    }
+
+    _manageProductInformation() {
+        let productDescriptionField = document.getElementById('productDescription');
+
+        productDescriptionField.innerHTML = productData.description;
     }
 }
