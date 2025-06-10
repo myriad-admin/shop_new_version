@@ -1,7 +1,13 @@
 import Plugin from '../../plugin-system/plugin-class.js';
 
 import Swiper from 'swiper';
-import { Navigation, Mousewheel, Pagination } from "swiper/modules";
+import { Navigation, Mousewheel, Pagination, EffectCards } from "swiper/modules";
+
+import 'swiper/css';
+import 'swiper/css/effect-cards';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 
 
 export default class ProduktDetail extends Plugin {
@@ -90,6 +96,11 @@ export default class ProduktDetail extends Plugin {
                 modules: [Mousewheel, Pagination],
                 direction: "vertical",
                 speed: 900, // Langsames Sliden
+                noSwiping: true,
+                noSwipingClass: 'no-swipe-zone',
+                // Standardmäßig fängt Swiper touchstart/move ab – hier auslassen:
+                touchStartPreventDefault: false,
+                touchMoveStopPropagation: false,
                 mousewheel: {
                     sensitivity: 0.5,
                     forceToAxis: true,
@@ -115,10 +126,128 @@ export default class ProduktDetail extends Plugin {
                 }
             });
 
+            this.customerRatingImageSlider = new Swiper(".customer-rating-image-slider", {
+                modules: [Navigation],
+                loop: true,
+                navigation: {
+                    nextEl: ".customer-rating-image-slider-button-next",
+                    prevEl: ".customer-rating-image-slider-button-prev",
+                },
+            });
+
+            this.socialMediaImagesSwiper = new Swiper(".social-media-images-slider", {
+                modules: [EffectCards],
+                effect: "cards",
+                cardsEffect: {
+                    perSlideOffset: 40,
+                    perSlideRotate: 0, // 0 Grad Rotation pro Slide
+                },
+                grabCursor: true,
+                slidesPerView: 1,
+                loop: false,
+                threshold: 30,
+                touchRatio: 1,
+                freeMode: false,
+                on: {
+                    slideChange: function () {
+                        const realIndex = this.activeIndex;
+                        const diff = realIndex - this.previousIndex;
+                        if (Math.abs(diff) > 1) {
+                            this.slideTo(this.previousIndex + Math.sign(diff));
+                        }
+                    }
+                }
+
+            });
+
             // Customer-Slider verhindern dass am Ende der descriptionSlider slidet
             document.querySelector('.customer-pictures').addEventListener('wheel', function (e) {
                 e.stopPropagation();
             }, { passive: false });
+
+            document.querySelector('.rating-wrapper').addEventListener('wheel', function (e) {
+                if (document.querySelector('.rating-wrapper').scrollTop !== 0) {
+                    e.stopPropagation();
+                }
+            });
+
+            // const ratingWrapper = document.querySelector('.rating-wrapper');
+            // let topReachedCooldown = false;
+            // let cooldownTimeout = null;
+            // let removeAnimationTimeout = null;
+
+            // ratingWrapper.addEventListener('wheel', function (e) {
+            //     // Wenn nicht ganz oben oder Cooldown noch aktiv -> stopPropagation
+            //     if (ratingWrapper.scrollTop !== 0 || topReachedCooldown || cooldownTimeout != null) {
+            //         e.stopPropagation();
+            //     }
+
+            //     // Wenn wir gerade ganz oben angekommen sind, Cooldown setzen
+            //     if (ratingWrapper.scrollTop === 0 && !topReachedCooldown) {
+            //         topReachedCooldown = true;
+
+            //         // Cooldown nach 2 Sekunden wieder entfernen
+            //         if (cooldownTimeout) clearTimeout(cooldownTimeout);
+
+            //         cooldownTimeout = setTimeout(() => {
+            //             const informationsSliderWrapper = document.querySelector('.description-slider .swiper-wrapper .swiper-slide.two .informations-wrapper');
+            //             if (informationsSliderWrapper) {
+            //                 informationsSliderWrapper.classList.remove('ratings-animation');
+            //             }
+            //             topReachedCooldown = false;
+            //             cooldownTimeout = null;
+            //         }, 2000);
+            //     }
+
+            //     // Debounce für Animation, wenn nach oben gescrollt wird und Cooldown aktiv ist
+            //     if (topReachedCooldown && ratingWrapper.scrollTop === 0 && e.deltaY < 0) {
+            //         const informationsSliderWrapper = document.querySelector('.description-slider .swiper-wrapper .swiper-slide.two .informations-wrapper');
+            //         if (!informationsSliderWrapper) return;
+
+            //         informationsSliderWrapper.classList.add('ratings-animation');
+
+            //         // Falls schon ein Timeout läuft, abbrechen (VOR dem Neusetzen!)
+            //         if (removeAnimationTimeout) {
+            //             clearTimeout(removeAnimationTimeout);
+            //         }
+            //         removeAnimationTimeout = setTimeout(() => {
+            //             informationsSliderWrapper.classList.remove('ratings-animation');
+            //             removeAnimationTimeout = null;
+            //         }, 150);
+            //     }
+            // }, { passive: false });
+
+
+            //Den socialMediaImagesSwiper wrapper in 9:16 setzen und breite/höhe auf platz anpassen
+            function setSocialMediaImagesSwiperWidth() {
+
+
+                let socialMediaImagesSwiper = document.querySelector('.social-media-images-slider');
+                socialMediaImagesSwiper.style.width = `100%`;
+                socialMediaImagesSwiper.style.height = `100%`;
+
+                let width = 9 * socialMediaImagesSwiper.clientHeight / 16;
+                socialMediaImagesSwiper.style.width = `${width}px`;
+
+                let socialMediaImagesSwiperWidth = socialMediaImagesSwiper.parentElement.clientWidth;
+                let socialMediaImagesSwiperTotalWidth = width * 1.64;
+
+                if (socialMediaImagesSwiperTotalWidth > socialMediaImagesSwiperWidth) {
+                    console.log('vandalismus');
+                    let width = socialMediaImagesSwiperWidth / 1.64;
+                    let height = 16 * width / 9;
+
+                    socialMediaImagesSwiper.style.width = `${width}px`;
+                    socialMediaImagesSwiper.style.height = `${height}px`;
+                }
+
+            }
+
+            setSocialMediaImagesSwiperWidth()
+
+            window.addEventListener('resize', () => {
+                setSocialMediaImagesSwiperWidth()
+            })
 
 
         } catch (error) {
@@ -224,6 +353,17 @@ export default class ProduktDetail extends Plugin {
             colorPickerIcon.addEventListener('click', () => {
                 colorSection.classList.toggle('closed');
             })
+
+            let desktopOptionsWrapper = document.querySelector('#desktopOptionsWrapper .color-select');
+            desktopOptionsWrapper.addEventListener('click', () => {
+                desktopOptionsWrapper.classList.toggle('open');
+            })
+
+            let desktopSizeSelectWrapper = document.querySelector('#desktopOptionsWrapper .size-select')
+            desktopSizeSelectWrapper.addEventListener('click', () => {
+                desktopSizeSelectWrapper.classList.toggle('open');
+            })
+
         } catch (error) {
             console.log('Fehler in _manageColorsSection()')
         }
