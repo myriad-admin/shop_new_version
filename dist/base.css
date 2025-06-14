@@ -746,6 +746,10 @@
     height: 100%;
     overflow-x: hidden;
   }
+  .product #MainContent .pds-slider.desktop.blur .description-slider-arrow-down {
+    translate: 0 -100vh;
+    rotate: -180deg;
+  }
   .product #MainContent .pds-slider.desktop #pdsBackgroundImageDesktop {
     width: auto;
     height: 100%;
@@ -753,6 +757,21 @@
     overflow: visible;
     filter: blur(0px);
     transition: filter 900ms;
+  }
+  .product #MainContent .pds-slider.desktop .description-slider-arrow-down {
+    width: 4vw;
+    max-width: 80px;
+    min-width: 60px;
+    height: auto;
+    cursor: pointer;
+    animation: bounce 7s infinite;
+    position: absolute;
+    left: 50%;
+    bottom: 2rem;
+    translate: -50%;
+    z-index: 100;
+    opacity: 1;
+    transition: translate 0.9s, rotate 0.7s;
   }
   .product #MainContent .pds-slider.desktop .content-wrapper {
     display: flex;
@@ -872,21 +891,16 @@
     top: -20px;
     right: -10px;
   }
-  .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.size-select .not-selected {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    opacity: 1;
-    transition: opacity 1s;
-  }
-  .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.size-select .not-selected .ring {
-    height: 80%;
+  .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.size-select .arrow-svg {
+    height: 21px;
     width: auto;
+    position: absolute;
+    right: 12px;
+    transition: translate 0.9s, transform 0.9s, rotate 0.9s;
+    translate: 0;
+    rotate: 0;
   }
-  .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.size-select .not-selected .size {
+  .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.size-select .size {
     position: absolute;
     top: 4px;
     right: 3px;
@@ -894,16 +908,40 @@
     font-weight: 900;
     font-size: 17px;
   }
+  .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.size-select .arrow-svg,
+  .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.size-select .ring {
+    translate: -6px;
+  }
+  .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.size-select .not-selected {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    translate: 0;
+    transition: translate 1s;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.size-select .not-selected .ring {
+    height: 80%;
+    width: auto;
+  }
   .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.size-select .selected {
     position: absolute;
-    opacity: 0;
-    transition: opacity 1s;
+    translate: 100%;
+    transition: translate 1s;
+  }
+  .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.size-select.open .arrow-svg {
+    translate: -78px;
+    rotate: -180deg;
   }
   .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.size-select.open .not-selected {
-    opacity: 0;
+    translate: -100%;
   }
   .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.size-select.open .selected {
-    opacity: 1;
+    translate: 0;
   }
   .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.color-select {
     position: relative;
@@ -917,6 +955,19 @@
     top: -20px;
     right: -10px;
     z-index: 100;
+  }
+  .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.color-select .arrow-svg {
+    height: 21px;
+    width: auto;
+    position: absolute;
+    right: 12px;
+    transition: translate 0.9s, transform 0.9s, rotate 0.9s;
+    translate: 0;
+    rotate: 0;
+  }
+  .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.color-select .arrow-svg,
+  .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.color-select .material-icon {
+    translate: -6px;
   }
   .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.color-select .colors {
     position: absolute;
@@ -939,6 +990,8 @@
     height: 100%;
     translate: 0;
     transition: translate 1s;
+    overflow: hidden;
+    border-radius: 10px;
   }
   .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.color-select .not-selected .material-icon {
     height: 38%;
@@ -958,7 +1011,7 @@
     border: 2px solid black;
     align-self: center;
     cursor: pointer;
-    transform: translate(-5px);
+    transform: translate(7px);
   }
   .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.color-select .selected.one .color-field {
     position: absolute;
@@ -976,14 +1029,14 @@
     height: 27px;
   }
   .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.color-select .selected.two .color-field:first-child {
-    left: 20%;
-    top: 50%;
-    translate: 0 -50%;
+    left: 50%;
+    top: 15%;
+    translate: -100%;
   }
   .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.color-select .selected.two .color-field:last-child {
     right: 20%;
-    bottom: 50%;
-    translate: 0 50%;
+    bottom: 15%;
+    translate: -30%;
   }
   .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.color-select .selected.three .color-field {
     position: absolute;
@@ -1049,6 +1102,10 @@
   .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.color-select .selected.five .color-field:last-child {
     right: 24%;
     bottom: 5%;
+  }
+  .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.color-select.open .arrow-svg {
+    translate: -78px;
+    rotate: -180deg;
   }
   .product #MainContent .pds-slider.desktop .content-wrapper .product-information .informations-wrapper .left .options-wrapper article.color-select.open .not-selected {
     translate: -100%;
@@ -1261,6 +1318,54 @@
     z-index: 0;
     translate: 0 100%;
   }
+  .product #MainContent .pds-slider.desktop .description-slider .swiper-scrollbar {
+    right: 1rem;
+    top: 50%;
+    width: 1rem;
+    height: 80vh;
+    background-color: white;
+    transform: translateY(-50%);
+    translate: 0 -100vh;
+    transition: opacity 900ms;
+    transition-delay: 300ms;
+    opacity: 1;
+  }
+  .product #MainContent .pds-slider.desktop .description-slider .swiper-scrollbar.delay-change {
+    transition: opacity 750ms;
+    transition-delay: unset;
+  }
+  .product #MainContent .pds-slider.desktop .description-slider .swiper-scrollbar.inactive {
+    opacity: 0;
+  }
+  .product #MainContent .pds-slider.desktop .description-slider .swiper-wrapper .scroll-bar-wrapper {
+    display: none;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    translate: 0 -50%;
+    transform: translateY(0);
+    transition: transform 900ms;
+    z-index: 100;
+  }
+  .product #MainContent .pds-slider.desktop .description-slider .swiper-wrapper .scroll-bar-wrapper.move-scroll-bar {
+    transform: translateY(100vh);
+  }
+  .product #MainContent .pds-slider.desktop .description-slider .swiper-wrapper .scroll-bar-wrapper .scroll-bar {
+    height: 80vh;
+    width: 1rem;
+    background: aliceblue;
+    border-radius: 10px;
+    display: none;
+  }
+  .product #MainContent .pds-slider.desktop .description-slider .swiper-wrapper .scroll-bar-wrapper .scroll-progress {
+    position: absolute;
+    top: 31%;
+    height: 33.3333333333%;
+    width: 100%;
+    background: aqua;
+    border-radius: 10px;
+    cursor: pointer;
+  }
   .product #MainContent .pds-slider.desktop .description-slider .swiper-wrapper .swiper-slide {
     padding: 165px 50px 100px 30px;
     display: flex;
@@ -1268,6 +1373,7 @@
     row-gap: 1.5rem;
   }
   .product #MainContent .pds-slider.desktop .description-slider .swiper-wrapper .swiper-slide .informations-wrapper {
+    position: relative;
     display: flex;
     flex-direction: column;
     row-gap: 2rem;
@@ -1500,6 +1606,7 @@
     display: flex;
     justify-content: center;
     width: 70%;
+    min-width: 950px;
     height: 40px;
     margin-inline: auto;
   }
@@ -1736,6 +1843,7 @@
     width: auto;
     height: 100%;
     overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.72) 0px 0px 50px;
   }
   .product #MainContent .pds-slider.desktop .description-slider .swiper-wrapper .swiper-slide.two .informations-wrapper .content-wrapper2 .content-right .social-media-images-slider .swiper-wrapper .swiper-slide img {
     width: 100%;
@@ -1804,7 +1912,27 @@
   background: linear-gradient(152.05deg, rgba(255, 185, 158, 0.988235) 14.54%, #DC9275 45.15%, #D09984 55.17%, #C1785B 65.18%, #C98970 73.3%, #B9694A 88.56%);
 }
 .color-field.color-field-active {
-  border: 2px solid white;
+  border: 2px solid white !important;
+}
+
+@keyframes bounce {
+  /* Anfangsruhe */
+  0%, 71.43% {
+    transform: translateY(0);
+  }
+  /* Bounce beginnt */
+  77.13%, 85.73%, 94.33%, 100% {
+    transform: translateY(0);
+  }
+  82.83% {
+    transform: translateY(-30px);
+  }
+  88.53% {
+    transform: translateY(-15px);
+  }
+}
+.bounce {
+  animation: bounce 7s infinite;
 }
 
 html {

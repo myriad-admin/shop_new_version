@@ -1,7 +1,7 @@
 import Plugin from '../../plugin-system/plugin-class.js';
 
 import Swiper from 'swiper';
-import { Navigation, Mousewheel, Pagination, EffectCards } from "swiper/modules";
+import { Navigation, Mousewheel, Pagination, EffectCards, Scrollbar } from "swiper/modules";
 
 import 'swiper/css';
 import 'swiper/css/effect-cards';
@@ -93,7 +93,7 @@ export default class ProduktDetail extends Plugin {
             });
 
             this.descriptionSlider = new Swiper(".description-slider", {
-                modules: [Mousewheel, Pagination],
+                modules: [Mousewheel, Pagination, Scrollbar],
                 direction: "vertical",
                 speed: 900, // Langsames Sliden
                 noSwiping: true,
@@ -105,6 +105,11 @@ export default class ProduktDetail extends Plugin {
                     sensitivity: 0.5,
                     forceToAxis: true,
                     releaseOnEdges: true,
+                },
+                scrollbar: {
+                    el: '.swiper-scrollbar',
+                    draggable: true,
+                    snapOnRelease: true,
                 },
                 pagination: {
                     el: ".swiper-pagination",
@@ -170,53 +175,6 @@ export default class ProduktDetail extends Plugin {
                     e.stopPropagation();
                 }
             });
-
-            // const ratingWrapper = document.querySelector('.rating-wrapper');
-            // let topReachedCooldown = false;
-            // let cooldownTimeout = null;
-            // let removeAnimationTimeout = null;
-
-            // ratingWrapper.addEventListener('wheel', function (e) {
-            //     // Wenn nicht ganz oben oder Cooldown noch aktiv -> stopPropagation
-            //     if (ratingWrapper.scrollTop !== 0 || topReachedCooldown || cooldownTimeout != null) {
-            //         e.stopPropagation();
-            //     }
-
-            //     // Wenn wir gerade ganz oben angekommen sind, Cooldown setzen
-            //     if (ratingWrapper.scrollTop === 0 && !topReachedCooldown) {
-            //         topReachedCooldown = true;
-
-            //         // Cooldown nach 2 Sekunden wieder entfernen
-            //         if (cooldownTimeout) clearTimeout(cooldownTimeout);
-
-            //         cooldownTimeout = setTimeout(() => {
-            //             const informationsSliderWrapper = document.querySelector('.description-slider .swiper-wrapper .swiper-slide.two .informations-wrapper');
-            //             if (informationsSliderWrapper) {
-            //                 informationsSliderWrapper.classList.remove('ratings-animation');
-            //             }
-            //             topReachedCooldown = false;
-            //             cooldownTimeout = null;
-            //         }, 2000);
-            //     }
-
-            //     // Debounce für Animation, wenn nach oben gescrollt wird und Cooldown aktiv ist
-            //     if (topReachedCooldown && ratingWrapper.scrollTop === 0 && e.deltaY < 0) {
-            //         const informationsSliderWrapper = document.querySelector('.description-slider .swiper-wrapper .swiper-slide.two .informations-wrapper');
-            //         if (!informationsSliderWrapper) return;
-
-            //         informationsSliderWrapper.classList.add('ratings-animation');
-
-            //         // Falls schon ein Timeout läuft, abbrechen (VOR dem Neusetzen!)
-            //         if (removeAnimationTimeout) {
-            //             clearTimeout(removeAnimationTimeout);
-            //         }
-            //         removeAnimationTimeout = setTimeout(() => {
-            //             informationsSliderWrapper.classList.remove('ratings-animation');
-            //             removeAnimationTimeout = null;
-            //         }, 150);
-            //     }
-            // }, { passive: false });
-
 
             //Den socialMediaImagesSwiper wrapper in 9:16 setzen und breite/höhe auf platz anpassen
             function setSocialMediaImagesSwiperWidth() {
@@ -313,6 +271,12 @@ export default class ProduktDetail extends Plugin {
             })
 
             // Desktop Produktinfos Slider ersten Slide erkennen
+            let descriptionSliderArrowDown = document.querySelector('.description-slider-arrow-down');
+
+            descriptionSliderArrowDown.addEventListener('click', () => {
+                this.descriptionSlider.slideNext();
+            })
+
             window.addEventListener("wheel", (event) => {
                 if (
                     event.deltaY > 0 &&
@@ -335,8 +299,25 @@ export default class ProduktDetail extends Plugin {
                     document.querySelector('.pds-slider.desktop').classList.add('blur', 'shadow');
                 }
 
+                if (this.descriptionSlider.activeIndex == 0) {
+                    document.querySelector('.swiper-scrollbar').classList.add('inactive');
+                }
+                else {
+                    document.querySelector('.swiper-scrollbar').classList.remove('inactive');
+                }
+
                 console.log(this.descriptionSlider.activeIndex);
             })
+
+            this.descriptionSlider.on('transitionEnd', () => {
+                // scroll bar mit bewegen
+                if (this.descriptionSlider.activeIndex == 0) {
+                    document.querySelector('.swiper-scrollbar').classList.remove('delay-change');
+                }
+                else {
+                    document.querySelector('.swiper-scrollbar').classList.add('delay-change');
+                }
+            });
 
 
 
@@ -355,8 +336,11 @@ export default class ProduktDetail extends Plugin {
             })
 
             let desktopOptionsWrapper = document.querySelector('#desktopOptionsWrapper .color-select');
-            desktopOptionsWrapper.addEventListener('click', () => {
-                desktopOptionsWrapper.classList.toggle('open');
+            desktopOptionsWrapper.addEventListener('click', (e) => {
+                if (!e.target.closest('.color-field')) {
+                    desktopOptionsWrapper.classList.toggle('open');
+                }
+
             })
 
             let desktopSizeSelectWrapper = document.querySelector('#desktopOptionsWrapper .size-select')
