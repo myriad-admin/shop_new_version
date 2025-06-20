@@ -1,45 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
     <meta charset="UTF-8">
+    <title>Gekrümmter Swiper</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        .scroll-container {
-            height: 100vh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-            scrollbar-width: none;
-            /* für Firefox */
-            -ms-overflow-style: none;
-            /* für IE/Edge */
-        }
-
-        .scroll-container::-webkit-scrollbar {
-            display: none;
-            /* für Chrome/Safari */
-        }
-
-        .snap-point {
-            scroll-snap-align: start;
-            height: 100vh;
+        body {
+            background: #111;
+            color: white;
+            font-family: sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2rem;
+            height: 100vh;
+        }
+
+        .swiper-container {
+            width: 300px;
+            height: 200px;
+            position: relative;
+            overflow: visible;
+        }
+
+        .swiper-wrapper {
+            position: absolute;
+            top: 100px;
+            /* Y-Zentrum */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .swiper-slide {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            background: #f0c040;
+            color: #000;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            transform-origin: bottom center;
         }
     </style>
+</head>
 
-    <div class="scroll-container">
-        <div class="snap-point">Slide 1</div>
-        <div class="snap-point">Slide 2</div>
-        <div class="snap-point">Slide 3</div>
+<body>
+
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">46</div>
+            <div class="swiper-slide">47</div>
+            <div class="swiper-slide">48</div>
+            <div class="swiper-slide">49</div>
+            <div class="swiper-slide">50</div>
+        </div>
     </div>
 
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper-container', {
+            slidesPerView: 5,
+            centeredSlides: true,
+            initialSlide: 2,
+            on: {
+                init: positionSlides,
+                slideChange: positionSlides,
+            }
+        });
+
+        function positionSlides() {
+            const slides = document.querySelectorAll('.swiper-slide');
+            const centerIndex = swiper.activeIndex;
+            const angleStep = 15; // Gradabstand pro Slide
+
+            slides.forEach((slide, index) => {
+                const offset = index - centerIndex;
+                const angle = offset * angleStep;
+
+                slide.style.transform = `
+          rotate(${angle}deg)
+          translateY(-100px)
+          rotate(${-angle}deg)
+        `;
+
+                slide.style.opacity = Math.abs(offset) > 2 ? '0' : '1';
+                slide.style.zIndex = 100 - Math.abs(offset);
+                slide.style.scale = offset === 0 ? '1.4' : '1.0';
+            });
+        }
+    </script>
 </body>
 
 </html>

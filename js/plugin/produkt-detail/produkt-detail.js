@@ -122,7 +122,9 @@ export default class ProduktDetail extends Plugin {
                 slidesPerView: 2.6,
                 spaceBetween: 30,
                 nested: true,
-                mousewheel: true,
+                mousewheel: {
+                    releaseOnEdges: true
+                },
                 touchMoveStopPropagation: true,
                 breakpoints: {
                     1200: {
@@ -130,6 +132,7 @@ export default class ProduktDetail extends Plugin {
                     }
                 }
             });
+
 
             this.customerRatingImageSlider = new Swiper(".customer-rating-image-slider", {
                 modules: [Navigation],
@@ -165,47 +168,92 @@ export default class ProduktDetail extends Plugin {
 
             });
 
-            // Customer-Slider verhindern dass am Ende der descriptionSlider slidet
-            document.querySelector('.customer-pictures').addEventListener('wheel', function (e) {
-                e.stopPropagation();
-            }, { passive: false });
+            // this.sizeSelectSwiperDesktop = new Swiper(".size-select-swiper-desktop", {
+            //     slidesPerView: 5,
+            //     speed: 330,
+            //     allowTouchMove: false,
+            //     // initialSlide: 3
+            // });
+            const swiperElements = document.querySelectorAll('.size-select-swiper-desktop');
+            const swiperInstances = [];
 
-            document.querySelector('.rating-wrapper').addEventListener('wheel', function (e) {
-                if (document.querySelector('.rating-wrapper').scrollTop !== 0) {
-                    e.stopPropagation();
-                }
+            swiperElements.forEach((el) => {
+                const swiper = new Swiper(el, {
+                    slidesPerView: 5,
+                    speed: 330,
+                    allowTouchMove: false,
+                    on: {
+                        activeIndexChange: function () {
+                            updateSizeSwiperClasses(this, false);
+                        }
+                    }
+                });
+
+                swiperInstances.push(swiper);
+
+                // Init einmalig
+                updateSizeSwiperClasses(swiper, true);
             });
 
-            //Den socialMediaImagesSwiper wrapper in 9:16 setzen und breite/höhe auf platz anpassen
-            function setSocialMediaImagesSwiperWidth() {
+            function updateSizeSwiperClasses(swiper, initial) {
+                const el = swiper.el; // root element of this Swiper
+                const swiperSlides = el.querySelectorAll('.swiper-wrapper .swiper-slide');
+                const swiperSlidePrev = el.querySelector('.swiper-wrapper .swiper-slide-prev');
+                const swiperSlideActive = swiper.slides[swiper.activeIndex];
 
+                // Inhalte aktualisieren (nicht über Klassen gehen)
+                let sizeSelectClosedNumber = document.querySelectorAll('#desktopOptionsWrapper .size-select .not-selected .size');
+                sizeSelectClosedNumber.forEach(number => {
+                    number.innerHTML = swiperSlideActive.innerHTML;
+                });
 
-                let socialMediaImagesSwiper = document.querySelector('.social-media-images-slider');
-                socialMediaImagesSwiper.style.width = `100%`;
-                socialMediaImagesSwiper.style.height = `100%`;
+                swiperSlides.forEach(slide => {
+                    slide.classList.remove('swiper-slide-prev-prev', 'slide-above', 'slide-below');
+                });
 
-                let width = 9 * socialMediaImagesSwiper.clientHeight / 16;
-                socialMediaImagesSwiper.style.width = `${width}px`;
+                let previousSibling = swiperSlideActive?.previousElementSibling?.previousElementSibling;
+                let nextSibling = swiperSlideActive?.nextElementSibling;
 
-                let socialMediaImagesSwiperWidth = socialMediaImagesSwiper.parentElement.clientWidth;
-                let socialMediaImagesSwiperTotalWidth = width * 1.64;
-
-                if (socialMediaImagesSwiperTotalWidth > socialMediaImagesSwiperWidth) {
-                    console.log('vandalismus');
-                    let width = socialMediaImagesSwiperWidth / 1.64;
-                    let height = 16 * width / 9;
-
-                    socialMediaImagesSwiper.style.width = `${width}px`;
-                    socialMediaImagesSwiper.style.height = `${height}px`;
+                while (previousSibling) {
+                    if (previousSibling.classList.contains('swiper-slide')) {
+                        previousSibling.classList.add('slide-above');
+                    }
+                    previousSibling = previousSibling.previousElementSibling;
                 }
 
+                while (nextSibling) {
+                    if (nextSibling.classList.contains('swiper-slide')) {
+                        nextSibling.classList.add('slide-below');
+                    }
+                    nextSibling = nextSibling.nextElementSibling;
+                }
+
+                if (swiper.activeIndex > swiper.previousIndex) {
+                    if (swiperSlidePrev?.classList.contains('swiper-slide')) {
+                        if (initial) {
+                            swiperSlidePrev.previousElementSibling?.classList.add('swiper-slide-prev-prev');
+                        } else {
+                            swiperSlidePrev.classList.add('swiper-slide-prev-prev');
+                        }
+                    }
+                } else {
+                    swiperSlidePrev?.previousElementSibling?.previousElementSibling?.classList.add('swiper-slide-prev-prev');
+                }
             }
 
-            setSocialMediaImagesSwiperWidth()
+            document.querySelectorAll('#plus-svg-desktop').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    swiperInstances.forEach(swiper => swiper.slideNext());
+                });
+            });
 
-            window.addEventListener('resize', () => {
-                setSocialMediaImagesSwiperWidth()
-            })
+            document.querySelectorAll('#minus-svg-desktop').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    swiperInstances.forEach(swiper => swiper.slidePrev());
+                });
+            });
 
 
         } catch (error) {
@@ -319,10 +367,63 @@ export default class ProduktDetail extends Plugin {
                 }
             });
 
+            document.querySelector('.read-ratings').addEventListener('click', () => {
+                this.descriptionSlider.slideTo(2, 1100);
+            })
+
+            document.getElementById('scrollToRatings').addEventListener('click', () => {
+                this.descriptionSlider.slideTo(2);
+            })
+
+            //SizeSelectSwiper Desktop Verhalten
+
+
+
+            // Customer-Slider verhindern dass am Ende der descriptionSlider slidet
+            document.querySelector('.customer-pictures').addEventListener('wheel', function (e) {
+                e.stopPropagation();
+            }, { passive: false });
+
+            document.querySelector('.rating-wrapper').addEventListener('wheel', function (e) {
+                if (document.querySelector('.rating-wrapper').scrollTop !== 0) {
+                    e.stopPropagation();
+                }
+            });
+
+            //Den socialMediaImagesSwiper wrapper in 9:16 setzen und breite/höhe auf platz anpassen
+            function setSocialMediaImagesSwiperWidth() {
+
+
+                let socialMediaImagesSwiper = document.querySelector('.social-media-images-slider');
+                socialMediaImagesSwiper.style.width = `100%`;
+                socialMediaImagesSwiper.style.height = `100%`;
+
+                let width = 9 * socialMediaImagesSwiper.clientHeight / 16;
+                socialMediaImagesSwiper.style.width = `${width}px`;
+
+                let socialMediaImagesSwiperWidth = socialMediaImagesSwiper.parentElement.clientWidth;
+                let socialMediaImagesSwiperTotalWidth = width * 1.64;
+
+                if (socialMediaImagesSwiperTotalWidth > socialMediaImagesSwiperWidth) {
+                    console.log('vandalismus');
+                    let width = socialMediaImagesSwiperWidth / 1.64;
+                    let height = 16 * width / 9;
+
+                    socialMediaImagesSwiper.style.width = `${width}px`;
+                    socialMediaImagesSwiper.style.height = `${height}px`;
+                }
+
+            }
+
+            setSocialMediaImagesSwiperWidth()
+
+            window.addEventListener('resize', () => {
+                setSocialMediaImagesSwiperWidth()
+            })
 
 
         } catch (error) {
-            console.log('Fehler in _swiperBehavior()')
+            console.log('Fehler in _swiperBehavior() \n' + error)
         }
     }
 
@@ -335,19 +436,23 @@ export default class ProduktDetail extends Plugin {
                 colorSection.classList.toggle('closed');
             })
 
-            let desktopOptionsWrapper = document.querySelector('#desktopOptionsWrapper .color-select');
-            desktopOptionsWrapper.addEventListener('click', (e) => {
-                if (!e.target.closest('.color-field')) {
-                    desktopOptionsWrapper.classList.toggle('open');
-                }
+            let desktopOptionsWrappers = document.querySelectorAll('#desktopOptionsWrapper .color-select');
+            let desktopSizeSelectWrappers = document.querySelectorAll('#desktopOptionsWrapper .size-select')
 
+            desktopOptionsWrappers.forEach(wrapper => {
+                wrapper.addEventListener('click', (e) => {
+                    if (!e.target.closest('.color-field')) {
+                        wrapper.classList.toggle('open');
+                    }
+
+                })
             })
 
-            let desktopSizeSelectWrapper = document.querySelector('#desktopOptionsWrapper .size-select')
-            desktopSizeSelectWrapper.addEventListener('click', () => {
-                desktopSizeSelectWrapper.classList.toggle('open');
+            desktopSizeSelectWrappers.forEach(wrapper => {
+                wrapper.addEventListener('click', () => {
+                    wrapper.classList.toggle('open');
+                })
             })
-
         } catch (error) {
             console.log('Fehler in _manageColorsSection()')
         }
@@ -415,9 +520,24 @@ export default class ProduktDetail extends Plugin {
                         document.querySelectorAll('.color-field').forEach(field =>
                             field.classList.remove("color-field-active")
                         );
-                        this.classList.add("color-field-active");
+
+                        const colorClass = [...this.classList].find(cls =>
+                            cls !== 'color-field' && cls !== 'color-field-active'
+                        );
+
+                        document.querySelectorAll(`.color-field.${colorClass}`).forEach(colorField => {
+                            colorField.classList.add("color-field-active");
+                        });
+                        // this.classList.add("color-field-active");
                         // changeProductImages(this.getAttribute('value'), null, null);
                         changeImagebyColorchange(this.getAttribute('value'));
+
+                        //Farbe in Preview ändern
+                        document.querySelectorAll('#colorPreviewDesktop').forEach(field => {
+                            field.className = `color-field ${colorClass}`;
+                        })
+
+                        console.log('Farbe:', colorClass); // z. B. "gold"
                     });
                 });
             }
@@ -511,6 +631,10 @@ export default class ProduktDetail extends Plugin {
 
                 productImageSwiperWrapper.classList.add('animation');
                 setTimeout(() => productImageSwiperWrapper.classList.remove('animation'), 500);
+            }
+
+            function changeColorInPreview() {
+
             }
 
             loadColorLabels();
@@ -799,18 +923,88 @@ export default class ProduktDetail extends Plugin {
                     productSwiperWrapper.style.transform = `translateY(${translateNumber}px)`;
                 }
 
+                // function setDesktopPosition() {
+                //     let imageElement = document.getElementById('pdsBackgroundImageDesktop');
+                //     let anchorX = 950;
+                //     let anchorY = 880;
+                //     let imageNaturalWidth = 2944;
+                //     let imageNaturalHeight = 1168;
+                //     let getTargetViewportX = () => window.innerWidth * 0.25;
+                //     let getTargetViewportY = () => window.innerHeight * 1;
+
+
+                //     function updatePosition() {
+                //         // console.log('POSITION');
+                //         const viewportWidth = window.innerWidth;
+                //         const viewportHeight = window.innerHeight;
+
+                //         const imageAspectRatio = imageNaturalWidth / imageNaturalHeight;
+                //         const viewportAspectRatio = viewportWidth / viewportHeight;
+
+                //         let renderedWidth, renderedHeight;
+
+                //         if (imageAspectRatio > viewportAspectRatio) {
+                //             // Bild ist breiter → Höhe füllt Viewport
+                //             renderedHeight = viewportHeight;
+                //             renderedWidth = renderedHeight * imageAspectRatio;
+                //         } else {
+                //             // Bild ist höher → Breite füllt Viewport
+                //             renderedWidth = viewportWidth;
+                //             renderedHeight = renderedWidth / imageAspectRatio;
+                //         }
+
+                //         const scaleX = renderedWidth / imageNaturalWidth;
+                //         const scaleY = renderedHeight / imageNaturalHeight;
+
+                //         const anchorXOnScreen = anchorX * scaleX;
+                //         const anchorYOnScreen = anchorY * scaleY;
+
+                //         const targetX = getTargetViewportX();
+                //         const targetY = getTargetViewportY();
+
+                //         const offsetX = targetX - anchorXOnScreen;
+                //         const offsetY = targetY - anchorYOnScreen;
+
+                //         // Position und Größe anwenden
+                //         imageElement.style.position = "absolute";
+                //         imageElement.style.width = `${renderedWidth}px`;
+                //         // imageElement.style.height = `${renderedHeight}px`;
+                //         imageElement.style.left = `${offsetX}px`;
+                //         // imageElement.style.top = `${offsetY}px`;
+                //         imageElement.style.objectFit = "cover";
+                //         imageElement.style.zIndex = "-1";
+                //     }
+
+                //     // Initial aufrufen
+                //     updatePosition();
+
+                //     // Bei Resize erneut aufrufen
+                //     window.addEventListener("resize", updatePosition);
+                // }
+
                 function setDesktopPosition() {
                     let imageElement = document.getElementById('pdsBackgroundImageDesktop');
                     let anchorX = 950;
                     let anchorY = 880;
                     let imageNaturalWidth = 2944;
                     let imageNaturalHeight = 1168;
-                    let getTargetViewportX = () => window.innerWidth * 0.25;
+
+                    const maxContentWidth = 2000;
+
+                    let getTargetViewportX = () => {
+                        const vw = window.innerWidth;
+                        if (vw <= maxContentWidth) {
+                            return vw * 0.25; // Wie bisher bei kleinerem Viewport
+                        } else {
+                            return (vw - maxContentWidth) / 2 + 500; // 500px innerhalb des zentrierten Contents
+                        }
+                    };
+
                     let getTargetViewportY = () => window.innerHeight * 1;
 
+                    updatePosition();
 
                     function updatePosition() {
-                        // console.log('POSITION');
                         const viewportWidth = window.innerWidth;
                         const viewportHeight = window.innerHeight;
 
@@ -820,11 +1014,9 @@ export default class ProduktDetail extends Plugin {
                         let renderedWidth, renderedHeight;
 
                         if (imageAspectRatio > viewportAspectRatio) {
-                            // Bild ist breiter → Höhe füllt Viewport
                             renderedHeight = viewportHeight;
                             renderedWidth = renderedHeight * imageAspectRatio;
                         } else {
-                            // Bild ist höher → Breite füllt Viewport
                             renderedWidth = viewportWidth;
                             renderedHeight = renderedWidth / imageAspectRatio;
                         }
@@ -841,22 +1033,14 @@ export default class ProduktDetail extends Plugin {
                         const offsetX = targetX - anchorXOnScreen;
                         const offsetY = targetY - anchorYOnScreen;
 
-                        // Position und Größe anwenden
                         imageElement.style.position = "absolute";
                         imageElement.style.width = `${renderedWidth}px`;
-                        // imageElement.style.height = `${renderedHeight}px`;
                         imageElement.style.left = `${offsetX}px`;
-                        // imageElement.style.top = `${offsetY}px`;
                         imageElement.style.objectFit = "cover";
                         imageElement.style.zIndex = "-1";
                     }
-
-                    // Initial aufrufen
-                    updatePosition();
-
-                    // Bei Resize erneut aufrufen
-                    window.addEventListener("resize", updatePosition);
                 }
+
             }
         } catch (error) {
             console.log('Fehler in _managePodestPosition()', error)
