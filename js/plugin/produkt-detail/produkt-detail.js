@@ -119,7 +119,7 @@ export default class ProduktDetail extends Plugin {
 
             this.customerSlider = new Swiper(".customer-pictures", {
                 modules: [Mousewheel, Pagination],
-                slidesPerView: 2.6,
+                slidesPerView: 3.6,
                 spaceBetween: 30,
                 nested: true,
                 mousewheel: {
@@ -338,6 +338,7 @@ export default class ProduktDetail extends Plugin {
             this.descriptionSlider.on('slideChange', () => {
                 if (this.descriptionSlider.activeIndex == 0) {
                     document.querySelector('.pds-slider.desktop').classList.remove('blur');
+                    document.querySelector('body').classList.remove('pdp-desktop-nav-hidden');
 
                     setTimeout(() => {
                         document.querySelector('.pds-slider.desktop').classList.remove('shadow');
@@ -345,6 +346,7 @@ export default class ProduktDetail extends Plugin {
                 }
                 else {
                     document.querySelector('.pds-slider.desktop').classList.add('blur', 'shadow');
+                    document.querySelector('body').classList.add('pdp-desktop-nav-hidden');
                 }
 
                 if (this.descriptionSlider.activeIndex == 0) {

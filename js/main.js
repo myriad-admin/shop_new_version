@@ -3,14 +3,19 @@ import Search from './plugin/navigation/search.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     registerPlugin(ProduktDetail, 'body.product');
-    registerPlugin(Search, '.header-wrapper');
-    console.log('LOADED');
+    registerPlugin(Search, '.nav-bar');
 });
 
 function registerPlugin(pluginClass, selector) {
     const elements = document.querySelectorAll(selector);
 
     elements.forEach((el) => {
-        new pluginClass(el);
+        try {
+            new pluginClass(el);
+        }
+        catch (error) {
+            console.error(`Fehler beim Initialisieren von ${pluginClass.name}`, error);
+        }
+
     });
 }
