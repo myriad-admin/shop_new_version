@@ -324,7 +324,7 @@ body {
                 left: 0;
                 width: 45%;
                 min-width: 13rem;
-                height: calc(100vh - 49px);
+                height: calc(100svh - 49px);
                 background: rgba(0, 0, 0, 0.5019607843);
                 padding: 2rem 1rem;
                 overflow-y: scroll;
@@ -361,7 +361,7 @@ body {
                             color: white;
                         }
 
-                        svg {
+                        .svg-import {
                             height: 1.4rem;
                             width: auto;
                         }
@@ -481,7 +481,7 @@ body {
                     display: flex;
                     column-gap: 0.5rem;
 
-                    svg {
+                    .svg-import {
                         width: 30px;
                         height: 30px;
                     }
@@ -654,7 +654,7 @@ body {
                     min-width: 13rem;
 
                     a {
-                        svg {
+                        .svg-import {
                             position: absolute;
                             top: 0;
                             width: auto;
@@ -710,7 +710,7 @@ body {
                             transition: right 1s;
                             z-index: 100;
 
-                            svg {
+                            .svg-import {
                                 position: absolute;
                                 width: auto;
                                 height: 20px;
@@ -738,7 +738,7 @@ body {
                     display: flex;
                     column-gap: 0.8rem;
 
-                    svg {
+                    .svg-import {
                         width: 28px;
                         height: 28px;
                     }
@@ -829,7 +829,7 @@ body {
             .svg-wrapper {
                 right: 95.3%;
 
-                svg {
+                .svg-import {
                     &:first-of-type {
                         rotate: 180deg;
                         translate: -6px -1px;

@@ -1,12 +1,14 @@
 import Plugin from '../../plugin-system/plugin-class.js';
 
 import Swiper from 'swiper';
-import { Navigation, Mousewheel, Pagination, EffectCards, Scrollbar } from "swiper/modules";
+import { Navigation, Mousewheel, Pagination, EffectCards, Scrollbar, Autoplay, EffectCoverflow } from "swiper/modules";
 
 import 'swiper/css';
 import 'swiper/css/effect-cards';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/effect-coverflow';
+
 
 
 
@@ -37,6 +39,8 @@ export default class ProduktDetail extends Plugin {
         this._manageSizeCalculatorOverlay();
         this._manageSizeCalculating();
         this._manageProductInformation();
+        this._manageMobileProductDescription();
+        this._manageMobileUserRatings();
     }
 
     _initSwipers() {
@@ -119,7 +123,7 @@ export default class ProduktDetail extends Plugin {
 
             this.customerSlider = new Swiper(".customer-pictures", {
                 modules: [Mousewheel, Pagination],
-                slidesPerView: 3.6,
+                slidesPerView: 3.4,
                 spaceBetween: 30,
                 nested: true,
                 mousewheel: {
@@ -127,7 +131,7 @@ export default class ProduktDetail extends Plugin {
                 },
                 touchMoveStopPropagation: true,
                 breakpoints: {
-                    1200: {
+                    1500: {
                         slidesPerView: 3.6
                     }
                 }
@@ -166,6 +170,36 @@ export default class ProduktDetail extends Plugin {
                     }
                 }
 
+            });
+
+
+            this.uspSliderMobile = new Swiper(".usp-slider-mobile", {
+                modules: [Autoplay],
+                centeredSlides: true,
+                loop: true,
+                speed: 1000,
+                slidesPerView: "auto",
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+            });
+
+            this.productImagesMobileDescriptionSlider = new Swiper(".product-images-description-slider-mobile", {
+                modules: [EffectCoverflow],
+                effect: "coverflow",
+                grabCursor: true,
+                centeredSlides: true,
+                slidesPerView: "auto",
+                loop: true,
+                coverflowEffect: {
+                    rotate: -65,
+                    stretch: 22.5,
+                    depth: 300,
+                    modifier: 1,
+                    slideShadows: false,
+                },
+                spaceBetween: 0, // Gap entfernen!,
             });
 
             // this.sizeSelectSwiperDesktop = new Swiper(".size-select-swiper-desktop", {
@@ -254,6 +288,8 @@ export default class ProduktDetail extends Plugin {
                     swiperInstances.forEach(swiper => swiper.slidePrev());
                 });
             });
+
+
 
 
         } catch (error) {
@@ -423,6 +459,13 @@ export default class ProduktDetail extends Plugin {
                 setSocialMediaImagesSwiperWidth()
             })
 
+            //Mobile 100vh Slider Pfeile klickbar machen
+            document.querySelectorAll('.arrow-down-description-mobile').forEach(arrow => {
+                arrow.addEventListener('click', () => {
+                    this.productBoxSwiper.slideNext();
+                })
+            })
+
 
         } catch (error) {
             console.log('Fehler in _swiperBehavior() \n' + error)
@@ -499,7 +542,7 @@ export default class ProduktDetail extends Plugin {
                 const colorMap = {
                     "Gold": "gold",
                     "Silber": "silber",
-                    "Kupfer": "kupfer"
+                    "Bronze": "bronze"
                 };
 
                 let labelColor = colorMap[label.value];
@@ -524,7 +567,7 @@ export default class ProduktDetail extends Plugin {
                         );
 
                         const colorClass = [...this.classList].find(cls =>
-                            cls !== 'color-field' && cls !== 'color-field-active'
+                            cls !== 'color-field' && cls !== 'color-field-active' && cls !== 'animation-button'
                         );
 
                         document.querySelectorAll(`.color-field.${colorClass}`).forEach(colorField => {
@@ -572,9 +615,10 @@ export default class ProduktDetail extends Plugin {
 
 
                     Object.values(productImagesData).forEach(productImageColor => {
-                        console.log(productImageColor);
+                        console.log(productImageColor[index]);
                         let imgElement = document.createElement('img');
                         imgElement.setAttribute('src', productImageColor[index].src);
+                        console.log(productData.title, productImageColor[index].alt);
                         imgElement.setAttribute('alt', `Myriad ${productData.title} ${productImageColor[index].alt}`);
                         imgElement.classList.add(productImageColor[index].alt.toLowerCase());
 
@@ -583,8 +627,6 @@ export default class ProduktDetail extends Plugin {
                         }
                         swiperSlideDiv.appendChild(imgElement);
                     });
-
-
 
                     productImageSwiperWrappers.forEach((productImageSwiperWrapper) => {
                         productImageSwiperWrapper.appendChild(swiperSlideDiv.cloneNode(true));
@@ -1423,8 +1465,51 @@ export default class ProduktDetail extends Plugin {
     }
 
     _manageProductInformation() {
-        let productDescriptionField = document.getElementById('productDescription');
+        let productDescriptionField = document.querySelectorAll('#productDescription, .description-text-mobile');
 
-        productDescriptionField.innerHTML = productData.description;
+        productDescriptionField.forEach(field => {
+            field.innerHTML = productData.description;
+        })
+    }
+
+    _manageMobileProductDescription() {
+        const mobileDescriptionWrapper = document.querySelector('.product-description-mobile');
+        let textArea = mobileDescriptionWrapper.querySelector('.description-text-mobile');
+
+        mobileDescriptionWrapper.addEventListener('click', (e) => {
+            if (e.target.closest('.information-text') && mobileDescriptionWrapper.classList.contains('open')) {
+                mobileDescriptionWrapper.classList.remove('open');
+                textArea.style.removeProperty('height');
+                return;
+            }
+
+            let mobileDescriptionWrapperHeight = mobileDescriptionWrapper.clientHeight;
+            let mobileDescriptionWrapperOpenedHeight = getSpaceBelowElement(mobileDescriptionWrapper) + mobileDescriptionWrapperHeight - 59.4;
+
+            mobileDescriptionWrapper.classList.add('open');
+            textArea.style.height = `${mobileDescriptionWrapperOpenedHeight}px`;
+        })
+
+        function getSpaceBelowElement(el) {
+            const rect = el.getBoundingClientRect();
+            const spaceBelow = window.innerHeight - rect.bottom;
+            return spaceBelow;
+        }
+    }
+
+
+    _manageMobileUserRatings() {
+        let contentWrapperMobile = document.querySelector('.swiper-user-ratings .content-wrapper-mobile');
+        const mobileUserRatings = document.querySelector('.user-ratings-mobile');
+        let textArea = mobileUserRatings.querySelector('.description-text-mobile');
+
+        mobileUserRatings.addEventListener('click', (e) => {
+            if (e.target.closest('.information-text') && contentWrapperMobile.classList.contains('open')) {
+                contentWrapperMobile.classList.remove('open');
+                return;
+            }
+
+            contentWrapperMobile.classList.add('open');
+        })
     }
 }

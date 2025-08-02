@@ -25,7 +25,7 @@
                 // height: 700px;
                 overflow-y: hidden;
 
-                img {
+                #pdsBackgroundImage {
                     width: 100%;
                     height: 666px;
                     object-fit: cover;
@@ -76,7 +76,7 @@
                                 opacity: 0.5;
                             }
 
-                            svg {
+                            .svg-import {
                                 width: 1rem;
                                 height: auto;
                             }
@@ -88,6 +88,7 @@
 
                         .swiper-button-prev {
                             left: 20%;
+                            rotate: 180deg;
                         }
                     }
                 }
@@ -98,6 +99,7 @@
                     // bottom: 0;
                     left: 0;
                     height: 11.25rem;
+                    width: 100%;
                     overflow: unset;
 
                     .swiper-wrapper {
@@ -137,7 +139,7 @@
                                         max-width: 140px;
                                         column-gap: 3%;
 
-                                        svg {
+                                        .svg-import {
                                             width: fit-content;
                                             height: 33px;
                                         }
@@ -230,7 +232,7 @@
 
                                             .size-select-wrapper {
                                                 width: 2.63rem;
-                                                height: 1.7rem;
+                                                height: 1.9rem;
                                                 border: 3px solid #D4AF37;
                                                 border-radius: 10px;
                                                 transition: height 0.5s, translate 0.5s;
@@ -245,7 +247,7 @@
                                                     overflow: unset;
 
                                                     .swiper-wrapper {
-                                                        height: 1.7rem;
+                                                        height: 1.6rem;
 
                                                         .swiper-slide {
                                                             position: relative;
@@ -376,14 +378,15 @@
                                         order: 1;
                                         padding-inline-end: 5px;
                                         height: 40px;
-                                        max-width: 145px;
+                                        max-width: 140px;
                                         column-gap: 3%;
 
                                         .add-to-cart-wrapper {
                                             position: relative;
                                             display: flex;
-                                            width: 100%;
+                                            width: 33.33%;
                                             height: auto;
+                                            flex-shrink: 0;
 
                                             &::after {
                                                 content: "";
@@ -459,6 +462,11 @@
                                                 }
                                             }
 
+                                            svg {
+                                                height: auto;
+                                                width: 100%;
+                                            }
+
                                             &.alreadyInCart {
                                                 #addToCartSvg {
                                                     display: none;
@@ -474,10 +482,12 @@
                                             }
                                         }
 
-                                        svg {
-                                            width: 100%;
-                                            // height: 43px;
+                                        svg,
+                                        .svg-import {
                                             height: auto;
+                                            width: 33.33%;
+                                            flex-shrink: 0;
+
 
                                             &#wishlistButton {
                                                 .fill-in {
@@ -507,7 +517,7 @@
                                     transition: right 800ms ease-out, top 800ms ease-out;
 
 
-                                    svg {
+                                    .svg-import {
                                         width: 100%;
                                         height: auto;
                                         position: absolute;
@@ -528,7 +538,7 @@
 
 
                                     &.size-calculator-active {
-                                        svg {
+                                        .svg-import {
                                             width: 100%;
                                             height: auto;
                                             position: absolute;
@@ -554,7 +564,7 @@
                                     translate: -50%;
                                     z-index: 10;
 
-                                    svg {
+                                    .svg-import {
                                         width: 100%;
                                         height: fit-content;
                                     }
@@ -620,10 +630,11 @@
                                                     height: 100%;
 
                                                     &:first-of-type {
-                                                        svg {
+                                                        .svg-import {
                                                             width: 80%;
                                                             height: auto;
                                                             max-height: 85%;
+                                                            object-fit: contain;
                                                         }
                                                     }
 
@@ -643,7 +654,7 @@
                                                             width: 100%;
                                                             height: auto;
 
-                                                            svg {
+                                                            .svg-import {
                                                                 height: 8rem;
                                                                 width: auto;
                                                                 padding-inline-start: 25px;
@@ -702,7 +713,7 @@
                                                 &.second {
                                                     .number-input {
                                                         .input-wrapper {
-                                                            svg {
+                                                            .svg-import {
                                                                 height: 88.69px;
                                                                 padding-block-start: 40px;
                                                             }
@@ -751,9 +762,505 @@
                                 }
                             }
 
+                            &.description-slide {
+                                height: 100svh !important;
+                                background-color: #292929;
+                                padding: 8% 0;
+
+                                .usp-slider-mobile {
+                                    .point {
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        column-gap: 1rem;
+                                        width: fit-content;
+                                        height: fit-content;
+                                        padding-inline: 1rem;
+
+                                        .icon {
+                                            .svg-import {
+                                                height: 2rem;
+                                                width: auto;
+                                            }
+                                        }
+
+                                        .text {
+                                            text-align: center;
+                                            line-height: 1.2;
+                                            color: white;
+                                            margin: 0;
+                                        }
+
+                                        &:not(:first-child) {
+                                            border-inline-start: 2px solid rgba(255, 255, 255, 0.4);
+                                        }
+                                    }
+                                }
+
+                                .content-wrapper-mobile {
+                                    display: flex;
+                                    flex-direction: column;
+                                    row-gap: 1.6rem;
+                                    padding-inline: 2%;
+                                    padding-block: 1.6rem 4.4rem;
+                                    height: 100%;
+
+                                    .arrow-down-description-mobile {
+                                        position: absolute;
+                                        bottom: 0.3rem;
+                                        left: 50%;
+                                        translate: -50%;
+
+                                        .svg-import {
+                                            width: clamp(50px, 12vw, 80px);
+                                        }
+                                    }
+
+                                    .product-configuration-description-mobile {
+                                        display: flex;
+                                        align-items: center;
+                                        column-gap: 1rem;
+                                        height: calc(60vw - 1rem);
+                                        z-index: 0;
+                                        transition: opacity 1s;
+                                        transition-delay: 1.1s;
+
+                                        .product-image-slider-wrapper {
+                                            position: unset;
+                                            translate: 0;
+                                            width: calc(50% - 2rem / 3);
+                                        }
+
+                                        .product-characteristics {
+                                            display: flex;
+                                            height: 100%;
+                                            flex-direction: column;
+                                            justify-content: space-between;
+                                            width: calc(33% - 2rem / 3);
+
+                                            .options-wrapper {
+                                                flex-direction: column;
+                                                row-gap: 1rem;
+                                                height: 73% !important;
+
+                                                article {
+                                                    height: 50% !important;
+                                                    width: 100% !important;
+                                                }
+                                            }
+
+                                            .klarna-button {
+                                                width: auto;
+                                                height: 20%;
+                                            }
+                                        }
+
+                                        .product-action-buttons {
+                                            display: flex;
+                                            flex-direction: column;
+                                            justify-content: space-between;
+                                            width: calc(17% - 2rem / 3);
+                                            height: 100%;
+
+                                            .action-buttons-mobile-description {
+                                                background-color: #898989;
+                                                border-radius: 41px;
+                                                padding: 5px 3px;
+                                                display: flex;
+                                                justify-content: space-between;
+                                                align-items: center;
+                                                flex-direction: column;
+                                                height: 73%;
+
+                                                .add-to-cart-wrapper {
+                                                    width: auto;
+                                                    height: 31%;
+
+                                                    svg {
+                                                        width: auto;
+                                                        height: 100%;
+
+                                                        &#alreadyInCartSvg {
+                                                            display: none;
+                                                        }
+                                                    }
+                                                }
+
+                                                #wishlistButton,
+                                                #shareButton {
+                                                    width: auto;
+                                                    height: 31%;
+                                                }
+                                            }
+
+                                            #payPalSvg {
+                                                width: auto;
+                                                height: 20%;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
                             &.swiper-product-actions {
-                                height: 48px !important;
-                                background: red;
+                                .content-wrapper-mobile {
+                                    .article-information {
+                                        display: flex;
+                                        justify-content: center;
+                                        column-gap: 0.7rem;
+
+                                        .information-point {
+                                            display: flex;
+                                            flex-direction: column;
+                                            align-items: center;
+                                            row-gap: 0.7rem;
+                                            color: white;
+                                            background-color: #898989;
+                                            border-radius: 30px;
+                                            padding: 0.5rem 0.5rem;
+                                            width: 33.33%;
+                                        }
+
+                                        .image-text-wrapper {
+                                            display: flex;
+                                            flex-direction: column;
+                                            align-items: center;
+
+                                            .svg-wrapper {
+                                                min-height: 48px;
+
+                                                .svg-import {
+                                                    width: 3rem;
+                                                    height: auto;
+                                                }
+                                            }
+
+                                            p {
+                                                margin: 0;
+                                                font-size: 0.7rem;
+                                            }
+                                        }
+
+                                        .description {
+                                            margin: 0;
+                                            text-align: center;
+                                        }
+                                    }
+
+                                    .product-description-mobile {
+                                        // background-color: #8989896b;
+                                        border-radius: 30px;
+                                        height: 35%;
+                                        min-height: 8rem;
+                                        overflow-y: clip;
+                                        // overflow: hidden;
+                                        overflow: visible;
+                                        z-index: 100;
+
+                                        &.open {
+                                            .information-text {
+                                                p {
+                                                    &.opened {
+                                                        display: block;
+                                                    }
+
+                                                    &.closed {
+                                                        display: none;
+                                                    }
+                                                }
+                                            }
+
+                                            .description-text-mobile {
+                                                filter: blur(0px);
+                                                overflow-y: scroll;
+                                            }
+
+                                            &~.product-configuration-description-mobile {
+                                                opacity: 0;
+                                                transition: opacity 400ms;
+                                                transition-delay: unset;
+                                            }
+                                        }
+
+                                        .information-text {
+                                            display: flex;
+                                            align-items: baseline;
+                                            column-gap: 0.5rem;
+                                            color: white;
+                                            width: 100%;
+                                            background-color: #898989;
+                                            padding-block: 0.4rem 0.9rem;
+                                            justify-content: center;
+                                            border-radius: 30px;
+                                            border-block-end: 3.5px solid #EBC343;
+                                            z-index: 200;
+                                            position: relative;
+
+                                            p {
+                                                margin: 0;
+
+                                                &.opened {
+                                                    display: none;
+                                                }
+                                            }
+
+                                            .svg-import {
+                                                height: 1.5rem;
+                                                width: auto;
+                                            }
+                                        }
+
+                                        .description-text-mobile {
+                                            color: white;
+                                            padding-inline: 2%;
+                                            filter: blur(3px);
+                                            transition: filter 1s, height 1s;
+                                            background-color: rgba(137, 137, 137, 0.4196078431);
+                                            border-radius: 30px;
+                                            height: 100%;
+                                            min-height: 8rem;
+                                            overflow: hidden;
+                                            padding-block-start: 51.2px;
+                                            margin-block-start: -51.2px;
+                                        }
+                                    }
+
+
+                                }
+                            }
+
+                            &.swiper-user-ratings {
+                                .content-wrapper-mobile {
+                                    position: relative;
+
+                                    &.open {
+                                        .product-configuration-description-mobile {
+                                            opacity: 0;
+                                            transition-delay: unset;
+                                        }
+
+                                        .user-ratings-mobile {
+                                            top: 1.6rem;
+                                            height: calc(100% - 6rem);
+
+                                            .rating-score-and-pictures {
+                                                opacity: 0;
+                                                transition-delay: unset;
+                                            }
+
+                                            .ratings {
+                                                top: 0rem;
+
+                                                .description-text-mobile {
+                                                    filter: blur(0px) !important;
+                                                    // overflow-y: scroll;
+                                                    background-color: transparent !important;
+                                                }
+                                            }
+                                        }
+
+                                    }
+
+                                    .user-ratings-mobile {
+                                        position: absolute;
+                                        top: calc(60vw + 2rem);
+                                        left: 50%;
+                                        translate: -50%;
+                                        width: 96%;
+                                        overflow: hidden;
+                                        transition: top 1s, height 1s;
+
+                                        display: flex;
+                                        flex-direction: column;
+                                        row-gap: 1rem;
+                                        border-radius: 30px;
+                                        background-color: rgba(137, 137, 137, 0.4196078431);
+                                        padding: 1rem 3px;
+                                        height: calc(100% - (60vw - 1rem) - 7rem);
+
+                                        .rating-score-and-pictures {
+                                            display: flex;
+                                            align-items: center;
+                                            width: 100%;
+                                            height: fit-content;
+                                            column-gap: 3px;
+                                            transition: opacity 1s;
+                                            transition-delay: 1.1s;
+
+                                            .rating-score {
+                                                width: 50%;
+
+                                                .content-wrapper {
+                                                    display: flex;
+                                                    justify-content: flex-end;
+                                                    padding-inline: 0.3rem;
+                                                    background-color: #898989;
+                                                    border-radius: 30px;
+                                                    padding-block: 0.3rem;
+
+                                                    .svg-wrapper {
+                                                        position: relative;
+
+                                                        .svg-import {
+                                                            height: 2.6rem;
+                                                            width: auto;
+                                                            position: absolute;
+                                                            right: 0;
+                                                            top: 50%;
+                                                            translate: 0 -50%;
+                                                        }
+                                                    }
+
+                                                    span {
+                                                        color: white;
+                                                        font-family: 'Kodchasan';
+                                                        font-size: 1.56rem;
+                                                    }
+                                                }
+
+                                                .score-list {
+                                                    width: 100%;
+                                                    padding-inline-end: 2px;
+
+                                                    .score {
+                                                        width: 100%;
+                                                        display: flex;
+                                                        align-items: center;
+                                                        justify-content: flex-end;
+                                                        column-gap: 0.2rem;
+
+                                                        .svg-import {
+                                                            width: 50%;
+                                                        }
+
+                                                        .percent {
+                                                            font-size: 1.3rem;
+                                                            color: white;
+                                                            width: 50px;
+                                                            text-align: right;
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            .pictures {
+                                                background-color: #898989;
+                                                height: 100%;
+                                                border-radius: 30px;
+                                                display: flex;
+                                                align-items: center;
+                                                width: 50%;
+
+                                                .swiper {
+                                                    height: fit-content;
+                                                    width: 95%;
+
+                                                    .swiper-wrapper {
+                                                        width: 100%;
+
+                                                        .swiper-slide {
+                                                            background-position: center;
+                                                            background-size: cover;
+                                                            width: 120px;
+                                                            height: 120px;
+
+                                                            img {
+                                                                display: block;
+                                                                width: 100%;
+                                                                border-radius: 12px;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        .ratings {
+                                            position: absolute;
+                                            top: 52vw;
+                                            transition: top 1s;
+
+                                            .product-description-mobile {
+                                                // background-color: #8989896b;
+                                                border-radius: 30px;
+                                                height: 100%;
+                                                min-height: 7rem;
+                                                overflow-y: clip;
+                                                // overflow: hidden;
+                                                overflow: visible;
+                                                z-index: 100;
+
+                                                &.open {
+                                                    .information-text {
+                                                        p {
+                                                            &.opened {
+                                                                display: block;
+                                                            }
+
+                                                            &.closed {
+                                                                display: none;
+                                                            }
+                                                        }
+                                                    }
+
+                                                    .description-text-mobile {
+                                                        filter: blur(0px);
+                                                        overflow-y: scroll;
+                                                    }
+
+                                                    &~.product-configuration-description-mobile {
+                                                        opacity: 0;
+                                                        transition: opacity 400ms;
+                                                        transition-delay: unset;
+                                                    }
+                                                }
+
+                                                .information-text {
+                                                    display: flex;
+                                                    align-items: baseline;
+                                                    column-gap: 0.5rem;
+                                                    color: white;
+                                                    width: 100%;
+                                                    background-color: #898989;
+                                                    padding-block: 0.4rem 0.9rem;
+                                                    justify-content: center;
+                                                    border-radius: 30px;
+                                                    border-block-end: 3.5px solid #EBC343;
+                                                    z-index: 200;
+                                                    position: relative;
+
+                                                    p {
+                                                        margin: 0;
+
+                                                        &.opened {
+                                                            display: none;
+                                                        }
+                                                    }
+
+                                                    .svg-import {
+                                                        height: 1.5rem;
+                                                        width: auto;
+                                                    }
+                                                }
+
+                                                .description-text-mobile {
+                                                    color: white;
+                                                    padding-inline: 2%;
+                                                    filter: blur(3px);
+                                                    transition: filter 1s, height 1s;
+                                                    background-color: rgba(137, 137, 137, 0.4196078431);
+                                                    border-radius: 30px;
+                                                    height: 100%;
+                                                    min-height: 7rem;
+                                                    overflow: hidden;
+                                                    padding-block-start: 51.2px;
+                                                    margin-block-start: -51.2px;
+                                                    transition: filter 1s, background-color 1s;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
 
                             &.empty-slide {
@@ -817,7 +1324,7 @@
                         height: 43px;
                         z-index: 1000;
 
-                        svg {
+                        .svg-import {
                             width: 75%;
                             height: auto;
                         }
@@ -1174,6 +1681,7 @@
 
                                     }
 
+                                    .svg-import,
                                     svg {
                                         width: 3.3rem;
                                         height: auto;
@@ -1199,7 +1707,7 @@
                                     height: fit-content;
                                     position: relative;
 
-                                    svg {
+                                    .svg-import {
                                         width: 100%;
                                         height: auto;
 
@@ -1225,7 +1733,7 @@
                                     row-gap: 5px;
                                     position: relative;
 
-                                    svg {
+                                    .svg-import {
                                         width: 10rem;
                                         height: auto;
 
@@ -1266,7 +1774,7 @@
                                         align-items: center;
                                         column-gap: 0.3rem;
 
-                                        svg {
+                                        .svg-import {
                                             width: 1.5rem;
                                             height: auto;
                                         }
@@ -1370,7 +1878,16 @@
                         }
 
                         .swiper-slide {
-                            padding: 165px 50px 100px 30px;
+                            // padding: 30px 50px 30px 30px;
+                            padding: 14vh 50px 6vh 30px;
+
+                            @media screen and (min-height: 850px) {
+                                // padding: 165px 50px 100px 30px;
+                            }
+
+
+
+
 
                             display: flex;
                             flex-direction: column;
@@ -1410,6 +1927,12 @@
                                         row-gap: 2rem;
                                         width: 40%;
 
+                                        justify-content: space-around;
+
+                                        @media screen and (min-height: 800px) {
+                                            // justify-content: unset;
+                                        }
+
                                         .product22 {
                                             display: flex;
                                             padding: 1rem;
@@ -1417,6 +1940,8 @@
                                             height: calc(33.33% - 1rem);
                                             box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 29px 30px;
                                             border-radius: 27px;
+
+                                            min-height: 11rem;
 
                                             .product-images {
                                                 width: 40%;
@@ -1443,9 +1968,21 @@
 
                                                     .swiper-button-next,
                                                     .swiper-button-prev {
+                                                        width: 27px;
+                                                        height: 44px;
+
+                                                        img {
+                                                            height: 100%;
+                                                            width: auto;
+                                                        }
+
                                                         &::after {
                                                             display: none;
                                                         }
+                                                    }
+
+                                                    .swiper-button-prev img {
+                                                        rotate: 180deg;
                                                     }
                                                 }
 
@@ -1463,113 +2000,11 @@
                                                     display: flex;
                                                     column-gap: 0.85rem;
 
-                                                    svg {
+                                                    .svg-import {
                                                         width: auto;
                                                         height: 3rem;
                                                     }
                                                 }
-
-                                                .article-settings {
-                                                    display: flex;
-                                                    column-gap: 1rem;
-                                                    display: none;
-
-                                                    .size-select {
-                                                        display: flex;
-                                                        justify-content: center;
-                                                        align-items: center;
-                                                        background: #00000080;
-                                                        height: 5rem;
-                                                        max-width: 8rem;
-                                                        width: 6rem;
-                                                        border-radius: 10px;
-                                                        overflow: hidden;
-                                                        cursor: pointer;
-                                                        position: relative;
-
-                                                        .ring {
-                                                            height: 80%;
-                                                            width: auto;
-                                                        }
-
-                                                        .size-background {
-                                                            background: #D4AF37;
-                                                            width: 2rem;
-                                                            height: 4rem;
-                                                            position: absolute;
-                                                            rotate: -45deg;
-                                                            top: -20px;
-                                                            right: -10px;
-                                                        }
-
-                                                        .size {
-                                                            position: absolute;
-                                                            top: 4px;
-                                                            right: 3px;
-                                                            color: black;
-                                                            font-weight: 900;
-                                                            font-size: 17px;
-                                                        }
-                                                    }
-
-                                                    .color-select {
-                                                        display: flex;
-                                                        justify-content: center;
-                                                        align-items: center;
-                                                        background: #00000080;
-                                                        height: 5rem;
-                                                        max-width: 8rem;
-                                                        width: 6rem;
-                                                        border-radius: 10px;
-                                                        overflow: hidden;
-                                                        cursor: pointer;
-                                                        position: relative;
-                                                        position: relative;
-
-                                                        .not-selected {
-                                                            display: none;
-
-                                                            .material-icon {
-                                                                height: 38%;
-                                                                width: auto;
-                                                            }
-
-                                                            .color-background {
-                                                                background: #D4AF37;
-                                                                width: 2rem;
-                                                                height: 4rem;
-                                                                position: absolute;
-                                                                rotate: -45deg;
-                                                                top: -20px;
-                                                                right: -10px;
-                                                            }
-
-                                                            .colors {
-                                                                position: absolute;
-                                                                top: 3px;
-                                                                right: 3px;
-                                                                color: black;
-                                                                font-weight: 900;
-
-                                                                .color-field {
-                                                                    width: 17px;
-                                                                    height: 17px;
-                                                                    border-radius: 50%;
-                                                                    border: 1px solid black;
-                                                                }
-
-                                                                svg {
-                                                                    width: 17px;
-                                                                    height: auto;
-                                                                }
-                                                            }
-                                                        }
-
-                                                        .selected {}
-                                                    }
-                                                }
-
-
                                             }
                                         }
 
@@ -1579,9 +2014,12 @@
                                             row-gap: 1rem;
                                             padding: 1rem;
                                             width: 100%;
-                                            height: calc(66.66% - 1rem);
+                                            // height: calc(66.66% - 1rem);
                                             box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 29px 30px;
                                             border-radius: 27px;
+
+                                            height: -webkit-fill-available;
+                                            justify-content: space-evenly;
 
                                             .rating-info {
                                                 display: flex;
@@ -1591,11 +2029,11 @@
                                                 column-gap: 1rem;
 
                                                 .stars {
-                                                    width: 50%;
+                                                    width: 45%;
                                                     height: fit-content;
                                                     position: relative;
 
-                                                    svg {
+                                                    .svg-import {
                                                         width: 100%;
                                                         height: auto;
 
@@ -1618,14 +2056,18 @@
                                                     justify-content: center;
                                                     row-gap: 0.3rem;
                                                     color: white;
-                                                    width: 50%;
+                                                    width: 55%;
                                                     font-family: "Kodchasan";
 
                                                     p {
                                                         margin: 0;
 
                                                         &.rating-score {
-                                                            font-size: 1.5rem;
+                                                            font-size: 1.6rem;
+
+                                                            @media screen and (min-width: 1500px) {
+                                                                font-size: 1.7rem;
+                                                            }
                                                         }
                                                     }
 
@@ -1640,7 +2082,9 @@
                                             }
 
                                             .rating-images {
-                                                height: 100%;
+                                                height: fit-content;
+
+                                                // height: 100%;
                                                 display: flex;
                                                 align-items: center;
 
@@ -1687,7 +2131,7 @@
                                     height: fit-content;
 
                                     .icon {
-                                        svg {
+                                        .svg-import {
                                             height: 2rem;
                                             width: auto;
                                         }
@@ -1731,7 +2175,7 @@
                                                 margin-inline: auto;
                                                 column-gap: 1rem;
                                                 border-block-end: 2px solid #b3b3b3;
-                                                padding-block: 1rem;
+                                                padding: 1rem;
 
                                                 .stars-score-wrapper {
                                                     display: flex;
@@ -1741,13 +2185,14 @@
                                                     column-gap: 1rem;
 
                                                     .stars {
-                                                        width: auto;
-                                                        height: 5rem;
+                                                        width: 30%;
+                                                        height: fit-content;
+                                                        min-width: 11rem;
                                                         position: relative;
 
-                                                        svg {
-                                                            width: auto;
-                                                            height: 100%;
+                                                        .svg-import {
+                                                            width: 100%;
+                                                            height: auto;
 
 
                                                             &#golden-svg {
@@ -1791,7 +2236,7 @@
                                                         align-items: center;
                                                         column-gap: 1rem;
 
-                                                        svg {
+                                                        .svg-import {
                                                             width: auto;
                                                             height: 1.6rem;
                                                         }
@@ -1807,18 +2252,69 @@
                                             }
 
                                             .customer-rating-wrapper {
-
-
                                                 .customer-rating {
                                                     display: flex;
                                                     column-gap: 1rem;
+                                                    min-height: 200px;
 
-                                                    .customer-text {
+                                                    .customer-rating-wrapper {
+                                                        position: relative;
                                                         display: flex;
-                                                        align-items: center;
-                                                        width: 70%;
+                                                        flex-direction: column;
                                                         padding: 1rem;
-                                                        border-block-end: 2px solid #b3b3b3;
+                                                        // border-block-end: 2px solid #b3b3b3;
+                                                        width: 70%;
+
+                                                        &::after {
+                                                            position: absolute;
+                                                            bottom: 0;
+                                                            content: "";
+                                                            background-color: #b3b3b3;
+                                                            height: 2px;
+                                                            width: calc(100% - 2rem);
+                                                        }
+
+                                                        .customer-data {
+                                                            display: flex;
+
+                                                            justify-content: space-between;
+
+                                                            .customer-info {
+                                                                display: flex;
+                                                                align-items: center;
+                                                                font-family: "Kodchasan", sans-serif;
+                                                                column-gap: 0.2rem;
+                                                                color: #ffffffab;
+
+                                                                .name {
+                                                                    display: flex;
+                                                                    align-items: center;
+
+                                                                    .customer-name {}
+
+                                                                    .verified {
+                                                                        height: 1rem;
+                                                                        width: auto;
+                                                                    }
+                                                                }
+                                                            }
+
+                                                            .customer-rating-stars {
+                                                                height: 1.5rem;
+                                                                width: auto;
+                                                            }
+                                                        }
+
+                                                        .customer-text {
+                                                            display: flex;
+                                                            flex-direction: column;
+
+                                                            .headline {
+                                                                font-weight: 600;
+                                                            }
+
+
+                                                        }
                                                     }
 
                                                     .customer-images {
@@ -1858,7 +2354,7 @@
                                                                 position: absolute;
                                                                 top: 50%;
 
-                                                                svg {
+                                                                .svg-import {
                                                                     width: 1rem;
                                                                     height: auto;
                                                                 }
@@ -1874,6 +2370,7 @@
 
                                                             .customer-rating-image-slider-button-prev {
                                                                 left: 0;
+                                                                rotate: 180deg;
                                                             }
 
                                                             @media screen and (min-width: 1440px) {
@@ -1888,22 +2385,20 @@
 
                                                             @media screen and (min-width: 1750px) {
                                                                 .customer-rating-image-slider-button-next {
-                                                                    right: 15%;
+                                                                    right: 10%;
                                                                 }
 
                                                                 .customer-rating-image-slider-button-prev {
-                                                                    left: 15%;
+                                                                    left: 10%;
                                                                 }
                                                             }
                                                         }
 
 
                                                         img {
-                                                            width: fit-content;
-                                                            height: 80%;
-                                                            object-fit: cover;
-                                                            max-height: 7rem;
-                                                            user-select: none;
+                                                            width: 60%;
+                                                            height: auto;
+                                                            max-height: 80%;
                                                         }
 
                                                         &::after {
@@ -2069,206 +2564,60 @@
             }
         }
     }
+}
 
-    // Styling für Size-Select und Color Select für Desktop. Beide Sektionen PDS und PDS 1ter Slide
-    .options-wrapper {
+// Styling für Size-Select und Color Select für Desktop. Beide Sektionen PDS und PDS 1ter Slide
+.options-wrapper {
+    display: flex;
+    column-gap: 1rem;
+    height: 5rem;
+
+    article {
         display: flex;
-        column-gap: 1rem;
-        height: 5rem;
+        justify-content: center;
+        align-items: center;
+        background: #00000080;
+        height: 100%;
+        max-width: 8rem;
+        width: 6.6295rem;
+        border-radius: 10px;
+        overflow: hidden;
 
-        article {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #00000080;
-            height: 100%;
-            max-width: 8rem;
-            width: 6.6295rem;
-            border-radius: 10px;
-            overflow: hidden;
+        &.size-select {
+            position: relative;
 
-            &.size-select {
-                position: relative;
-
-                .arrow-svg {
-                    height: 21px;
-                    width: auto;
-                    position: absolute;
-                    right: 12px;
-                    transition: translate 0.9s, transform 0.9s, rotate 0.9s;
-                    translate: 0;
-                    rotate: 0deg;
-                    cursor: pointer;
-                    z-index: 100;
-                }
-
-                .arrow-svg,
-                .ring {
-                    translate: -6px;
-                }
-
-                .not-selected {
-                    position: absolute;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 100%;
-                    height: 100%;
-                    translate: 0;
-                    transition: translate 1s;
-                    overflow: hidden;
-                    border-radius: 10px;
-                    cursor: pointer;
-                    z-index: 100;
-
-                    .size-background {
-                        background: #D4AF37;
-                        width: 2rem;
-                        height: 4rem;
-                        position: absolute;
-                        rotate: -45deg;
-                        top: -20px;
-                        right: -10px;
-                    }
-
-                    .size {
-                        position: absolute;
-                        top: 4px;
-                        right: 3px;
-                        color: black;
-                        font-weight: 900;
-                        font-size: 16px;
-                    }
-
-                    .ring {
-                        height: 80%;
-                        width: auto;
-                    }
-                }
-
-                .selected {
-                    position: relative;
-                    width: 100%;
-                    height: 100%;
-                    display: flex;
-                    justify-content: center;
-                    translate: 100%;
-                    transition: translate 1s;
-                    overflow: hidden;
-
-                    #minus-svg-desktop {
-                        position: absolute;
-                        top: 4px;
-                        left: 13px;
-                        height: 23px;
-                        width: auto;
-                        padding: 3px;
-                        cursor: pointer;
-                    }
-
-                    #plus-svg-desktop {
-                        position: absolute;
-                        top: 4px;
-                        right: 13px;
-                        height: 23px;
-                        width: auto;
-                        padding: 3px;
-                        cursor: pointer;
-                    }
-
-                    #ring-svg-desktop {
-                        position: absolute;
-                        width: 80%;
-                        height: auto;
-                        bottom: 0;
-                    }
-
-                    .size-select-swiper-desktop {
-                        position: absolute;
-                        top: 38%;
-                        left: 40%;
-                        width: 100%;
-                        color: #D4AF37;
-                        font-weight: 600;
-                        overflow: visible;
-
-                        .swiper-wrapper {
-                            .swiper-slide {
-                                display: flex;
-                                flex-direction: row !important;
-                                justify-content: center;
-                                text-align: center;
-                                transition: translate 0.33s, rotate 0.33s, font-size 0.25s, color 0.33s;
-                                font-family: 'Kodchasan';
-                                font-size: 0.86rem !important;
-                                user-select: none;
-                                height: fit-content !important;
-                                padding: 0 !important;
-
-                                &.slide-above {
-                                    translate: 53% 378%;
-                                    rotate: -72deg;
-                                }
-
-                                &.slide-below {
-                                    translate: -53% 378%;
-                                    rotate: 72deg;
-                                }
-
-
-                                &.swiper-slide-prev {
-                                    translate: -28% 118%;
-                                    rotate: -29deg;
-
-                                    &-prev {
-                                        translate: -6% 222%;
-                                        rotate: -51deg;
-                                    }
-                                }
-
-                                &.swiper-slide-active {
-                                    translate: 0;
-                                    rotate: 0deg;
-                                    font-size: 1.15rem !important;
-                                    color: black;
-                                }
-
-                                &.swiper-slide-next {
-                                    translate: 28% 118%;
-                                    rotate: 29deg;
-
-                                    &+.swiper-slide {
-                                        translate: 6% 222%;
-                                        rotate: 51deg;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                &.open {
-                    .arrow-svg {
-                        translate: -78px;
-                        rotate: -180deg;
-                        // transform: scaleX(-1);
-                    }
-
-                    .not-selected {
-                        // opacity: 0;
-                        translate: -100%;
-                    }
-
-                    .selected {
-                        translate: 0;
-                    }
-                }
+            .arrow-svg {
+                height: 21px;
+                width: auto;
+                position: absolute;
+                right: 12px;
+                transition: translate 0.9s, transform 0.9s, rotate 0.9s;
+                translate: 0;
+                rotate: 0deg;
+                cursor: pointer;
+                z-index: 100;
             }
 
-            &.color-select {
-                position: relative;
+            .arrow-svg,
+            .ring {
+                translate: -6px;
+            }
 
-                .color-background {
+            .not-selected {
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                translate: 0;
+                transition: translate 1s;
+                overflow: hidden;
+                border-radius: 10px;
+                cursor: pointer;
+                z-index: 100;
+
+                .size-background {
                     background: #D4AF37;
                     width: 2rem;
                     height: 4rem;
@@ -2276,222 +2625,368 @@
                     rotate: -45deg;
                     top: -20px;
                     right: -10px;
-                    z-index: 100;
                 }
 
-                .arrow-svg {
-                    height: 21px;
-                    width: auto;
+                .size {
                     position: absolute;
-                    right: 12px;
-                    transition: translate 0.9s, transform 0.9s, rotate 0.9s;
-                    translate: 0;
-                    rotate: 0;
-                    cursor: pointer;
-                    z-index: 100;
-                }
-
-                .arrow-svg,
-                .material-icon {
-                    translate: -6px;
-                }
-
-                .colors {
-                    position: absolute;
-                    top: 3px;
+                    top: 4px;
                     right: 3px;
                     color: black;
                     font-weight: 900;
-                    z-index: 100;
+                    font-size: 16px;
+                }
 
-                    .color-field {
-                        width: 17px;
-                        height: 17px;
-                        border-radius: 50%;
-                        border: 1px solid black;
-                    }
+                .ring {
+                    height: 80%;
+                    width: auto;
+                }
+            }
 
-                    svg {
-                        width: 17px;
-                        height: auto;
+            .selected {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                translate: 100%;
+                transition: translate 1s;
+                overflow: hidden;
+
+                #minus-svg-desktop {
+                    position: absolute;
+                    top: 4px;
+                    left: 13px;
+                    height: 23px;
+                    width: auto;
+                    padding: 3px;
+                    cursor: pointer;
+                }
+
+                #plus-svg-desktop {
+                    position: absolute;
+                    top: 4px;
+                    right: 13px;
+                    height: 23px;
+                    width: auto;
+                    padding: 3px;
+                    cursor: pointer;
+                }
+
+                #ring-svg-desktop {
+                    position: absolute;
+                    width: 80%;
+                    height: auto;
+                    bottom: 0;
+                }
+
+                .size-select-swiper-desktop {
+                    position: absolute;
+                    top: 38%;
+                    left: 40%;
+                    width: 100%;
+                    color: #D4AF37;
+                    font-weight: 600;
+                    overflow: visible;
+
+                    .swiper-wrapper {
+                        .swiper-slide {
+                            display: flex;
+                            flex-direction: row !important;
+                            justify-content: center;
+                            text-align: center;
+                            transition: translate 0.33s, rotate 0.33s, font-size 0.25s, color 0.33s;
+                            font-family: 'Kodchasan';
+                            font-size: 0.86rem !important;
+                            user-select: none;
+                            height: fit-content !important;
+                            padding: 0 !important;
+
+                            &.slide-above {
+                                translate: 53% 378%;
+                                rotate: -72deg;
+                            }
+
+                            &.slide-below {
+                                translate: -53% 378%;
+                                rotate: 72deg;
+                            }
+
+
+                            &.swiper-slide-prev {
+                                translate: -28% 118%;
+                                rotate: -29deg;
+
+                                &-prev {
+                                    translate: -6% 222%;
+                                    rotate: -51deg;
+                                }
+                            }
+
+                            &.swiper-slide-active {
+                                translate: 0;
+                                rotate: 0deg;
+                                font-size: 1.15rem !important;
+                                color: black;
+                            }
+
+                            &.swiper-slide-next {
+                                translate: 28% 118%;
+                                rotate: 29deg;
+
+                                &+.swiper-slide {
+                                    translate: 6% 222%;
+                                    rotate: 51deg;
+                                }
+                            }
+                        }
                     }
+                }
+            }
+
+            &.open {
+                .arrow-svg {
+                    translate: -78px;
+                    rotate: -180deg;
+                    // transform: scaleX(-1);
                 }
 
                 .not-selected {
-                    position: absolute;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 100%;
-                    height: 100%;
-                    // opacity: 1;
-                    translate: 0;
-                    transition: translate 1s;
-                    overflow: hidden;
-                    border-radius: 10px;
-                    cursor: pointer;
-
-                    .material-icon {
-                        height: 38%;
-                        width: auto;
-                    }
+                    // opacity: 0;
+                    translate: -100%;
                 }
 
                 .selected {
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    overflow: hidden;
-                    translate: 100%;
-                    transition: translate 1s;
+                    translate: 0;
+                }
+            }
+        }
 
+        &.color-select {
+            position: relative;
+
+            .color-background {
+                background: #D4AF37;
+                width: 2rem;
+                height: 4rem;
+                position: absolute;
+                rotate: -45deg;
+                top: -20px;
+                right: -10px;
+                z-index: 100;
+            }
+
+            .arrow-svg {
+                height: 21px;
+                width: auto;
+                position: absolute;
+                right: 12px;
+                transition: translate 0.9s, transform 0.9s, rotate 0.9s;
+                translate: 0;
+                rotate: 0;
+                cursor: pointer;
+                z-index: 100;
+            }
+
+            .arrow-svg,
+            .material-icon {
+                translate: -6px;
+            }
+
+            .colors {
+                position: absolute;
+                top: 3px;
+                right: 3px;
+                color: black;
+                font-weight: 900;
+                z-index: 100;
+
+                .color-field {
+                    width: 17px;
+                    height: 17px;
+                    border-radius: 50%;
+                    border: 1px solid black;
+                }
+
+                svg {
+                    width: 17px;
+                    height: auto;
+                }
+            }
+
+            .not-selected {
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                // opacity: 1;
+                translate: 0;
+                transition: translate 1s;
+                overflow: hidden;
+                border-radius: 10px;
+                cursor: pointer;
+
+                .material-icon {
+                    height: 38%;
+                    width: auto;
+                }
+            }
+
+            .selected {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                translate: 100%;
+                transition: translate 1s;
+
+                .color-field {
+                    width: 33px;
+                    height: 33px;
+                    border-radius: 50%;
+                    border: 2px solid black;
+                    align-self: center;
+                    cursor: pointer;
+                    transform: translate(7px);
+                }
+
+                &.one {
                     .color-field {
-                        width: 33px;
-                        height: 33px;
-                        border-radius: 50%;
-                        border: 2px solid black;
-                        align-self: center;
-                        cursor: pointer;
-                        transform: translate(7px);
-                    }
+                        position: absolute;
+                        width: 27px;
+                        height: 27px;
 
-                    &.one {
-                        .color-field {
-                            position: absolute;
-                            width: 27px;
-                            height: 27px;
-
-                            &:first-child {
-                                left: 50%;
-                                top: 50%;
-                                translate: -50% -50%;
-                            }
-                        }
-                    }
-
-                    &.two {
-                        .color-field {
-                            position: absolute;
-                            width: 27px;
-                            height: 27px;
-
-                            &:first-child {
-                                left: 50%;
-                                top: 15%;
-                                translate: -100%;
-                            }
-
-                            &:last-child {
-                                right: 20%;
-                                bottom: 15%;
-                                translate: -30%;
-                            }
-                        }
-                    }
-
-                    &.three {
-                        .color-field {
-                            position: absolute;
-                            width: 27px;
-                            height: 27px;
-
-                            &:first-child {
-                                left: 50%;
-                                top: 15%;
-                                translate: -50%;
-                            }
-
-                            &:nth-child(2) {
-                                left: 20%;
-                                bottom: 15%;
-                            }
-
-                            &:last-child {
-                                right: 20%;
-                                bottom: 15%;
-                            }
-                        }
-                    }
-
-                    &.four {
-                        .color-field {
-                            position: absolute;
-                            width: 27px;
-                            height: 27px;
-
-                            &:first-child {
-                                left: 20%;
-                                top: 15%;
-                            }
-
-                            &:nth-child(2) {
-                                right: 26%;
-                                top: 15%;
-                            }
-
-                            &:nth-child(3) {
-                                left: 20%;
-                                bottom: 15%;
-                            }
-
-                            &:last-child {
-                                right: 26%;
-                                bottom: 15%;
-                            }
-                        }
-                    }
-
-                    &.five {
-                        .color-field {
-                            position: absolute;
-                            width: 25px;
-                            height: 25px;
-
-                            &:first-child {
-                                left: 50%;
-                                top: 5%;
-                                translate: -50%;
-                            }
-
-                            &:nth-child(2) {
-                                right: 14%;
-                                top: 29%;
-                            }
-
-                            &:nth-child(3) {
-                                top: 29%;
-                                left: 14%;
-                            }
-
-                            &:nth-child(4) {
-                                left: 24%;
-                                bottom: 5%;
-                            }
-
-                            &:last-child {
-                                right: 24%;
-                                bottom: 5%;
-                            }
+                        &:first-child {
+                            left: 50%;
+                            top: 50%;
+                            translate: -50% -50%;
                         }
                     }
                 }
 
-                &.open {
-                    .arrow-svg {
-                        translate: -78px;
-                        rotate: -180deg;
-                        // transform: scaleX(-1);
-                    }
+                &.two {
+                    .color-field {
+                        position: absolute;
+                        width: 27px;
+                        height: 27px;
 
-                    .not-selected {
-                        // opacity: 0;
-                        translate: -100%;
-                    }
+                        &:first-child {
+                            left: 50%;
+                            top: 15%;
+                            translate: -100%;
+                        }
 
-                    .selected {
-                        // opacity: 1;
-                        translate: 0;
+                        &:last-child {
+                            right: 20%;
+                            bottom: 15%;
+                            translate: -30%;
+                        }
                     }
+                }
+
+                &.three {
+                    .color-field {
+                        position: absolute;
+                        width: 27px;
+                        height: 27px;
+
+                        &:first-child {
+                            left: 50%;
+                            top: 15%;
+                            translate: -50%;
+                        }
+
+                        &:nth-child(2) {
+                            left: 20%;
+                            bottom: 15%;
+                        }
+
+                        &:last-child {
+                            right: 20%;
+                            bottom: 15%;
+                        }
+                    }
+                }
+
+                &.four {
+                    .color-field {
+                        position: absolute;
+                        width: 27px;
+                        height: 27px;
+
+                        &:first-child {
+                            left: 20%;
+                            top: 15%;
+                        }
+
+                        &:nth-child(2) {
+                            right: 26%;
+                            top: 15%;
+                        }
+
+                        &:nth-child(3) {
+                            left: 20%;
+                            bottom: 15%;
+                        }
+
+                        &:last-child {
+                            right: 26%;
+                            bottom: 15%;
+                        }
+                    }
+                }
+
+                &.five {
+                    .color-field {
+                        position: absolute;
+                        width: 25px;
+                        height: 25px;
+
+                        &:first-child {
+                            left: 50%;
+                            top: 5%;
+                            translate: -50%;
+                        }
+
+                        &:nth-child(2) {
+                            right: 14%;
+                            top: 29%;
+                        }
+
+                        &:nth-child(3) {
+                            top: 29%;
+                            left: 14%;
+                        }
+
+                        &:nth-child(4) {
+                            left: 24%;
+                            bottom: 5%;
+                        }
+
+                        &:last-child {
+                            right: 24%;
+                            bottom: 5%;
+                        }
+                    }
+                }
+            }
+
+            &.open {
+                .arrow-svg {
+                    translate: -78px;
+                    rotate: -180deg;
+                    // transform: scaleX(-1);
+                }
+
+                .not-selected {
+                    // opacity: 0;
+                    translate: -100%;
+                }
+
+                .selected {
+                    // opacity: 1;
+                    translate: 0;
                 }
             }
         }

@@ -1,0 +1,228 @@
+.html,
+body {
+    margin: 0;
+}
+
+@font-face {
+    font-family: 'Modern No. 20';
+    font-style: normal;
+    font-weight: normal;
+    src: url('https://cdn.shopify.com/s/files/1/0957/3675/8597/files/MOD20.woff?v=1754153429') format('woff');
+}
+
+
+.homepage-slider {
+    width: 100%;
+    height: 100svh;
+
+    .swiper-wrapper {
+        height: 100%;
+
+        .swiper-slide {
+            height: 100%;
+
+            &.teaser-video-wrapper {
+                position: relative;
+                width: 100%;
+                height: 100%;
+
+                .teaser-video {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+                .overlay {
+                    position: absolute;
+                    top: 0;
+                    height: 0;
+                    width: 100%;
+                    height: 100vh;
+                    background: linear-gradient(to top, #00000099, rgba(0, 0, 0, 0));
+                }
+
+                .logo-image {
+                    position: absolute;
+                    top: 50vh;
+                    left: 50%;
+                    translate: -50% -50%;
+                    width: 85vw;
+                    height: auto;
+
+                    @media screen and (min-width: 768px) {
+                        width: 65vw;
+                    }
+                }
+
+
+                .text-wrapper {
+                    position: sticky;
+                    top: 100vh;
+                    translate: 0 50vh;
+                    transform: translateY(50%);
+                    font-family: var(--font-paragraph--family);
+                    text-align: center;
+                    color: white;
+                    // font-family: system-ui;
+
+                    .first-text {
+                        font-size: 2rem;
+                    }
+
+                    .second-text {
+                        font-size: 1.6rem;
+                    }
+                }
+            }
+
+            &.summer-collection {
+                .video {
+                    object-position: -3rem;
+                }
+            }
+
+            &.collection-slide {
+                position: relative;
+                width: 100%;
+                height: 100%;
+
+                .video {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+                .collection-text {
+                    position: absolute;
+                    top: calc(100% - 2% - 207px * 2);
+                    translate: 0 -50%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    row-gap: 1.4rem;
+                    width: 100%;
+
+                    p {
+                        color: white;
+                        background: rgba(255, 255, 255, 0.24);
+                        backdrop-filter: blur(6px);
+                        border-radius: 40px;
+                        font-family: 'Modern No. 20';
+                        text-shadow: 0.9px 0.6px 1.8px rgba(0, 0, 0, 0.9);
+                        margin: 0;
+                        border: 1px solid rgba(255, 255, 255, 0.28)
+                    }
+
+                    .headline {
+                        font-size: 3rem;
+                        padding: 0.15rem 1.7rem;
+                    }
+
+                    .subheadline {
+                        padding: 0.2rem 1rem;
+                    }
+                }
+
+                .product-slider {
+                    position: absolute;
+                    bottom: 2%;
+                    left: 2%;
+                    width: 100%;
+
+                    .swiper-wrapper {
+                        .swiper-slide {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            width: fit-content;
+                            color: white;
+                            background: rgba(255, 255, 255, 0.24);
+                            backdrop-filter: blur(6px);
+                            /* border-radius: 40px; */
+                            font-family: "Modern No. 20";
+                            margin: 0;
+                            border: 1px solid rgba(255, 255, 255, 0.28);
+                            padding: 0.6rem 0.35rem;
+                            border-radius: 15px;
+
+                            .product-name {
+                                display: flex;
+                                flex-direction: column;
+                                text-align: center;
+
+                                span {
+                                    border-radius: 40px;
+                                    font-family: "Modern No. 20";
+                                    text-shadow: 0.9px 0.6px 1.8px rgba(0, 0, 0, 0.9);
+                                    margin: 0;
+                                }
+                            }
+
+                            .product-images {
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                height: 8rem;
+                                width: 8rem;
+
+                                img {
+                                    width: 100%;
+                                    height: auto;
+                                }
+                            }
+
+                            .product-price {
+                                border-radius: 40px;
+                                font-family: "Modern No. 20";
+                                text-shadow: 0.9px 0.6px 1.8px rgba(0, 0, 0, 0.9);
+                                margin: 0;
+                                font-size: 1.4rem;
+                            }
+
+
+
+                            .colors {
+                                display: flex;
+                                column-gap: 0.3rem;
+                                padding-block: 0.5rem;
+
+                                .color-button {
+
+                                    width: 1rem;
+                                    height: 1rem;
+                                    border-radius: 50%;
+
+                                    &.gold {
+                                        background-color: gold;
+                                    }
+
+                                    &.silber {
+                                        background-color: silver;
+                                    }
+
+                                    &.bronze {
+                                        background-color: burlywood;
+                                    }
+
+                                    &.yellow {
+                                        background-color: yellow;
+                                    }
+                                }
+                            }
+
+                            .buy-button {
+                                background-color: black;
+                                padding: 0.11rem 0.6rem;
+                                border-radius: 20px;
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}

@@ -1,0 +1,189 @@
+.html,
+body {
+  margin: 0;
+}
+
+@font-face {
+  font-family: "Modern No. 20";
+  font-style: normal;
+  font-weight: normal;
+  src: url("https://cdn.shopify.com/s/files/1/0957/3675/8597/files/MOD20.woff?v=1754153429") format("woff");
+}
+.homepage-slider {
+  width: 100%;
+  height: 100svh;
+}
+.homepage-slider .swiper-wrapper {
+  height: 100%;
+}
+.homepage-slider .swiper-wrapper .swiper-slide {
+  height: 100%;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.teaser-video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.teaser-video-wrapper .teaser-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.teaser-video-wrapper .overlay {
+  position: absolute;
+  top: 0;
+  height: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+}
+.homepage-slider .swiper-wrapper .swiper-slide.teaser-video-wrapper .logo-image {
+  position: absolute;
+  top: 50vh;
+  left: 50%;
+  translate: -50% -50%;
+  width: 85vw;
+  height: auto;
+}
+@media screen and (min-width: 768px) {
+  .homepage-slider .swiper-wrapper .swiper-slide.teaser-video-wrapper .logo-image {
+    width: 65vw;
+  }
+}
+.homepage-slider .swiper-wrapper .swiper-slide.teaser-video-wrapper .text-wrapper {
+  position: sticky;
+  top: 100vh;
+  translate: 0 50vh;
+  transform: translateY(50%);
+  font-family: var(--font-paragraph--family);
+  text-align: center;
+  color: white;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.teaser-video-wrapper .text-wrapper .first-text {
+  font-size: 2rem;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.teaser-video-wrapper .text-wrapper .second-text {
+  font-size: 1.6rem;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.summer-collection .video {
+  object-position: -3rem;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .collection-text {
+  position: absolute;
+  top: calc(98% - 414px);
+  translate: 0 -50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1.4rem;
+  width: 100%;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .collection-text p {
+  color: white;
+  background: rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(6px);
+  border-radius: 40px;
+  font-family: "Modern No. 20";
+  text-shadow: 0.9px 0.6px 1.8px rgba(0, 0, 0, 0.9);
+  margin: 0;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .collection-text .headline {
+  font-size: 3rem;
+  padding: 0.15rem 1.7rem;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .collection-text .subheadline {
+  padding: 0.2rem 1rem;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider {
+  position: absolute;
+  bottom: 2%;
+  left: 2%;
+  width: 100%;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  color: white;
+  background: rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(6px);
+  /* border-radius: 40px; */
+  font-family: "Modern No. 20";
+  margin: 0;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  padding: 0.6rem 0.35rem;
+  border-radius: 15px;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .product-name {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .product-name span {
+  border-radius: 40px;
+  font-family: "Modern No. 20";
+  text-shadow: 0.9px 0.6px 1.8px rgba(0, 0, 0, 0.9);
+  margin: 0;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .product-images {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 8rem;
+  width: 8rem;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .product-images img {
+  width: 100%;
+  height: auto;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .product-price {
+  border-radius: 40px;
+  font-family: "Modern No. 20";
+  text-shadow: 0.9px 0.6px 1.8px rgba(0, 0, 0, 0.9);
+  margin: 0;
+  font-size: 1.4rem;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .colors {
+  display: flex;
+  column-gap: 0.3rem;
+  padding-block: 0.5rem;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .colors .color-button {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .colors .color-button.gold {
+  background-color: gold;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .colors .color-button.silber {
+  background-color: silver;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .colors .color-button.bronze {
+  background-color: burlywood;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .colors .color-button.yellow {
+  background-color: yellow;
+}
+.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .buy-button {
+  background-color: black;
+  padding: 0.11rem 0.6rem;
+  border-radius: 20px;
+}
+
+/*# sourceMappingURL=startseite_new.css.map */
