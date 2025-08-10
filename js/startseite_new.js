@@ -78,6 +78,66 @@ document.addEventListener('DOMContentLoaded', () => {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
         },
-        slidesPerView: 'auto'
+        slidesPerView: 'auto',
+        spaceBetween: 18.4,
+
+        freeMode: true,
+        freeModeSticky: false,
+        freeModeMomentum: false,
+        touchRatio: 1,
+
+        speed: 0, // sofortiges Stoppen
+    });
+
+
+
+
+    //Product Kacheln Logik bei klick
+
+    let swiperSlides = document.querySelectorAll('.product-slider .swiper-slide');
+
+    swiperSlides.forEach(swiperSlide => {
+        let colors = swiperSlide.querySelectorAll('.colors .color-button');
+
+        colors.forEach(color => {
+            color.addEventListener('click', () => {
+                let detectedColor = [...color.classList].find(cls => cls !== 'color-button');
+
+                _changeContent(swiperSlide, detectedColor);
+
+            })
+        })
+    })
+
+    function _changeContent(swiperSlide, color) {
+        let productData = swiperSlide.querySelector(`.data .${color}`);
+        let price = swiperSlide.querySelector('.product-price .amount')
+
+        // Change Product-Box link
+        swiperSlide.href = productData.querySelector('.link').innerHTML;
+
+        // Change Product-Box price
+        price.innerHTML = productData.querySelector('.price').innerText;
+
+        // Change Product-Image
+        let productImages = swiperSlide.querySelectorAll('.product-images img');
+
+        productImages.forEach(image => {
+            if (image.classList.contains(`${color}`)) {
+                image.classList.remove('d-none');
+            }
+            else {
+                image.classList.add('d-none');
+            }
+        })
+
+    }
+
+    // Klick blockieren bei klick auf <a> Tag bei colors und warenkorb
+    document.querySelectorAll('.colors, .buy-button').forEach(el => {
+        el.addEventListener('click', (e) => {
+            e.preventDefault();    // verhindert das Navigieren des umschließenden <a>
+            e.stopPropagation();   // lässt den Klick nicht hochbubblen
+        });
     });
 });

@@ -9,6 +9,11 @@ body {
   font-weight: normal;
   src: url("https://cdn.shopify.com/s/files/1/0957/3675/8597/files/MOD20.woff?v=1754153429") format("woff");
 }
+.vorlage {
+  height: 100%;
+  width: auto;
+}
+
 .homepage-slider {
   width: 100%;
   height: 100svh;
@@ -65,9 +70,6 @@ body {
 .homepage-slider .swiper-wrapper .swiper-slide.teaser-video-wrapper .text-wrapper .second-text {
   font-size: 1.6rem;
 }
-.homepage-slider .swiper-wrapper .swiper-slide.summer-collection .video {
-  object-position: -3rem;
-}
 .homepage-slider .swiper-wrapper .swiper-slide.collection-slide {
   position: relative;
   width: 100%;
@@ -83,69 +85,80 @@ body {
 }
 .homepage-slider .swiper-wrapper .swiper-slide.collection-slide .collection-text {
   position: absolute;
-  top: calc(98% - 414px);
+  top: 40%;
+  row-gap: 1.15rem;
   translate: 0 -50%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: 1.4rem;
   width: 100%;
 }
 .homepage-slider .swiper-wrapper .swiper-slide.collection-slide .collection-text p {
   color: white;
-  background: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(6px);
   border-radius: 40px;
   font-family: "Modern No. 20";
-  text-shadow: 0.9px 0.6px 1.8px rgba(0, 0, 0, 0.9);
+  text-shadow: -0.1px 0.9px 1.1px rgba(0, 0, 0, 0.39);
   margin: 0;
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  border: 0.7px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 1.5px 2px 5px 0px rgba(0, 0, 0, 0.39);
 }
 .homepage-slider .swiper-wrapper .swiper-slide.collection-slide .collection-text .headline {
-  font-size: 3rem;
-  padding: 0.15rem 1.7rem;
+  font-size: 6.558svh;
+  padding: 0.15rem 1.94rem;
+  background-color: rgba(255, 255, 255, 0.12);
 }
 .homepage-slider .swiper-wrapper .swiper-slide.collection-slide .collection-text .subheadline {
-  padding: 0.2rem 1rem;
+  padding: 0.3rem 1rem;
+  background-color: rgba(255, 255, 255, 0.12);
+  font-size: 2.157svh;
 }
 .homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider {
   position: absolute;
   bottom: 2%;
-  left: 2%;
+  padding-inline: 4.7%;
+  box-sizing: border-box;
   width: 100%;
+  overflow: visible;
 }
 .homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: fit-content;
   color: white;
-  background: rgba(255, 255, 255, 0.24);
+  background-color: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(6px);
   /* border-radius: 40px; */
   font-family: "Modern No. 20";
   margin: 0;
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  border: 0.7px solid rgba(255, 255, 255, 0.28);
   padding: 0.6rem 0.35rem;
-  border-radius: 15px;
+  border-radius: 7px;
+  box-shadow: 0.5px 2px 5px 0.3px rgba(0, 0, 0, 0.55);
+  text-decoration: none;
 }
 .homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .product-name {
   display: flex;
   flex-direction: column;
   text-align: center;
+  font-size: 2.398svh;
 }
 .homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .product-name span {
   border-radius: 40px;
   font-family: "Modern No. 20";
-  text-shadow: 0.9px 0.6px 1.8px rgba(0, 0, 0, 0.9);
+  text-shadow: -0.1px 0.9px 1.1px rgba(0, 0, 0, 0.39);
   margin: 0;
 }
 .homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .product-images {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 8rem;
-  width: 8rem;
+  margin-block-start: 0.8vh;
+  height: 14vh;
+  aspect-ratio: 1/0.7901;
 }
 .homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .product-images img {
   width: 100%;
@@ -154,36 +167,54 @@ body {
 .homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .product-price {
   border-radius: 40px;
   font-family: "Modern No. 20";
-  text-shadow: 0.9px 0.6px 1.8px rgba(0, 0, 0, 0.9);
+  text-shadow: -0.1px 0.9px 1.1px rgba(0, 0, 0, 0.39);
   margin: 0;
-  font-size: 1.4rem;
+  font-size: 3.17svh;
 }
 .homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .colors {
   display: flex;
+  justify-content: center;
   column-gap: 0.3rem;
   padding-block: 0.5rem;
+  width: 63%;
 }
 .homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .colors .color-button {
-  width: 1rem;
-  height: 1rem;
+  width: 2.19svh;
+  height: 2.19svh;
   border-radius: 50%;
+  border: 1px solid black;
 }
 .homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .colors .color-button.gold {
-  background-color: gold;
+  background: linear-gradient(152.05deg, rgba(235, 220, 129, 0.988235) 14.54%, #F8E48D 29.15%, #BF892E 57.18%, #C38F34 48.56%);
 }
 .homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .colors .color-button.silber {
-  background-color: silver;
+  background: linear-gradient(152.05deg, #D9D9D9 14.54%, #C4C4C4 29.15%, #7A7A7A 57.18%, #7A7A7A 48.56%);
 }
 .homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .colors .color-button.bronze {
-  background-color: burlywood;
-}
-.homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .colors .color-button.yellow {
-  background-color: yellow;
+  background: linear-gradient(152.05deg, rgba(255, 185, 158, 0.988235) 14.54%, #DC9275 29.15%, #D09984 51.18%, #C1785B 68.56%);
 }
 .homepage-slider .swiper-wrapper .swiper-slide.collection-slide .product-slider .swiper-wrapper .swiper-slide .buy-button {
   background-color: black;
   padding: 0.11rem 0.6rem;
   border-radius: 20px;
+  font-size: 2.188svh;
+}
+
+.d-none {
+  display: none;
+}
+
+* {
+  line-height: 1 !important;
+}
+
+#header-component {
+  height: 0;
+}
+
+body {
+  height: 100svh;
+  overflow-y: hidden;
 }
 
 /*# sourceMappingURL=startseite_new.css.map */
