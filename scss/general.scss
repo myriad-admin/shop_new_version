@@ -1,0 +1,25 @@
+.color-button {
+    border-radius: 50%;
+    border: 1px solid black;
+    transition: width 0.1s, height 0.1s;
+
+    &.gold {
+        background: linear-gradient(152.05deg, rgba(235, 220, 129, 0.988235) 14.54%, #F8E48D 29.15%, #BF892E 57.18%, #C38F34 48.56%);
+    }
+
+    &.silber {
+        background: linear-gradient(152.05deg, #D9D9D9 14.54%, #C4C4C4 29.15%, #7A7A7A 57.18%, #7A7A7A 48.56%);
+    }
+
+    &.bronze {
+        background: linear-gradient(152.05deg, rgba(255, 185, 158, 0.988235) 14.54%, #DC9275 29.15%, #D09984 51.18%, #C1785B 68.56%);
+    }
+
+    &.active {
+        border: 1px solid white;
+    }
+
+    &:hover {
+        border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+}

@@ -2,102 +2,273 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Startseite DE</title>
-    <link rel="stylesheet" href="../scss/pages/startseite.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <title>Startseite neu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="../dist/base.css">
+    <script src="../js/webpack/bundle.js" defer></script>
 </head>
 
-<body class="gradient index">
+<body class="index">
+    <div class="swiper homepage-slider">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide teaser-video-wrapper">
+                <video class="teaser-video"
+                    src="https://cdn.shopify.com/videos/c/o/v/acb15d0b30f040daaa31ace759adcb85.mp4"
+                    playsinline="playsinline" autoplay="autoplay" loop="loop" muted="muted"></video>
 
-    <article class="teaser-video-wrapper">
-        <div class="video-wrapper">
-            <video class="teaser-video" src="https://cdn.shopify.com/videos/c/o/v/acb15d0b30f040daaa31ace759adcb85.mp4"
-                playsinline="playsinline" autoplay="autoplay" loop="loop" muted="muted"></video>
+                <div class="overlay"></div>
+
+                <img class="logo-image"
+                    src="https://cdn.shopify.com/s/files/1/0957/3675/8597/files/Myriad_thin.svg?v=1753030014" alt="">
+            </div>
+
+            <div class="swiper-slide summer-collection collection-slide swiper-slide-active" nav-bar-color="light">
+                <video class="video" playsinline="playsinline" autoplay="autoplay" loop="loop" muted="muted"
+                    preload="metadata">
+                    <source src="https://cdn.shopify.com/videos/c/o/v/9ed0d315fb0f4aa1aa81fc82467ef875.mp4"
+                        type="video/mp4">
+                    <img src="https://cdn.shopify.com/videos/c/o/v/941bf40c54ed4f719c259bff03b8a7e6.mp4">
+                </video>
+
+                <div class="collection-text">
+                    <p class="headline">Summer Love</p>
+                    <p class="subheadline">Perfekter Schmuck für perfekte Erinnerungen</p>
+                </div>
+
+                <div class="swiper product-slider">
+                    <div class="swiper-wrapper">
+                        <a class="swiper-slide swiper-slide-active" href="/products/summer-love-armband"
+                            data-product="{&quot;gold&quot;: {                  &quot;price&quot;: 2500,                  &quot;link&quot;: &quot;/products/summer-love-armband?variant=55119397847365&quot;                },&quot;silber&quot;: {                  &quot;price&quot;: 2000,                  &quot;link&quot;: &quot;/products/summer-love-armband?variant=55119397880133&quot;                }}"
+                            role="group" aria-label="1 / 5" style="margin-right: 18.4px;">
+                            <div class="product-name">
+                                <span class="name">Summer Love</span>
+                                <span class="category">Armband</span>
+                            </div>
+
+                            <div class="product-images">
+                                <img class="gold "
+                                    src="//www.myriad.jewelry/cdn/shop/files/SummerLoveGold.png?v=1752152797&amp;width=800"
+                                    alt="">
+                                <img class="silber d-none"
+                                    src="//www.myriad.jewelry/cdn/shop/files/SummerLoveSilver.png?v=1752152797&amp;width=800"
+                                    alt="">
+                            </div>
+
+                            <div class="product-price"><span class="amount">25</span>€</div>
+
+                            <div class="colors">
+                                <div class="color-button gold active"></div>
+                                <div class="color-button silber"></div>
+                            </div>
+
+                            <div class="buy-button">Warenkorb</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide summer-collection collection-slide" nav-bar-color="light">
+                <video class="video" playsinline="playsinline" autoplay="autoplay" loop="loop" muted="muted"
+                    class="hero__video" preload="metadata">
+                    <source
+                        src="//www.myriad.jewelry/cdn/shop/videos/c/vp/ee58182bd6284bc1afa6765da09708d9/ee58182bd6284bc1afa6765da09708d9.HD-1080p-7.2Mbps-51708402.mp4?v=0"
+                        type="video/mp4"><img
+                        src="//www.myriad.jewelry/cdn/shop/files/preview_images/ee58182bd6284bc1afa6765da09708d9.thumbnail.0000000000_small.jpg?v=1753199722">
+                </video>
+
+                <div class="collection-text">
+                    <p class="headline">Zirkonia</p>
+                    <p class="subheadline">Meisterlich geschliffene Zirkonia</p>
+                </div>
+
+                <div class="swiper product-slider">
+                    <div class="swiper-wrapper">
+                        <a class="swiper-slide" href="https://www.delife.de" product-data="">
+                            <div class="product-name">
+                                <span class="name">Escentia</span>
+                                <span class="category">Ring</span>
+                            </div>
+
+                            <div class="product-images">
+                                <img class="silber"
+                                    src="https://www.myriad.jewelry/cdn/shop/files/freepik__shiny-silver-ring-with-two-diamonds__82147.png?v=1750338937&width=2000"
+                                    alt="">
+                                <img class="gold d-none"
+                                    src="https://www.myriad.jewelry/cdn/shop/files/freepik__shiny-gold-ring-with-two-diamonds__88165.png?v=1750339685&width=2000"
+                                    alt="">
+                                <img class="bronze d-none"
+                                    src="https://www.myriad.jewelry/cdn/shop/files/freepik__a-product-shot-of-a-shiny-rose-gold-ring-with-two-__91976.png?v=1750273590&width=2000"
+                                    alt="">
+                            </div>
+
+                            <div class="product-price">
+                                <span class="amount">20</span>€
+                            </div>
+
+                            <div class="colors">
+                                <div class="color-button gold"></div>
+                                <div class="color-button silber"></div>
+                                <div class="color-button bronze"></div>
+                            </div>
+
+                            <div class="buy-button">Warenkorb</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide summer-collection collection-slide" nav-bar-color="light">
+                <video class="video" playsinline="playsinline" autoplay="autoplay" loop="loop" muted="muted"
+                    class="hero__video" preload="metadata">
+                    <source
+                        src="//www.myriad.jewelry/cdn/shop/videos/c/vp/901339300d8b496e8c69d0e9ce429b94/901339300d8b496e8c69d0e9ce429b94.HD-1080p-7.2Mbps-51722421.mp4?v=0"
+                        type="video/mp4"><img
+                        src="//www.myriad.jewelry/cdn/shop/files/preview_images/901339300d8b496e8c69d0e9ce429b94.thumbnail.0000000000_small.jpg?v=1753216049">
+                </video>
+
+                <div class="collection-text">
+                    <p class="headline">Silber</p>
+                    <p class="subheadline">Filigraner Schmuck aus Sterlingsilber</p>
+                </div>
+
+                <div class="swiper product-slider">
+                    <div class="swiper-wrapper">
+                        <a class="swiper-slide" href="https://www.delife.de" product-data="">
+                            <div class="product-name">
+                                <span class="name">Escentia</span>
+                                <span class="category">Ring</span>
+                            </div>
+
+                            <div class="product-images">
+                                <img class="silber"
+                                    src="https://www.myriad.jewelry/cdn/shop/files/freepik__shiny-silver-ring-with-two-diamonds__82147.png?v=1750338937&width=2000"
+                                    alt="">
+                                <img class="gold d-none"
+                                    src="https://www.myriad.jewelry/cdn/shop/files/freepik__shiny-gold-ring-with-two-diamonds__88165.png?v=1750339685&width=2000"
+                                    alt="">
+                                <img class="bronze d-none"
+                                    src="https://www.myriad.jewelry/cdn/shop/files/freepik__a-product-shot-of-a-shiny-rose-gold-ring-with-two-__91976.png?v=1750273590&width=2000"
+                                    alt="">
+                            </div>
+
+                            <div class="product-price">
+                                <span class="amount">20</span>€
+                            </div>
+
+                            <div class="colors">
+                                <div class="color-button gold"></div>
+                                <div class="color-button silber"></div>
+                                <div class="color-button bronze"></div>
+                            </div>
+
+                            <div class="buy-button">Warenkorb</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide summer-collection collection-slide" nav-bar-color="light">
+                <video class="video" playsinline="playsinline" autoplay="autoplay" loop="loop" muted="muted"
+                    class="hero__video" preload="metadata">
+                    <source
+                        src="//www.myriad.jewelry/cdn/shop/videos/c/vp/daf32dc63b36464aab2303cad5483e2c/daf32dc63b36464aab2303cad5483e2c.HD-1080p-7.2Mbps-51712779.mp4?v=0"
+                        type="video/mp4"><img
+                        src="//www.myriad.jewelry/cdn/shop/files/preview_images/daf32dc63b36464aab2303cad5483e2c.thumbnail.0000000000_small.jpg?v=1753204682">
+                </video>
+
+                <div class="collection-text">
+                    <p class="headline">Gold</p>
+                    <p class="subheadline">Handwerk und Material in Perfektion</p>
+                </div>
+
+                <div class="swiper product-slider">
+                    <div class="swiper-wrapper">
+                        <a class="swiper-slide" href="https://www.delife.de" product-data="">
+                            <div class="product-name">
+                                <span class="name">Escentia</span>
+                                <span class="category">Ring</span>
+                            </div>
+
+                            <div class="product-images">
+                                <img class="silber"
+                                    src="https://www.myriad.jewelry/cdn/shop/files/freepik__shiny-silver-ring-with-two-diamonds__82147.png?v=1750338937&width=2000"
+                                    alt="">
+                                <img class="gold d-none"
+                                    src="https://www.myriad.jewelry/cdn/shop/files/freepik__shiny-gold-ring-with-two-diamonds__88165.png?v=1750339685&width=2000"
+                                    alt="">
+                                <img class="bronze d-none"
+                                    src="https://www.myriad.jewelry/cdn/shop/files/freepik__a-product-shot-of-a-shiny-rose-gold-ring-with-two-__91976.png?v=1750273590&width=2000"
+                                    alt="">
+                            </div>
+
+                            <div class="product-price">
+                                <span class="amount">20</span>€
+                            </div>
+
+                            <div class="colors">
+                                <div class="color-button gold"></div>
+                                <div class="color-button silber"></div>
+                                <div class="color-button bronze"></div>
+                            </div>
+
+                            <div class="buy-button">Warenkorb</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide summer-collection collection-slide" nav-bar-color="light">
+                <video class="video" playsinline="playsinline" autoplay="autoplay" loop="loop" muted="muted"
+                    class="hero__video" preload="metadata">
+                    <source
+                        src="//www.myriad.jewelry/cdn/shop/videos/c/vp/3ee29eaa180d482fa1e6e9f5295efe93/3ee29eaa180d482fa1e6e9f5295efe93.HD-1080p-7.2Mbps-51789563.mp4?v=0"
+                        type="video/mp4"><img
+                        src="//www.myriad.jewelry/cdn/shop/files/preview_images/3ee29eaa180d482fa1e6e9f5295efe93.thumbnail.0000000000_small.jpg?v=1753299365">
+                </video>
+
+                <div class="collection-text">
+                    <p class="headline">Herren</p>
+                    <p class="subheadline">Authentisch. Kompromisslos.</p>
+                </div>
+
+                <div class="swiper product-slider">
+                    <div class="swiper-wrapper">
+                        <a class="swiper-slide" href="https://www.delife.de" product-data="">
+                            <div class="product-name">
+                                <span class="name">Escentia</span>
+                                <span class="category">Ring</span>
+                            </div>
+
+                            <div class="product-images">
+                                <img class="silber"
+                                    src="https://www.myriad.jewelry/cdn/shop/files/freepik__shiny-silver-ring-with-two-diamonds__82147.png?v=1750338937&width=2000"
+                                    alt="">
+                                <img class="gold d-none"
+                                    src="https://www.myriad.jewelry/cdn/shop/files/freepik__shiny-gold-ring-with-two-diamonds__88165.png?v=1750339685&width=2000"
+                                    alt="">
+                                <img class="bronze d-none"
+                                    src="https://www.myriad.jewelry/cdn/shop/files/freepik__a-product-shot-of-a-shiny-rose-gold-ring-with-two-__91976.png?v=1750273590&width=2000"
+                                    alt="">
+                            </div>
+
+                            <div class="product-price">
+                                <span class="amount">20</span>€
+                            </div>
+
+                            <div class="colors">
+                                <div class="color-button gold"></div>
+                                <div class="color-button silber"></div>
+                                <div class="color-button bronze"></div>
+                            </div>
+
+                            <div class="buy-button">Warenkorb</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="overlay-wrapper">
-            <div class="overlay"></div>
-        </div>
-
-        <div class="image-wrapper">
-            <img src="https://cdn.shopify.com/s/files/1/0957/3675/8597/files/Myriad_thin.svg?v=1753030014" alt="">
-        </div>
-
-        <div class="text-wrapper">
-            <p class="first-text">Every piece has ist story</p>
-            <p class="second-text">Find Yours</p>
-        </div>
-    </article>
-
-    <div class="placeholder"></div>
-
-    <div class="test"></div>
-    <!-- 
-    <script>
-        if ('scrollRestoration' in history) {
-            history.scrollRestoration = 'manual';
-        }
-
-        window.addEventListener('load', () => {
-            window.scrollTo(0, 0);
-        });
-
-        // Ausrechnen Transparenz und Blurr im Scrollfortschritt
-
-        let teaserVideoWrapper = document.querySelector('.teaser-video-wrapper');
-        let teaserVideoWrapperScrollHeight = teaserVideoWrapper.clientHeight;
-
-        let teaserMyriadImage = document.querySelector('.image-wrapper img');
-        let videoWrapper = document.querySelector('.video-wrapper');
-
-        document.addEventListener('scroll', () => {
-            let processInPercent = Math.round(window.scrollY * 230 / teaserVideoWrapperScrollHeight);
-
-            if (document.body.clientWidth >= 768) {
-                processInPercent = Math.round(window.scrollY * 200 / teaserVideoWrapperScrollHeight);
-            }
-
-
-            if (processInPercent <= 100) {
-                teaserMyriadImage.style.opacity = `${(100 - processInPercent) / 100}`;
-                videoWrapper.style.filter = `blur(${processInPercent * 4 / 100}px)`;
-            }
-            else {
-                teaserMyriadImage.style.opacity = 0;
-                videoWrapper.style.filter = `blur(4px)`;
-            }
-        })
-
-        let oldScroll = null;
-
-        function isScrollDown() {
-            let result = (oldScroll > window.scrollY);
-            oldScroll = window.scrollY;
-            return (result);
-        }
-
-
-        document.addEventListener('scroll', (e) => {
-            let scrollhöhe = window.scrollY;
-
-            if (scrollhöhe < (teaserVideoWrapperScrollHeight)) {
-                console.log(isScrollDown());
-
-                // window.scrollTo({
-                //     top: teaserVideoWrapperScrollHeight,
-                //     behavior: "smooth"
-                // });
-            }
-        })
-    </script> -->
+    </div>
 </body>
-
-
-
-
 
 </html>

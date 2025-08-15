@@ -1,21 +1,17 @@
-import ProduktDetail from './plugin/produkt-detail/produkt-detail.js';
-import Search from './plugin/navigation/search.js';
+import Startseite from './plugin/startseite/startseite.js';
 
-document.addEventListener("DOMContentLoaded", () => {
-    registerPlugin(ProduktDetail, 'body.product');
-    registerPlugin(Search, '.nav-bar');
+document.addEventListener('DOMContentLoaded', () => {
+  registerPlugin(Startseite, 'body.index');
 });
 
 function registerPlugin(pluginClass, selector) {
-    const elements = document.querySelectorAll(selector);
+  const elements = document.querySelectorAll(selector);
 
-    elements.forEach((el) => {
-        try {
-            new pluginClass(el);
-        }
-        catch (error) {
-            console.error(`Fehler beim Initialisieren von ${pluginClass.name}`, error);
-        }
-
-    });
+  elements.forEach((el) => {
+    try {
+      new pluginClass(el);
+    } catch (error) {
+      console.error(`Fehler beim Initialisieren von ${pluginClass.name}`, error);
+    }
+  });
 }
