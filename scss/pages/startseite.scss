@@ -28,27 +28,24 @@ body.index {
                         top: 0;
                         height: 0;
                         width: 100%;
-                        height: 100vh;
+                        height: 100svh;
                         background: linear-gradient(to top, #00000099, rgba(0, 0, 0, 0));
                     }
 
                     .logo-image {
                         position: absolute;
-                        top: 50vh;
+                        top: 50svh;
                         left: 50%;
                         translate: -50% -50%;
-                        width: 85vw;
+                        width: 135.342svh;
+                        max-width: 85vw;
                         height: auto;
-
-                        @media screen and (min-width: 768px) {
-                            width: 65vw;
-                        }
                     }
 
                     .text-wrapper {
                         position: sticky;
-                        top: 100vh;
-                        translate: 0 50vh;
+                        top: 100svh;
+                        translate: 0 50svh;
                         transform: translateY(50%);
                         font-family: var(--font-paragraph--family);
                         text-align: center;
@@ -92,8 +89,8 @@ body.index {
                             color: white;
                             background: rgba(255, 255, 255, 0.12);
                             backdrop-filter: blur(6px);
-                            border-radius: 40px;
-                            font-family: 'Modern No. 20';
+                            border-radius: 400px;
+                            font-family: "Agdasima";
                             text-shadow: -0.1px 0.9px 1.1px rgba(0, 0, 0, 0.39);
                             margin: 0;
                             border: 0.7px solid rgba(255, 255, 255, 0.28);
@@ -131,13 +128,31 @@ body.index {
                                 color: white;
                                 background-color: rgba(255, 255, 255, 0.12);
                                 backdrop-filter: blur(6px);
-                                font-family: "Modern No. 20";
+                                font-family: "Agdasima";
                                 margin: 0;
                                 border: 0.7px solid rgba(255, 255, 255, 0.28);
                                 padding: 0.6rem 0.35rem;
-                                border-radius: 7px;
+                                border-radius: 0.711961svh;
                                 box-shadow: 0.5px 2px 5px 0.3px rgba(0, 0, 0, 0.55);
                                 text-decoration: none;
+                                -webkit-tap-highlight-color: transparent;
+                                -webkit-touch-callout: none;
+
+                                transition: transform 0.5s 0.5s, translate 0.45s;
+
+                                @media (hover: hover) and (pointer: fine) {
+                                    &:hover {
+                                        translate: 0 -0.3rem;
+                                    }
+                                }
+
+                                &.active {
+                                    translate: 0 -0.3rem;
+                                }
+
+                                &.product-card-translated {
+                                    transform: translateY(35%);
+                                }
 
                                 .product-name {
                                     display: flex;
@@ -147,29 +162,49 @@ body.index {
 
                                     span {
                                         border-radius: 40px;
-                                        font-family: "Modern No. 20";
+                                        font-family: "Agdasima";
+                                        font-weight: 700;
                                         text-shadow: -0.1px 0.9px 1.1px rgba(0, 0, 0, 0.39);
                                         margin: 0;
                                     }
                                 }
 
+                                .material {
+                                    position: absolute;
+                                    height: 3.2svh;
+                                    width: auto;
+                                    right: 6.9%;
+                                    top: 2.8svh;
+                                }
+
                                 .product-images {
+                                    position: relative;
                                     display: flex;
                                     flex-direction: column;
                                     justify-content: center;
-                                    margin-block-start: 0.8vh;
-                                    height: 14vh;
-                                    aspect-ratio: 1 / 0.7901;
+                                    margin-block-start: .8svh;
+                                    height: 14svh;
+                                    aspect-ratio: 1 / 0.7716;
 
                                     img {
-                                        width: 100%;
+                                        position: absolute;
+                                        width: 96%;
                                         height: auto;
+                                        opacity: 1;
+                                        transition: opacity .5s;
+                                        translate: -50% -1.5%;
+                                        left: 50%;
+
+                                        &.image-hidden {
+                                            opacity: 0;
+                                        }
                                     }
                                 }
 
                                 .product-price {
                                     border-radius: 40px;
-                                    font-family: "Modern No. 20";
+                                    font-family: "Agdasima";
+                                    font-weight: 700;
                                     text-shadow: -0.1px 0.9px 1.1px rgba(0, 0, 0, 0.39);
                                     margin: 0;
                                     font-size: 3.17svh;
@@ -191,18 +226,46 @@ body.index {
                                 }
 
                                 .buy-button {
+                                    box-shadow: -5px -3px 14px 0px #2F2F2FBF inset, 47px 8px 11px 9px #FFFFFF63 inset;
+                                    backdrop-filter: blur(6px) blur(24px);
                                     background-color: rgba(255, 255, 255, 0.12);
-                                    backdrop-filter: blur(6px);
-                                    box-shadow: 0.5px 2px 5px 0.3px rgba(0, 0, 0, 0.5);
-                                    padding: 0.11rem 0.6rem;
+                                    // backdrop-filter: blur(6px);
+                                    // box-shadow: 0.5px 2px 5px 0.3px rgba(0, 0, 0, 0.5);
+                                    padding: 0.176rem 0.8rem;
                                     border-radius: 20px;
-                                    font-size: 2.188svh;
+                                    font-size: 2.05svh;
                                     transition: background-color 0.2s;
 
                                     &:hover {
+                                        box-shadow: 0 0 0 0 transparent;
                                         background-color: black;
                                     }
                                 }
+                            }
+                        }
+                    }
+                }
+
+                &.footer {
+                    height: fit-content;
+
+                    .footer-items {
+                        display: flex;
+                        flex-wrap: wrap;
+                        font-size: clamp(16px, 1.6vh, 1.6vh);
+                        margin: 0;
+                        padding: 1.5vh;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        gap: 0.6vh 2.7vh;
+
+                        li {
+                            list-style: none;
+                            height: fit-content;
+
+                            a {
+                                color: black;
+                                text-decoration: unset;
                             }
                         }
                     }
@@ -990,5 +1053,311 @@ body.index {
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
         overflow: hidden
+    }
+
+    .fast-product-preview-wrapper {
+        display: flex;
+        // display: none;
+        flex-direction: column;
+        row-gap: 1rem;
+        position: absolute;
+        top: calc(50% + (5.5svh / 2));
+        left: 50%;
+        z-index: 5;
+        width: 100svh;
+        height: 77svh;
+        translate: -50% -50%;
+
+        .top-area-wrapper {
+            display: flex;
+            column-gap: 1rem;
+            height: 7svh;
+
+            .action-buttons {
+                display: flex;
+                justify-content: space-around;
+                width: 15%;
+                height: 100%;
+
+                .wishlist-button {
+                    position: relative;
+                    height: 100%;
+                    aspect-ratio: 1 / 1;
+                    background-color: #000;
+                    border-radius: 50%;
+
+                    .icon-wishlist {
+                        position: absolute;
+                        top: 55%;
+                        left: 52%;
+                        height: 56%;
+                        width: auto;
+                        translate: -50% -50%;
+                    }
+
+                    .icon-share {
+                        position: absolute;
+                        height: 50%;
+                        top: 53%;
+                        left: 52%;
+                        width: auto;
+                        translate: -50% -50%;
+                    }
+                }
+
+
+            }
+
+            .product-name {
+                color: white;
+                font-size: 6svh;
+                font-weight: 700;
+                text-align: center;
+                padding: 0;
+                width: 65%;
+            }
+
+            .material {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                column-gap: 1rem;
+                width: 20%;
+
+                .icon {
+                    height: 100%;
+                    aspect-ratio: 1 / 1;
+                    scale: 1.15;
+                }
+
+                .name {
+                    font-size: 2.2svh;
+                }
+            }
+        }
+
+
+
+        .image-and-infos-wrapper {
+            display: flex;
+            height: 69svh;
+            column-gap: 1rem;
+
+            .product-images {
+                width: 69svh;
+                height: 69svh;
+
+                .product-preview-slider {
+                    .swiper-slide {
+                        img {
+                            width: 100%;
+                            height: auto;
+                        }
+                    }
+
+                    .swiper-pagination {
+                        .swiper-pagination-bullet {
+                            position: relative;
+                            height: 2svh;
+                            width: 2svh;
+                            background: unset;
+                            opacity: 1;
+
+                            &::after {
+                                position: absolute;
+                                content: "";
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                background-image: url(https://cdn.shopify.com/s/files/1/0957/3675/8597/files/swiper-point.svg?v=1757531547);
+                                background-repeat: no-repeat;
+                                background-size: contain;
+                            }
+
+                            &-active {
+                                &::after {
+                                    background-image: url(https://cdn.shopify.com/s/files/1/0957/3675/8597/files/swiper-point-active.svg?v=1757532165);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .information-wrapper {
+                display: flex;
+                flex-direction: column;
+                row-gap: 1rem;
+                width: 30%;
+                height: 100%;
+
+                .rating {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+                    height: 10%;
+
+                    .arrow-right {
+                        height: 100%;
+                        width: auto;
+                        translate: 0 .3vh;
+                    }
+
+                    .stars {
+                        position: relative;
+                        width: 77%;
+
+                        img {
+                            width: 100%;
+                            height: auto;
+
+                            &.filled-stars {
+                                position: absolute;
+                                left: 0;
+                            }
+                        }
+                    }
+                }
+
+                .material-and-size {
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 1.5svh;
+                    height: fit-content;
+
+                    .content-wrapper {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+
+                        p {
+                            font-weight: 700;
+                            font-size: 2.5svh;
+                            color: #dfdfdf;
+                            text-shadow: 1px 0px 0px black;
+                            margin: 0;
+                        }
+
+                        img {
+                            height: 2svh;
+                            width: auto;
+                        }
+                    }
+
+
+                    .sizes {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 1svh;
+
+                        span {
+                            color: #ffffff;
+                            display: flex;
+                            font-size: 2.3svh;
+                            width: 4svh;
+                            height: 4svh;
+                            background: #ffffff47;
+                            border-radius: 50%;
+                            justify-content: center;
+                            align-items: center;
+                            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+                            backdrop-filter: blur(6px);
+                        }
+                    }
+                }
+
+                .material {
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 1.5svh;
+                    height: fit-content;
+
+                    .content-wrapper {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+
+                        p {
+                            font-weight: 700;
+                            font-size: 2.5svh;
+                            color: #dfdfdf;
+                            text-shadow: 1px 0px 0px black;
+                            margin: 0;
+                        }
+
+                        img {
+                            height: 2svh;
+                            width: auto;
+                        }
+                    }
+
+                    .materials {
+                        display: flex;
+                        column-gap: 1svh;
+
+                        .color-wrapper {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+
+                            div {
+                                width: 4svh;
+                                height: 4svh;
+                                border-radius: 50%;
+                                box-shadow: 5px 5px 18px 0px rgba(0, 0, 0, 0.75);
+
+                                &.gold {
+                                    background: rgba(212, 175, 55, 1);
+                                }
+
+                                &.bronze {
+                                    background: rgba(168, 131, 68, 1);
+                                }
+
+                                &.silber {
+                                    background: rgba(162, 162, 162, 1);
+                                }
+                            }
+
+                            span {
+                                color: white;
+                                font-size: 2svh;
+                            }
+                        }
+                    }
+                }
+
+                .packaging-usp-buy {
+                    height: 100%;
+                }
+
+                article {
+                    height: 25%;
+                }
+            }
+        }
+
+        article {
+            background-color: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(6px);
+            font-family: "Agdasima";
+            margin: 0;
+            border: 0.7px solid rgba(255, 255, 255, 0.28);
+            padding: 0.6rem 0.35rem;
+            border-radius: 1.711961svh;
+            box-shadow: 0.5px 2px 5px 0.3px rgba(0, 0, 0, 0.55);
+            text-decoration: none;
+        }
+
+        .close-button {
+            position: absolute;
+            top: -3.8svh;
+            right: 0;
+            width: 3.5svh;
+            height: auto;
+            cursor: pointer;
+        }
     }
 }

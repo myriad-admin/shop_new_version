@@ -1,14 +1,16 @@
 import Plugin from '../../plugin-system/plugin-class.js';
 
 import Swiper from 'swiper';
-import { Mousewheel } from 'swiper/modules';
+import { Mousewheel, FreeMode, Navigation, Pagination, EffectCards } from 'swiper/modules';
 
-import 'swiper/css';
+// import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
 
-export default class ProduktDetail extends Plugin {
+export default class Startseite extends Plugin {
   constructor(el, options = {}) {
     super(el, {
-      ...ProduktDetail.options,
+      ...Startseite.options,
       ...options,
     });
   }
@@ -18,9 +20,19 @@ export default class ProduktDetail extends Plugin {
     this._swiperBehaviour();
     this._productCardsBehaviour();
     this._changeNavColor();
+    this._manageVideos();
+    this._manageFastProductPreview();
+    // this._managePrelaunchMails();
   }
 
   _initSwipers() {
+    this.fastProductPreviewSlider = new Swiper('.product-preview-slider', {
+      modules: [Pagination],
+      pagination: {
+        el: '.swiper-pagination',
+      },
+    });
+
     this.verticalSlider = new Swiper('.homepage-slider', {
       modules: [Mousewheel],
       direction: 'vertical',
@@ -42,20 +54,60 @@ export default class ProduktDetail extends Plugin {
       speed: 700,
     });
 
-    this.productSlider = new Swiper('.product-slider', {
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+    this.productSliders = [];
+    const sliders = document.querySelectorAll('.product-slider');
+
+    sliders.forEach((sliderEl) => {
+      const productSlider = new Swiper(sliderEl, {
+        modules: [FreeMode, Navigation],
+        slidesPerView: 'auto',
+        spaceBetween: 18,
+        grabCursor: true,
+        freeMode: {
+          enabled: true,
+          momentum: true,
+          momentumRatio: 0.5,
+          momentumBounce: false,
+          sticky: true,
+        },
+        touchRatio: 1,
+        resistanceRatio: 0.65,
+        threshold: 3,
+        followFinger: true,
+        watchOverflow: true,
+        preloadImages: false,
+        lazy: true,
+        observer: true,
+        observeParents: true,
+        navigation: {
+          nextEl: sliderEl.querySelector('.swiper-button-next'),
+          prevEl: sliderEl.querySelector('.swiper-button-prev'),
+        },
+      });
+
+      this.productSliders.push(productSlider);
+    });
+
+    this.socialMediaImagesSwiper = new Swiper('.social-media-images-slider', {
+      modules: [EffectCards],
+      effect: 'cards',
+      cardsEffect: {
+        perSlideOffset: 40,
+        perSlideRotate: 0,
       },
-      slidesPerView: 'auto',
-      spaceBetween: 18.4,
-
-      freeMode: true,
-      freeModeSticky: false,
-      freeModeMomentum: false,
+      grabCursor: true,
+      slidesPerView: 1,
+      loop: false,
+      threshold: 0,
       touchRatio: 1,
-
-      speed: 0,
+      freeMode: false,
+      on: {
+        touchEnd(swiper) {
+          // kein Springen in der Mitte
+          const diff = swiper.activeIndex - swiper.previousIndex;
+          if (Math.abs(diff) > 1) swiper.slideTo(swiper.previousIndex + Math.sign(diff));
+        },
+      },
     });
   }
 
@@ -102,13 +154,27 @@ export default class ProduktDetail extends Plugin {
       if (early && !this.verticalSlider.animating) this.verticalSlider.allowTouchMove = true;
       early = false;
     });
+
+    // Produkt-Slider animation
+    this.verticalSlider.on('transitionStart', () => {
+      const activeSlide = this.verticalSlider.slides[this.verticalSlider.activeIndex];
+
+      const productCards = activeSlide.querySelectorAll('.product-card-translated');
+
+      if (productCards) {
+        productCards.forEach((card, index) => {
+          setTimeout(() => {
+            card.classList.remove('product-card-translated');
+          }, 45 * index);
+        });
+      }
+    });
   }
 
   _productCardsBehaviour() {
-    //Product Kacheln Logik bei klick
-
     let swiperSlides = document.querySelectorAll('.product-slider .swiper-slide');
 
+    //Product Kacheln Logik bei klick
     swiperSlides.forEach((swiperSlide) => {
       let colors = swiperSlide.querySelectorAll('.colors .color-button');
 
@@ -127,11 +193,13 @@ export default class ProduktDetail extends Plugin {
       let productData = JSON.parse(productDataStr);
 
       let priceField = swiperSlide.querySelector('.amount');
-      console.log(productData);
 
       let price = productData[color].price;
       let link = productData[color].link;
-      console.log(price);
+      let variantId = productData[color].variantId;
+
+      // Change VariantId Data-Attribute for fast preview Box
+      swiperSlide.setAttribute('variant-id', variantId);
 
       // Change Product-Box link
       swiperSlide.href = link;
@@ -144,9 +212,9 @@ export default class ProduktDetail extends Plugin {
 
       productImages.forEach((image) => {
         if (image.classList.contains(color)) {
-          image.classList.remove('d-none');
+          image.classList.remove('image-hidden');
         } else {
-          image.classList.add('d-none');
+          image.classList.add('image-hidden');
         }
       });
     }
@@ -168,6 +236,50 @@ export default class ProduktDetail extends Plugin {
         e.stopPropagation();
       });
     });
+
+    // Klick irgendwohin -> Produktkarte nicht mehr aktiv
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.product-slider .swiper-slide')) {
+        document.querySelectorAll('.product-slider .swiper-slide').forEach((slide) => {
+          slide.classList.remove('active');
+        });
+      }
+    });
+
+    // Vertikal Bewegung bei <a> tag klick
+
+    document.querySelectorAll('.product-slider .swiper-slide').forEach((slideItem) => {
+      slideItem.addEventListener('click', (e) => {
+        if (!(e.target.closest('.colors') || e.target.closest('.buy-button'))) {
+          slideItem.classList.add('active');
+        }
+      });
+    });
+
+    // Vertikal Bewegung bei mobile scrollen
+    let klickedSlideItem = null;
+
+    this.productSliders.forEach((productSlider) => {
+      productSlider.on('touchMove', () => {
+        if (klickedSlideItem) {
+          klickedSlideItem.classList.add('active');
+        }
+      });
+    });
+
+    swiperSlides.forEach((swiperSlide) => {
+      swiperSlide.addEventListener('pointerdown', () => {
+        klickedSlideItem = swiperSlide;
+      });
+    });
+
+    document.addEventListener('pointerup', (e) => {
+      if (e.target.closest('[data-product]')) {
+        klickedSlideItem.classList.remove('active');
+        klickedSlideItem = null;
+      }
+    });
   }
 
   _changeNavColor() {
@@ -175,12 +287,106 @@ export default class ProduktDetail extends Plugin {
     this.verticalSlider.on('slideChangeTransitionStart', () => {
       const activeSlide = this.verticalSlider.slides[this.verticalSlider.activeIndex];
       const navBarColor = activeSlide.getAttribute('nav-bar-color');
+      const navWrapper = document.querySelector('.myriad-header');
 
       if (navBarColor == 'light') {
-        document.body.classList.add('nav-color-light');
+        navWrapper.setAttribute('nav-color', 'light');
       } else {
-        document.body.classList.remove('nav-color-light');
+        navWrapper.setAttribute('nav-color', 'dark');
       }
+    });
+
+    // Mobile bei klick in active setzen
+  }
+
+  _manageVideos() {
+    // Videos pausieren wenn nicht in active Slide
+    this.verticalSlider.on('slideChangeTransitionStart', () => {
+      const activeSlide = this.verticalSlider.slides[this.verticalSlider.activeIndex];
+
+      document.querySelectorAll('.collection-slide').forEach((slide) => {
+        slide.querySelector('#responsiveVideo')?.pause();
+      });
+
+      activeSlide.querySelector('#responsiveVideo')?.play();
+    });
+  }
+
+  _manageFastProductPreview() {
+    const buyButtons = document.querySelectorAll('.buy-button');
+
+    // Get Product Name and VariantId
+    buyButtons.forEach((buyButton) => {
+      buyButton.addEventListener('click', () => {
+        let swiperSlide = buyButton.closest('.swiper-slide');
+        let dataProductName = swiperSlide.getAttribute('data-product-name');
+        let variantId = swiperSlide.getAttribute('variant-id');
+
+        console.log(dataProductName, variantId);
+
+        loadFastProductPreview(dataProductName, variantId);
+      });
+    });
+
+    // Get Product HTML and instert it into page
+    async function loadFastProductPreview(productName, variantId) {
+      let startseiteSection = document.querySelector('#shopify-section-startseite');
+
+      let productPreviewHtml = await fetch(
+        `/products/${productName}?variant=${variantId}&section_id=fast-product-preview`
+      ).then((res) => {
+        if (!res.ok) throw new Error(res.status);
+        return res.text();
+      });
+
+      let fastProductPreviewWrapper = document.createElement('div');
+      fastProductPreviewWrapper.classList.add('fast-product-preview-wrapper');
+
+      fastProductPreviewWrapper.innerHTML = productPreviewHtml;
+
+      startseiteSection.appendChild(fastProductPreviewWrapper);
+    }
+
+    // Logic for Close Button
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.close-button')) {
+        let startseiteSection = document.querySelector('#shopify-section-startseite');
+        // let startseiteSection = document.querySelector('body');
+        console.log(e.target);
+        let fastProductPreviewWrapper = document.querySelector('.fast-product-preview-wrapper');
+        startseiteSection.removeChild(fastProductPreviewWrapper);
+      }
+    });
+  }
+
+  _managePrelaunchMails() {
+    console.log('drinnen');
+    let myriadEmailForm = document.querySelector('.mail-form');
+    let successMessage = document.querySelector('.email-signup__message--success');
+    let submitEmailForm = document.querySelector('.email-signup__input');
+
+    let myriadSuccessMessage = document.querySelector('.submit-message');
+
+    if (successMessage) {
+      myriadSuccessMessage.innerHTML = successMessage.innerHTML;
+    }
+
+    myriadEmailForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      console.log('TEST');
+
+      let userEmail = document.getElementById('myriad-email-input').value;
+
+      if (submitEmailForm) {
+        submitEmailForm.focus();
+        submitEmailForm.dispatchEvent(new Event('click', { bubbles: true }));
+      }
+
+      setTimeout(() => {
+        document.querySelector('.email-signup__input').setAttribute('value', userEmail);
+        document.querySelector('.email-signup__button').click();
+      }, 500);
     });
   }
 }

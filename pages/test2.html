@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Frosted Glass Beispiel</title>
+    <style>
+        /* ===== Notch: Grundstil ===== */
+        .notch {
+            /* Stellschrauben */
+            --r: 28px;
+            /* Radius der Ausnehmung */
+            --y: 50%;
+            /* vertikale Position: 0%..100% */
+            --br: 16px;
+            /* normaler Border-Radius außen */
+            --bg: linear-gradient(180deg, #ffa726, #f57c00);
+            /* Hintergrund */
+
+            position: relative;
+            border-radius: var(--br);
+            background: var(--bg);
+        }
+
+        /* ===== Kreis rechts „ausstanzen“ ===== */
+        .notch--right {
+            /* Chrome/Firefox */
+            mask:
+                radial-gradient(var(--r) at calc(100% - var(--r)) var(--y), transparent 99%, #000 100%),
+                linear-gradient(#000 0 0);
+            mask-composite: exclude;
+
+            /* Safari */
+            -webkit-mask:
+                radial-gradient(var(--r) at calc(100% - var(--r)) var(--y), transparent 99%, #000 100%),
+                linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+        }
+
+        /* ===== Kreis links „ausstanzen“ ===== */
+        .notch--left {
+            mask:
+                radial-gradient(var(--r) at var(--r) var(--y), transparent 99%, #000 100%),
+                linear-gradient(#000 0 0);
+            mask-composite: exclude;
+
+            -webkit-mask:
+                radial-gradient(var(--r) at var(--r) var(--y), transparent 99%, #000 100%),
+                linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+        }
+
+        /* ===== Option: feiner Schatten an der Ausnehmung ===== */
+        .notch::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .25));
+            /* kleiner „Trick“: der Schatten folgt der Maske automatisch */
+        }
+
+        /* ===== Option: halber Ring (Deko) an der Notch ===== */
+        .notch--right::before {
+            content: "";
+            position: absolute;
+            top: calc(var(--y) - var(--r));
+            right: calc(-1 * var(--r));
+            width: calc(var(--r) * 2);
+            height: calc(var(--r) * 2);
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, .7);
+            /* Ringfarbe/-dicke */
+            clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+            /* nur rechte Hälfte zeigen */
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="notch notch--right">
+        <!-- dein Inhalt -->
+    </div>
+
+
+</body>
+
+</html>

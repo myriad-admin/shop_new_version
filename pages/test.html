@@ -1,100 +1,162 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Gekrümmter Swiper</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <style>
-        body {
-            background: #111;
-            color: white;
-            font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .swiper-container {
-            width: 300px;
-            height: 200px;
-            position: relative;
-            overflow: visible;
-        }
-
-        .swiper-wrapper {
-            position: absolute;
-            top: 100px;
-            /* Y-Zentrum */
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .swiper-slide {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            text-align: center;
-            line-height: 40px;
-            border-radius: 50%;
-            background: #f0c040;
-            color: #000;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            transform-origin: bottom center;
-        }
-    </style>
+    <meta charset="utf-8" />
+    <title>Startseite neu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="../dist/base.css">
+    <script src="../js/webpack/bundle.js" defer></script>
 </head>
 
-<body>
-
-    <div class="swiper-container">
+<body class="index">
+    <div class="swiper homepage-slider">
         <div class="swiper-wrapper">
-            <div class="swiper-slide">46</div>
-            <div class="swiper-slide">47</div>
-            <div class="swiper-slide">48</div>
-            <div class="swiper-slide">49</div>
-            <div class="swiper-slide">50</div>
+
+            <div class="swiper-slide teaser-video-wrapper">
+                <video id="responsiveVideo" class="teaser-video" autoplay muted loop playsinline preload="metadata"
+                    data-src-desktop="https://cdn.shopify.com/videos/c/o/v/acb15d0b30f040daaa31ace759adcb85.mp4"
+                    data-src-mobile="https://cdn.shopify.com/videos/c/o/v/e44e26d47c6744eeaa7a9915299dde52.mp4">
+                </video>
+
+                <div class="overlay"></div>
+
+                <img class="logo-image"
+                    src="https://cdn.shopify.com/s/files/1/0957/3675/8597/files/Myriad_thin.svg?v=1753030014" alt="">
+
+
+                <div class="text">
+                    <p class="first">Prelaunch Kollektion</p>
+                    <p class="second">Ein Tag. Begrenzte Stückzahl. Members Only.</p>
+
+                    <form class="mail-form" action="#">
+                        <input type="email" required autocorrect="off" autocapitalize="off" autocomplete="email"
+                            id="myriad-email-input" placeholder="E-Mail Adresse ...">
+
+                        <label for="submit-input" class="submit">
+                            <svg width="21" height="40" viewBox="0 0 21 40" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g filter="url(#filter0_ii_5031_687)">
+                                    <path
+                                        d="M20.1504 20.1258C20.1666 20.9124 19.9641 21.7096 19.527 22.4217C19.5194 22.4342 19.5118 22.4467 19.504 22.4591C19.4994 22.4663 19.4948 22.4736 19.4902 22.4808C19.4575 22.5324 19.4236 22.5834 19.3885 22.6337C19.3853 22.6383 19.3822 22.6429 19.379 22.6475L8.46457 38.1515C7.11816 40.0641 4.47635 40.5233 2.56374 39.1769C0.651136 37.8305 0.192001 35.1884 1.53835 33.2758L10.7369 20.2092L1.53804 7.14222C0.191648 5.2296 0.650533 2.58749 2.56313 1.24108C4.47576 -0.105325 7.11786 0.353843 8.46427 2.26647L19.3318 17.7037C19.5178 17.9572 19.6733 18.2285 19.7969 18.5119C19.9761 18.9207 20.0858 19.3484 20.1293 19.779C20.1297 19.7832 20.1301 19.7874 20.1305 19.7916C20.1332 19.8195 20.1357 19.8473 20.1379 19.8752C20.1384 19.8813 20.1389 19.8875 20.1394 19.8936C20.1408 19.9123 20.142 19.931 20.1431 19.9497C20.1466 20.0065 20.1489 20.0634 20.1501 20.1203C20.1502 20.1221 20.1504 20.124 20.1504 20.1258Z"
+                                        fill="white"></path>
+                                </g>
+                                <defs>
+                                    <filter id="filter0_ii_5031_687" x="-2.23438" y="-1.53125" width="24.3828"
+                                        height="43.4805" filterUnits="userSpaceOnUse"
+                                        color-interpolation-filters="sRGB">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                                        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix"
+                                            result="shape"></feBlend>
+                                        <feColorMatrix in="SourceAlpha" type="matrix"
+                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha">
+                                        </feColorMatrix>
+                                        <feOffset dx="2" dy="2"></feOffset>
+                                        <feGaussianBlur stdDeviation="2.5"></feGaussianBlur>
+                                        <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"></feComposite>
+                                        <feColorMatrix type="matrix"
+                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.75 0"></feColorMatrix>
+                                        <feBlend mode="normal" in2="shape" result="effect1_innerShadow_5031_687">
+                                        </feBlend>
+                                        <feColorMatrix in="SourceAlpha" type="matrix"
+                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha">
+                                        </feColorMatrix>
+                                        <feOffset dx="-3" dy="-2"></feOffset>
+                                        <feGaussianBlur stdDeviation="1.5"></feGaussianBlur>
+                                        <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"></feComposite>
+                                        <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0">
+                                        </feColorMatrix>
+                                        <feBlend mode="normal" in2="effect1_innerShadow_5031_687"
+                                            result="effect2_innerShadow_5031_687"></feBlend>
+                                    </filter>
+                                </defs>
+                            </svg></label>
+                        <input type="submit" id="submit-input" class="d-none">
+                    </form>
+
+                    <div class="submit-message"></div>
+                </div>
+            </div>
+
+            <div class="swiper-slide footer" nav-bar-color="light">
+                <ul>
+                    <li>
+                        <a href="/policies/privacy-policy" class="footer-utilities__text">Datenschutzerklärung</a>
+                    </li>
+                    <li>
+                        <a href="/policies/refund-policy" class="footer-utilities__text">Widerrufsrecht</a>
+                    </li>
+                    <li>
+                        <a href="/policies/terms-of-service" class="footer-utilities__text">AGB</a>
+                    </li>
+                    <li>
+                        <a href="/policies/shipping-policy" class="footer-utilities__text">Versand</a>
+                    </li>
+                    <li>
+                        <a href="/policies/contact-information" class="footer-utilities__text">Kontaktinformationen</a>
+                    </li>
+                    <li>
+                        <a href="/policies/legal-notice" class="footer-utilities__text">Impressum</a>
+                    </li>
+                    <li>
+                        <a href="/policies/#shopifyReshowConsentBanner"
+                            class="footer-utilities__text">Cookie-Einstellungen</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        const swiper = new Swiper('.swiper-container', {
-            slidesPerView: 5,
-            centeredSlides: true,
-            initialSlide: 2,
-            on: {
-                init: positionSlides,
-                slideChange: positionSlides,
-            }
-        });
 
-        function positionSlides() {
-            const slides = document.querySelectorAll('.swiper-slide');
-            const centerIndex = swiper.activeIndex;
-            const angleStep = 15; // Gradabstand pro Slide
 
-            slides.forEach((slide, index) => {
-                const offset = index - centerIndex;
-                const angle = offset * angleStep;
+    <div class="email-signup-block size-style spacing-style"
+        style="--size-style-width:50%;--size-style-height: ;--padding-block-start: 0px;--padding-block-end: 0px;--padding-inline-start: 0px;--padding-inline-end: 0px;">
+        <form method="post" action="/contact#contact_form" id="contact_form" accept-charset="UTF-8"
+            class="email-signup__form spacing-style" data-cptcha="true" data-hcaptcha-bound="true"><input type="hidden"
+                name="form_type" value="customer"><input type="hidden" name="utf8" value="✓">
+            <div class="email-signup__input-group " style="--border-width: 1px; --border-radius: 100px;">
+                <label for="EmailInput-AWFNsR1cvR3VBVmtnU__email_signup_k9UrBY" class="visually-hidden">
+                    E-Mail
+                </label>
+                <input id="EmailInput-AWFNsR1cvR3VBVmtnU__email_signup_k9UrBY"
+                    class="email-signup__input email-signup__input--all paragraph " type="email" name="contact[email]"
+                    autocorrect="off" autocapitalize="off" autocomplete="email" placeholder="E-Mail-Adresse" required=""
+                    aria-describedby="Email-signup__message-success-AWFNsR1cvR3VBVmtnU__email_signup_k9UrBY">
+                <button
+                    class="email-signup__button email-signup__button--integrated email-signup__button--arrow paragraph button-unstyled button-unstyled--AWFNsR1cvR3VBVmtnU__email_signup_k9UrBY "
+                    aria-label="Registrieren">
 
-                slide.style.transform = `
-          rotate(${angle}deg)
-          translateY(-100px)
-          rotate(${-angle}deg)
-        `;
+                    <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true"
+                        class="email-signup__button-icon">
 
-                slide.style.opacity = Math.abs(offset) > 2 ? '0' : '1';
-                slide.style.zIndex = 100 - Math.abs(offset);
-                slide.style.scale = offset === 0 ? '1.4' : '1.0';
-            });
-        }
-    </script>
+                        <path clip-rule="evenodd"
+                            d="m11.246 5.31759c.0322-.07821.0833-.14723.1486-.20093.0654-.0537.143-.09041.2259-.10686.083-.01645.1688-.01214.2497.01257.0808.0247.1544.06902.214.12902l4.104 4.104c.0478.04765.0857.10426.1115.16659.0259.06232.0392.12913.0392.19661 0 .06747-.0133.13429-.0392.19661-.0258.06233-.0637.11893-.1115.16659l-4.104 4.10401c-.0963.0963-.227.1504-.3632.1504s-.2669-.0541-.3632-.1504-.1504-.227-.1504-.3632.0541-.2669.1504-.3632l3.2288-3.2278h-11.0736c-.13606 0-.26654-.0541-.36275-.15027-.0962-.0962-.15025-.22669-.15025-.36274 0-.13606.05405-.26654.15025-.36275.09621-.0962.22669-.15025.36275-.15025h11.0736l-3.2288-3.2278c-.0721-.07178-.1212-.16335-.1411-.2631s-.0097-.20316.0293-.2971z"
+                            fill="currentColor" fill-rule="evenodd"></path>
+                    </svg>
+
+                </button>
+            </div>
+            <div id="Email-signup__message-success-AWFNsR1cvR3VBVmtnU__email_signup_k9UrBY"
+                class="email-signup__message email-signup__message--success" tabindex="-1">
+                <span class="svg-wrapper icon-success">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="icon-checkmark">
+                        <path
+                            d="M4.75439 10.7485L7.68601 14.5888C7.79288 14.7288 7.84632 14.7988 7.91174 14.8242C7.96907 14.8466 8.03262 14.8469 8.09022 14.8253C8.15596 14.8007 8.21026 14.7314 8.31886 14.5927L15.2475 5.74658"
+                            stroke="currentColor" stroke-width="var(--icon-stroke-width)" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                    </svg>
+
+                </span>
+                <p class="email-signup__message-text">Danke für deine Anmeldung!</p>
+            </div>
+            <div class="h-captcha" data-sitekey="f06e6c50-85a8-45c8-87d0-21a2b65856fe" data-size="invisible"><iframe
+                    aria-hidden="true" data-hcaptcha-widget-id="0mx8thgrpnp" data-hcaptcha-response=""
+                    src="https://newassets.hcaptcha.com/captcha/v1/6231f9c2cce2f0900036b90c8615a7046899e03e/static/hcaptcha.html#frame=checkbox-invisible"
+                    style="display: none;"></iframe><textarea id="h-captcha-response-0mx8thgrpnp"
+                    name="h-captcha-response" style="display: none;"></textarea></div>
+        </form>
+    </div>
 </body>
 
 </html>
